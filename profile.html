@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Hikari's Portfolio</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body data-page="profile">
+    <!-- 背景の落ちるパズルピース -->
+    <div class="puzzle-container is-complete">
+        <img src="images/orange@2x.webp" class="piece piece-orange">
+        <img src="images/yellow@2x.webp" class="piece piece-yellow">
+        <img src="images/lightgreen@2x.webp" class="piece piece-lightgreen">
+        <img src="images/green@2x.webp" class="piece piece-green">
+        <img src="images/lightblue@2x.webp" class="piece piece-lightblue">
+        <img src="images/blue@2x.webp" class="piece piece-blue">
+        <img src="images/navy@2x.webp" class="piece piece-navy">
+        <img src="images/purple@2x.webp" class="piece piece-purple">
+        <img src="images/pink@2x.webp" class="piece piece-pink">
+        <img src="images/red@2x.webp" class="piece piece-red">
+    </div>
+    <!-- SVG定義（パズル型クリップパス用） -->
+    <svg class="svg-defs">
+        <defs>
+            <clipPath id="puzzle-clip" clipPathUnits="objectBoundingBox">
+                <path
+                    d="M0.167,0.167 L0.5,0.167 C0.5,0.083 0.583,0 0.667,0 C0.75,0 0.833,0.083 0.833,0.167 L0.833,0.5 C0.917,0.5 1,0.583 1,0.667 C1,0.75 0.917,0.833 0.833,0.833 L0.5,0.833 C0.5,0.917 0.417,1 0.333,1 C0.25,1 0.167,0.917 0.167,0.833 L0.167,0.167 Z" />
+            </clipPath>
+        </defs>
+    </svg>
+
+    <!-- ナビゲーション -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__inner">
+                <a href="index.html" class="nav__back">
+                    <svg class="nav__back__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Home</span>
+                </a>
+                <div class="nav__links">
+                    <a href="page_works.html" class="nav__link">Works</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- プロフィール -->
+    <main class="profile">
+        <div class="profile__inner">
+            <!-- プロフィールヒーロー -->
+            <div class="profile__hero">
+                <div class="profile__image__wrapper">
+                    <img src="./images/profile_icon (1).PNG" alt="プロフィール写真" class="profile__image">
+                </div>
+                <div class="profile__intro">
+                    <h1>増元ひかり</h1>
+                    <p class="profile__tagline">トライデントコンピュータ専門学校　2年</p>
+                    <p class="profile__intro__role">希望職種：Webデザイナー</p>
+                    <div class="profile__intro__catchphrase">
+                        <p>ユーザーと世界観に寄り添い、アイデアで印象に残るデザインを目指すWebデザイナー志望</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 自己紹介 -->
+        <section class="profile__introduction">
+            <div class="profile__inner">
+                <h2 class="profile__introduction__title">自己紹介</h2>
+                <div class="profile__about">
+                    <div class="profile__about__card">
+                        <p>
+                            Webデザイナーを志望している専門学校生です。
+                            デザインをする際は、媒体やターゲットに合わせたテイスト設計を大切にし、常に「見やすさ・使いやすさ」を意識しています。
+                            例えば、アニメやゲームが好きなユーザーを想定したデザインではキャラクター性のある表現を取り入れたり、和風のサイトでは色使いや雰囲気を崩さないよう工夫しています。また、どの制作においても自分なりのアイデアを一つ取り入れることを意識し、印象に残るデザインを心がけています。
+                        </p>
+                    </div>
+                    <div class="profile__about__card">
+                        <p>
+                            可愛らしさや動きのあるデザインを得意としており、制作段階からアニメーションも含めて設計しています。一方で、サイケデリックな表現やおとぎ話のような世界観のあるデザインにも興味があり、今後はより個性のある表現にも挑戦していきたいと考えています。
+                        </p>
+                    </div>
+                    <div class="profile__about__card">
+                        <p>
+                            これまでにブログサイトの制作や、漫画アプリを想定したUIデザイン、和風サイトのデザインなどに取り組みました。進級制作展ではフォトグラファーの方をクライアントとして募集し、ヒアリングからサイト制作まで一貫して行いました。また、デザイン部に所属し、ポスターや本のカバー、シールなどのグラフィック制作にも継続的に取り組んでいます。
+                        </p>
+                    </div>
+                    <div class="profile__about__card">
+                        <p>
+                            将来は、サイトを訪れた人に「面白い」「楽しい」と感じてもらえるような体験を提供できるWebデザイナーを目指しています。クライアントの意図や目的を大切にしながら、その中に自分なりのアイデアや個性を活かしたデザインを提案していきたいと考えています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- スキル -->
+        <section class="profile__skill">
+            <div class="profile__inner">
+                <h2 class="profile__skill__title">スキル</h2>
+                <div class="skills__grid">
+                    <!-- デザインスキル -->
+                    <div class="skill-card skill-card--design">
+                        <h3 class="skill-card__title">デザインスキル</h3>
+                        <ul class="skill-card__list">
+                            <li class="skill-card__list__design">バナー制作</li>
+                            <li class="skill-card__list__design">UIデザイン（アプリ・Web）</li>
+                            <li class="skill-card__list__design">配色設計・テイスト設計</li>
+                            <li class="skill-card__list__design">アイコン制作</li>
+                        </ul>
+                    </div>
+                    <!-- コーディングスキル -->
+                    <div class="skill-card skill-card--coding">
+                        <h3 class="skill-card__title">コーディングスキル</h3>
+                        <ul class="skill-card__list">
+                            <li class="skill-card__list__code">HTML / CSS</li>
+                            <li class="skill-card__list__code">Sassを用いた効率的なコーディング</li>
+                            <li class="skill-card__list__code">基礎的なWebサイトの構築・調整</li>
+                        </ul>
+                        <div class="skill-card__note">
+                            <p>Webクリエイター能力認定試験 エキスパート取得</p>
+                            <p>AIを活用しながらコードを理解・修正することが可能</p>
+                        </div>
+                    </div>
+                    <!-- 使用ツール -->
+                    <div class="skill-card skill-card--tools">
+                        <h3 class="skill-card__title">使用ツール</h3>
+                        <ul class="skill-card__list">
+                            <li class="skill-card__list__tool">Figma</li>
+                            <li class="skill-card__list__tool">Photoshop</li>
+                            <li class="skill-card__list__tool">Illustrator</li>
+                            <li class="skill-card__list__tool">VS code</li>
+                        </ul>
+                    </div>
+                    <!-- AI -->
+                    <div class="skill-card skill-card--ai">
+                        <h3 class="skill-card__title">使用したことのあるAI</h3>
+                        <ul class="skill-card__list">
+                            <li class="skill-card__list__ai">ChatGPT</li>
+                            <li class="skill-card__list__ai">Google Gemini</li>
+                            <li class="skill-card__list__ai">Claude</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 強み・こだわり -->
+        <section class="profile__section">
+            <div class="strengths">
+                <div class="strengths__header">
+                    <div class="strengths__badge">特に大切にしていること</div>
+                    <h2 class="strengths__title">強み・こだわり</h2>
+                    <p class="strengths__subtitle">デザインにおいて常に心がけている4つのポイント</p>
+                </div>
+                <div class="strengths__grid">
+                    <div class="strengths__item">
+                        <p>ペルソナに合わせたテイスト設計ができる</p>
+                    </div>
+                    <div class="strengths__item">
+                        <p>必ず1つオリジナルのアイデアを取り入れる</p>
+                    </div>
+                    <div class="strengths__item">
+                        <p>納得がいくまでデザインを作り直す姿勢</p>
+                    </div>
+                    <div class="strengths__item">
+                        <p>アニメーションまで含めた設計ができる</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SNS・リンク -->
+        <section class="profile__sns">
+            <h2 class="profile__sns__title">SNS・リンク</h2>
+            <p class="profile__sns__subtitle">お気軽にご連絡ください</p>
+            <div class="sns__grid">
+                <a href="mailto:hikari09.masu@gmail.com" target="_blank" rel="noopener noreferrer"
+                    class="sns__link sns__link--email">
+                    <span class="sns__name">Email</span>
+                </a>
+                <a href="https://rumc-hk.sub.jp/blog/" target="_blank" rel="noopener noreferrer"
+                    class="sns__link sns__link--blog">
+                    <span class="sns__name">Blog</span>
+                </a>
+                <a href="https://www.instagram.com/hk_stv01.01" target="_blank" rel="noopener noreferrer"
+                    class="sns__link sns__link--instagram">
+                    <span class="sns__name">Instagram</span>
+                </a>
+                <a href="https://github.com/masu-hi/promotion_site" target="_blank" rel="noopener noreferrer"
+                    class="sns__link sns__link--github">
+                    <span class="sns__name">Github</span>
+                </a>
+            </div>
+        </section>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer__bg"></div>
+        <div class="footer__inner">
+            <nav class="footer__nav">
+                <p class="footer__link--title">Quicklink</p>
+                <a href="index.html" class="footer__link">Home</a>
+                <a href="page_works.html" class="footer__link">Works</a>
+            </nav>
+            <p class="footer__copyright">© <span id="current-year"></span> 増元ひかり ポートフォリオ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- トップに戻るボタン -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="トップに戻る">
+        <svg class="scroll-to-top__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- GSAP本体 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- 自分のJS（これが最後） -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

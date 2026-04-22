@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Hikari's Portforio</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body data-page="project-detail">
+    <!-- 背景の落ちるパズルピース -->
+    <div class="puzzle-container is-complete">
+        <img src="images/orange@2x.webp" class="piece piece-orange">
+        <img src="images/yellow@2x.webp" class="piece piece-yellow">
+        <img src="images/lightgreen@2x.webp" class="piece piece-lightgreen">
+        <img src="images/green@2x.webp" class="piece piece-green">
+        <img src="images/lightblue@2x.webp" class="piece piece-lightblue">
+        <img src="images/blue@2x.webp" class="piece piece-blue">
+        <img src="images/navy@2x.webp" class="piece piece-navy">
+        <img src="images/purple@2x.webp" class="piece piece-purple">
+        <img src="images/pink@2x.webp" class="piece piece-pink">
+        <img src="images/red@2x.webp" class="piece piece-red">
+    </div>
+    <!-- ナビゲーション -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__inner">
+                <a href="index.html" class="nav__back">
+                    <svg class="nav__back__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Home</span>
+                </a>
+                <div class="nav__links">
+                    <a href="page_works.html" class="nav__link">Works</a>
+                    <a href="profile.html" class="nav__link">Profile</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- プロジェクト詳細 -->
+    <main class="project-detail">
+        <!-- プロジェクトヘッダー -->
+        <section class="project-detail__header">
+            <div class="project-detail__inner">
+                <div class="project-overview">
+                    <div class="project-overview__item">
+                        <div class="project-overview__category" id="project-category"></div>
+                    </div>
+                    <div class="project-overview__item project-overview__calender">
+                        <img src="./images/calendar.webp" alt="" class="calender" width="20px" height="20px">
+                        <div class="project-overview__value" id="project-timeline"></div>
+                    </div>
+                    <div class="project-overview__item">
+                        <div class="project-overview__value project-overview__valuebg" id="project-role"></div>
+                    </div>
+                </div>
+                <h1 class="project-detail__title" id="project-title"></h1>
+                <p class="project-detail__description" id="project-description"></p>
+                <div class="project-detail__image">
+                    <img id="project-image" src="" alt="">
+                </div>
+            </div>
+        </section>
+
+        <!-- プロジェクト詳細説明 -->
+        <section class="project-detail__summary" id="long-description-section">
+            <h2 class="project-detail__summary__title">プロジェクト概要</h2>
+            <div class="info-card__white">
+                <p id="project-long-description"></p>
+            </div>
+        </section>
+
+        <!-- 背景・課題 -->
+        <div class="project-detail__inner back__twin">
+            <section class="project-detail__theme" id="challenge-section">
+                <div class="project-detail__theme-group">
+                    <img src="./images/theme_icon.webp" alt="" class="theme__icon" width="48px" height="48px">
+                    <h2 class="project-detail__theme__title">背景・課題</h2>
+                </div>
+                <div class="info-card__red">
+                    <p id="project-challenge"></p>
+                </div>
+            </section>
+            <!-- ソリューション -->
+            <section class="project-detail__solution" id="solution-section">
+                <div class="project-detail__solution-group">
+                    <img src="./images/solution_icon.webp" alt="" class="solution__icon" width="48px" height="48px">
+                    <h2 class="project-detail__solution__title">解決策</h2>
+                </div>
+                <div class="info-card__orange">
+                    <p id="project-solution"></p>
+                </div>
+            </section>
+        </div>
+
+        <!-- 担当業務 -->
+        <div class="project-detail__inner back__triple">
+            <h2 class="project-detail__section__title">担当範囲・使用技術</h2>
+            <div class="back__threegroups">
+                <section class="project-detail__range" id="responsibilities-section">
+                    <h3 class="project-detail__range__title">担当範囲</h3>
+                    <ul class="detail-list" id="project-responsibilities"></ul>
+                </section>
+                <!-- 使用技術・ツール -->
+                <section class="project-detail__tech" id="tools-section">
+                    <h3 class="project-detail__tech__title">使用技術</h3>
+                    <ul class="detail-list" id="project-tools"></ul>
+                </section>
+                <!-- 開発環境 -->
+                <section class="project-detail__surroundings" id="environment-section">
+                    <h3 class="project-detail__surroundings__title">制作環境</h3>
+                    <ul class="detail-list" id="project-environment"></ul>
+                </section>
+            </div>
+        </div>
+
+        <!-- 施策・デザインの工夫 -->
+        <div class="project-detail__inner">
+            <section class="project-detail__ingenuity" id="design-section">
+                <h2 class="project-detail__ingenuity__title">施策・デザインの工夫</h2>
+                <div class="design-details" id="project-design-details"></div>
+            </section>
+        </div>
+        <!-- 成果 -->
+        <section class="project-detail__results" id="results-section">
+            <h2 class="project-detail__results__title">成果・結果</h2>
+            <ul class="results-list" id="project-results"></ul>
+        </section>
+        <!-- 学び -->
+        <div class="project-detail__inner">
+            <section class="project-detail__learning" id="learnings-section">
+                <h2 class="project-detail__learning__title">学び</h2>
+                <div class="info-card__gradation">
+                    <p id="project-learnings"></p>
+                </div>
+            </section>
+        </div>
+
+        <!-- 戻るボタン -->
+        <div class="back-to-works">
+            <a href="page_works.html" class="back-to-works__btn">作品一覧に戻る</a>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer__bg"></div>
+
+        <div class="footer__inner">
+            <nav class="footer__nav">
+                <p class="footer__link--title">Quicklink</p>
+                <a href="#portfolio" class="footer__link">Works</a>
+                <a href="profile.html" class="footer__link">Profile</a>
+            </nav>
+
+            <p class="footer__copyright">© <span id="current-year"></span> 増元ひかり ポートフォリオ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- トップに戻るボタン -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="トップに戻る">
+        <svg class="scroll-to-top__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- GSAP本体 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- 自分のJS（これが最後） -->
+    <script src="js/main.js"></script>
+    <script src="js/project-detail.js"></script>
+</body>
+
+</html>

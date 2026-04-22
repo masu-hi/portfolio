@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hikari's Portforio</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body data-page="home">
+    <!-- 背景の落ちるパズルピース -->
+    <div class="puzzle-container is-complete">
+        <img src="images/orange@2x.webp" class="piece piece-orange">
+        <img src="images/yellow@2x.webp" class="piece piece-yellow">
+        <img src="images/lightgreen@2x.webp" class="piece piece-lightgreen">
+        <img src="images/green@2x.webp" class="piece piece-green">
+        <img src="images/lightblue@2x.webp" class="piece piece-lightblue">
+        <img src="images/blue@2x.webp" class="piece piece-blue">
+        <img src="images/navy@2x.webp" class="piece piece-navy">
+        <img src="images/purple@2x.webp" class="piece piece-purple">
+        <img src="images/pink@2x.webp" class="piece piece-pink">
+        <img src="images/red@2x.webp" class="piece piece-red">
+    </div>
+    <!-- メインビジュアル -->
+    <section class="mainvisual">
+        <div class="mainvisual__inner">
+            <h1 class="mainvisual__title">Portfolio</h1>
+            <p class="mainvisual__subtitle">一つひとつのプロジェクトが、完成されたパズルのピース</p>
+            <div class="mainvisual__buttons">
+                <a href="page_works.html" class="mainvisual__cta mainvisual__cta--primary">作品を見る</a>
+                <a href="profile.html" class="mainvisual__cta mainvisual__cta--secondary">プロフィール</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- コンセプトセクション -->
+    <section id="concept" class="concept">
+        <div class="concept__bg"></div>
+        <div class="concept__inner">
+            <h2 class="concept__title">Concept</h2>
+            <div class="concept__message">
+                <p class="concept__message--title">このポートフォリオに込めた思い</p>
+                <p>
+                    パズルのように、一つひとつのプロジェクトが持つ独自の価値。それらが組み合わさることで、より大きな価値を生み出す。
+                    このポートフォリオは、私がこれまで積み重ねてきた経験と学びの集大成です。
+                    それぞれの作品が持つストーリーと、技術への情熱をお伝えできれば幸いです。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ポートフォリオセクション -->
+    <section id="portfolio" class="works">
+        <div class="works__inner">
+            <div class="works__header">
+                <h2 class="works__title">Works</h2>
+                <p class="works__subtitle">これまで制作したWebサイトの一部をご紹介します</p>
+            </div>
+
+            <div class="works__grid">
+                <!-- プロジェクトカード1: GLASSY-PHOTO -->
+                <a href="page_detail.html?id=glassy-photo" class="project-card">
+                    <div class="project-card__content">
+                        <span class="project-overview__category">Webサイト制作</span>
+                        <h3 class="project-card__name">GLASSY-PHOTO</h3>
+                        <p class="project-card__description">
+                            ウェディングフォトグラファーの公式サイト。温かさと親しみやすさを大切にした、アットホームな雰囲気のWebサイトを制作。
+                        </p>
+                        <div class="project-card__tech">
+                            <span class="project-card__tech__tag">HTML/CSS (Sass)</span>
+                            <span class="project-card__tech__tag">デザイン</span>
+                            <span class="project-card__tech__tag">ロゴ</span>
+                            <span class="project-card__tech__tag">イラスト制作</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="page_detail.html?id=3" class="project-card">
+                    <div class="project-card__content">
+                        <span class="project-overview__category">Portfolio</span>
+                        <h3 class="project-card__name">ポートフォリオサイト</h3>
+                        <p class="project-card__description">
+                            パズルをテーマに制作。1つ1つのピースが作品や私の強みを表しています。
+                        </p>
+                        <div class="project-card__tech">
+                            <span class="project-card__tech__tag">HTML/CSS (Sass)</span>
+                            <span class="project-card__tech__tag">GSAP</span>
+                            <span class="project-card__tech__tag">イラスト制作</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="page_detail.html?id=1" class="project-card">
+                    <div class="project-card__content">
+                        <span class="project-overview__category">Webサイト制作</span>
+                        <h3 class="project-card__name">ブログ制作</h3>
+                        <p class="project-card__description">
+                            緑と、時計をコンセプトにし、おとぎ話のような世界観を演出。なおかつ見やすい構成を意識しました。
+                        </p>
+                        <div class="project-card__tech">
+                            <span class="project-card__tech__tag">HTML/CSS</span>
+                            <span class="project-card__tech__tag">デザイン</span>
+                            <span class="project-card__tech__tag">イラスト制作</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- プロジェクトカード3: コーポレートサイト -->
+                <a href="page_detail.html?id=2" class="project-card">
+                    <div class="project-card__content">
+                        <span class="project-overview__category">UIデザイン</span>
+                        <h3 class="project-card__name">マンガUI制作</h3>
+                        <p class="project-card__description">
+                            マンガのUIデザインをしました。ペルソナに合ったゲームっぽいイラストが特徴です。
+                        </p>
+                        <div class="project-card__tech">
+                            <span class="project-card__tech__tag">Figma</span>
+                            <span class="project-card__tech__tag">ロゴ</span>
+                            <span class="project-card__tech__tag">イラスト制作</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- プロジェクトカード5: ダッシュボードアプリ -->
+                <a href="page_detail.html?id=4" class="project-card">
+                    <div class="project-card__content">
+                        <span class="project-overview__category">デザイン部</span>
+                        <h3 class="project-card__name">デザイン部作品</h3>
+                        <p class="project-card__description">
+                            私が所属しているデザイン部での作品の紹介です。グラフィックデザインを主にしました。
+                        </p>
+                        <div class="project-card__tech">
+                            <span class="project-card__tech__tag">イラスト制作</span>
+                            <span class="project-card__tech__tag">グラフィックデザイン</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- プロジェクトカード6: ランディングページ -->
+                <a href="page_detail.html?id=wafu-restaurant" class="project-card">
+                    <div class="project-card__content">
+                        <span class="project-overview__category">Webサイト制作</span>
+                        <h3 class="project-card__name">和風サイトデザイン</h3>
+                        <p class="project-card__description">
+                            和風がコンセプトのレストランのWebサイトをデザインしました。黒を貴重に日本の伝統色のみを使って作りました。
+                        </p>
+                        <div class="project-card__tech">
+                            <span class="project-card__tech__tag">Figma</span>
+                            <span class="project-card__tech__tag">デザイン</span>
+                            <span class="project-card__tech__tag">イラスト制作</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="works__more">
+                <p class="works__more__text">さらに多くのプロジェクトがあります</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer__bg"></div>
+        <div class="footer__inner">
+            <nav class="footer__nav">
+                <p class="footer__link--title">Quicklink</p>
+                <a href="page_works.html" class="footer__link">Works</a>
+                <a href="profile.html" class="footer__link">Profile</a>
+            </nav>
+            <p class="footer__copyright">© <span id="current-year"></span> 増元ひかり ポートフォリオ. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- トップに戻るボタン -->
+    <button id="scroll-to-top" class="scroll-to-top" aria-label="トップに戻る">
+        <svg class="scroll-to-top__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- GSAP本体（必須） -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+
+    <!-- ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+    <!-- 自分のJS（最後） -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

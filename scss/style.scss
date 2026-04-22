@@ -1,0 +1,1766 @@
+@use "sass:math";
+
+// =================================================================
+// Variables
+// =================================================================
+
+// --- Spacing ---
+$space-xs: 0.25rem; // 4px
+$space-s: 0.5rem; // 8px
+$space-m: 1rem; // 16px
+$space-l: 1.5rem; // 24px
+$space-xl: 2rem; // 32px
+$space-xxl: 2.5rem; // 40px
+$space-xxxl: 3rem; // 48px
+
+// --- Colors ---
+$color-text: #1f2730;
+$color-txt: #0a0a0a;
+$color-main: #000;
+$color-accent: #f97316;
+$color-bg: #fff;
+$color-bg-light: #f9fafb;
+$color-border: #e5e5e5;
+$color-gray-100: #f3f4f6;
+$color-gray-200: #e5e7eb;
+$color-gray-400: #999;
+$color-gray-500: #666;
+$color-gray-600: #555;
+$color-gray-700: #4b5563;
+$color-gray-800: #333;
+$color-red-500: #ef4444;
+$color-green-500: #10b981;
+$color-orange-50: #fff7ed;
+$color-orange-100: #ffedd5;
+$color-orange-200: #fed7aa;
+$color-orange-500: #f97316;
+$color-pink-50: #fdf2f8;
+$color-pink-100: #fce7f3;
+$color-pink-200: #fbcfe8;
+$color-pink-500: #ec4899;
+$color-blue-50: #eff6ff;
+$color-blue-100: #dbeafe;
+$color-blue-200: #bfdbfe;
+$color-blue-500: #3b82f6;
+$color-purple-50: #faf5ff;
+$color-purple-100: #f3e8ff;
+$color-purple-200: #e9d5ff;
+$color-purple-500: #a855f7;
+$color-white: #fff;
+
+// --- Typography ---
+$font-size-base: 16;
+$font-family-gothic: "Hiragino Kaku Gothic Pro", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+$font-family-mincho: "Times New Roman", Times, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+
+// --- Breakpoints ---
+$breakpoints: (
+    "desktop": 1024px,
+    "tablet": 768px,
+    "mabile": 640px
+);
+
+// =================================================================
+// Functions
+// =================================================================
+
+@function rem($px-value) {
+    @return #{math.div($px-value, $font-size-base)}rem;
+}
+
+@function ls($xd-value) {
+    @return #{math.div($xd-value, 1000)}em;
+}
+
+// =================================================================
+// Mixins
+// =================================================================
+
+@mixin mq($bp: tablet) {
+    @media (max-width: map-get($breakpoints, $bp)) {
+        @content;
+    }
+}
+
+@mixin inner($mw: 1000px, $w: 90%) {
+    max-width: $mw;
+    width: $w;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin section($s) {
+    padding: rem(80);
+
+    @media (max-width: 768px) {
+        margin-bottom: rem(64);
+    }
+}
+
+@mixin section_title($st) {
+    font-size: rem(28);
+    margin-bottom: $space-xl;
+    color: $color-txt;
+    text-align: center;
+    padding-left: $space-m;
+
+    @media (max-width: 768px) {
+        font-size: rem(20);
+    }
+}
+
+@mixin card($c) {
+    padding: rem(50);
+    border-radius: 12px;
+    line-height: 1.8;
+    color: $color-gray-700;
+}
+
+@mixin detail-list($li) {
+    list-style: none;
+    margin-top: rem(30);
+
+    li {
+        position: relative;
+        margin-bottom: $space-m;
+        line-height: 1.8;
+        color: $color-gray-700;
+    }
+}
+
+@mixin skill-card($skill) {
+    padding: rem(12) $space-m;
+    background: $color-white;
+    border-radius: 8px;
+    color: $color-gray-700;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+// ===================================
+// リセット＆ベーススタイル
+// ===================================
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: $font-family-gothic;
+    font-size: rem($font-size-base);
+    line-height: 1.6;
+    color: $color-text;
+    background: $color-bg;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.puzzle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+// ===================================
+// ナビゲーション
+// ===================================
+
+.nav {
+    background: rgba($color-white, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid $color-border;
+    padding: $space-m $space-xl;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    @media (max-width: 768px) {
+        padding: $space-m;
+    }
+
+    &__inner {
+        @include inner(1200px, 100%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__back {
+        display: inline-flex;
+        align-items: center;
+        gap: $space-s;
+        font-weight: 500;
+        color: $color-text;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: $color-accent;
+        }
+
+        &__icon {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &__links {
+        display: flex;
+        gap: $space-xl;
+
+        @media (max-width: 768px) {
+            gap: $space-m;
+        }
+    }
+
+    &__link {
+        font-weight: 500;
+        color: $color-gray-500;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: $color-accent;
+        }
+    }
+}
+
+// ===================================
+// メインビジュアルセクション
+// ===================================
+
+.mainvisual {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: $space-xl;
+    position: relative;
+
+    &__inner {
+        @include inner();
+    }
+
+    &__title {
+        font-size: rem(70);
+        font-weight: 700;
+        margin-bottom: $space-l;
+        color: $color-txt;
+        letter-spacing: ls(-20);
+
+        @include mq () {
+            font-size: rem(40);
+        }
+    }
+
+    &__subtitle {
+        font-size: rem(24);
+        color: $color-text;
+        margin-bottom: $space-xxxl;
+        text-align: center;
+
+        @media (max-width: 768px) {
+            font-size: rem(18);
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        gap: $space-m;
+        justify-content: center;
+        align-items: center;
+
+        @media (min-width: 640px) {
+            flex-direction: row;
+        }
+    }
+
+    &__cta {
+        display: inline-block;
+        padding: $space-m $space-xl;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        @media (max-width: 768px) {
+            padding: rem(14) $space-xl;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        &--primary {
+            background: $color-main;
+            color: $color-white;
+
+            &:hover {
+                background: $color-gray-800;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        &--secondary {
+            border: 2px solid $color-main;
+            color: $color-main;
+            background: transparent;
+
+            &:hover {
+                background: $color-gray-100;
+                transform: translateY(-2px);
+            }
+        }
+    }
+}
+
+// ===================================
+// コンセプトセクション
+// ===================================
+
+.concept {
+    padding: rem(96) $space-xl;
+
+    @media (max-width: 768px) {
+        padding: rem(64) $space-l;
+    }
+
+    &__inner {
+        @include inner();
+        text-align: center;
+    }
+
+    &__title {
+        font-size: rem(40);
+        margin-bottom: $space-xl;
+        color: $color-txt;
+
+        @media (max-width: 768px) {
+            font-size: rem(32);
+        }
+    }
+
+    &__message {
+        font-size: rem(18);
+        line-height: 1.8;
+        color: $color-text;
+        background-color: $color-white;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: rem(100) rem(80);
+        margin-top: rem(50);
+
+        &--title {
+            font-size: rem(24);
+            margin-bottom: rem(40);
+            color: $color-txt;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            font-size: rem(16);
+        }
+    }
+}
+
+// ===================================
+// ポートフォリオセクション
+// ===================================
+
+.works {
+    padding: rem(96) $space-xl;
+
+    @media (max-width: 768px) {
+        padding: rem(64) $space-l;
+    }
+
+    &__inner {
+        @include inner(1200px, 100%);
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: rem(64);
+    }
+
+    &__title {
+        font-size: rem(40);
+        margin-bottom: $space-m;
+        color: $color-txt;
+
+        @media (max-width: 768px) {
+            font-size: rem(32);
+        }
+    }
+
+    &__subtitle {
+        font-size: rem(18);
+        color: $color-text;
+
+        @media (max-width: 768px) {
+            font-size: rem(16);
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: $space-xl;
+        margin-bottom: rem(64);
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: $space-l;
+        }
+    }
+
+    &__more {
+        text-align: center;
+        padding: $space-xxxl 0;
+
+        &__text {
+            font-size: rem(18);
+            color: $color-gray-500;
+            margin-bottom: $space-s;
+        }
+    }
+}
+
+// ===================================
+// プロジェクトカード
+// ===================================
+
+.project-card {
+    background: $color-white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: block;
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    &__image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    &__content {
+        padding: $space-l;
+
+        .project-overview__category {
+            margin-bottom: rem(20);
+        }
+    }
+
+    &__category {
+        display: inline-block;
+        padding: rem(6) rem(14);
+        background: $color-gray-100;
+        color: $color-gray-500;
+        font-size: rem(14);
+        border-radius: 20px;
+        margin-bottom: $space-m;
+        font-weight: 500;
+    }
+
+    &__name {
+        font-size: rem(24);
+        margin-bottom: rem(12);
+        color: $color-txt;
+    }
+
+    &__description {
+        color: $color-gray-500;
+        line-height: 1.6;
+        margin-bottom: $space-m;
+    }
+
+    &__tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-s;
+
+        &__tag {
+            padding: rem(4) rem(12);
+            background: $color-gray-200;
+            color: $color-gray-600;
+            font-size: rem(14);
+            border-radius: 12px;
+        }
+    }
+}
+
+// ===================================
+// プロフィールページ
+// ===================================
+
+.profile {
+    min-height: 100vh;
+    padding: rem(96) 0 rem(64);
+
+    @media (max-width: 768px) {
+        padding: rem(64) $space-l $space-xxxl;
+    }
+
+    &__inner {
+        @include inner(1000px, 100%);
+    }
+
+    &__hero {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: $space-xxxl;
+        margin-bottom: rem(96);
+        align-items: center;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: $space-xl;
+            margin-bottom: rem(64);
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        &__wrapper {
+            width: 300px;
+            height: 300px;
+            position: relative;
+
+            @media (max-width: 768px) {
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &__intro {
+        h1 {
+            font-size: rem(40);
+            margin-bottom: $space-s;
+            color: $color-txt;
+
+            @media (max-width: 768px) {
+                font-size: rem(32);
+            }
+        }
+    }
+
+    &__tagline {
+        font-size: rem(20);
+        color: $color-gray-600;
+        margin-bottom: $space-m;
+
+        @media (max-width: 768px) {
+            font-size: rem(18);
+        }
+    }
+
+    &__intro__role {
+        font-size: rem(18);
+        color: $color-gray-500;
+        margin-bottom: $space-l;
+
+        @media (max-width: 768px) {
+            font-size: rem(16);
+        }
+    }
+
+    &__intro__catchphrase {
+        background: linear-gradient(to right, $color-orange-50, $color-pink-50);
+        padding: $space-l $space-xl;
+        border-radius: 16px;
+
+        @media (max-width: 768px) {
+            padding: $space-m $space-l;
+        }
+
+        p {
+            font-size: rem(18);
+            line-height: 1.8;
+            color: $color-gray-700;
+
+            @media (max-width: 768px) {
+                font-size: rem(16);
+            }
+        }
+    }
+
+    &__introduction {
+        margin-bottom: rem(120);
+
+        @media (max-width: 768px) {
+            margin-bottom: rem(64);
+        }
+
+        &__title {
+            @include section_title(introduction);
+        }
+    }
+
+    &__skill {
+        margin-bottom: rem(120);
+
+        &__title {
+            @include section_title(skill);
+        }
+    }
+
+    &__about {
+        display: flex;
+        flex-direction: column;
+        gap: $space-xl;
+        background: $color-white;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        padding: rem(50) rem(50);
+
+        &__card {
+            padding-bottom: rem(20);
+
+            @media (max-width: 768px) {
+                padding: $space-l;
+            }
+
+            p {
+                line-height: 1.8;
+                color: $color-gray-700;
+            }
+        }
+    }
+
+    &__sns {
+        margin-top: rem(120);
+
+        &__title {
+            @include section_title(sns);
+        }
+
+        &__subtitle {
+            font-size: rem(18);
+            color: $color-gray-600;
+            text-align: center;
+            margin-bottom: $space-xxxl;
+
+            @media (max-width: 768px) {
+                font-size: rem(16);
+                margin-bottom: $space-xl;
+            }
+        }
+    }
+}
+
+// ===================================
+// スキルセクション
+// ===================================
+
+.skills {
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $space-xl;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: $space-l;
+        }
+    }
+}
+
+.skill-card {
+    background: $color-white;
+    padding: $space-xl;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+        padding: $space-l;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    &--design {
+        border: 4px solid $color-orange-200;
+
+        .skill-card__title {
+            color: $color-orange-500;
+            position: relative;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: url(../images/design_icon.webp) no-repeat center center/cover;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .skill-card__list__item {
+            background: $color-white;
+        }
+    }
+
+    &--coding {
+        border: 4px solid $color-pink-200;
+
+        .skill-card__title {
+            color: $color-pink-500;
+            position: relative;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: url(../images/code_icon.webp) no-repeat center center/cover;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .skill-card__list__item {
+            background: $color-white;
+        }
+    }
+
+    &--tools {
+        border: 4px solid $color-blue-200;
+
+        .skill-card__title {
+            color: $color-blue-500;
+            position: relative;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: url(../images/tool_icon.webp) no-repeat center center/cover;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .skill-card__list__item {
+            background: $color-white;
+        }
+    }
+
+    &--ai {
+        border: 4px solid $color-purple-200;
+
+        .skill-card__title {
+            color: $color-purple-500;
+            position: relative;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: url(../images/ai_icon.webp) no-repeat center center/cover;
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .skill-card__list__item {
+            background: $color-white;
+        }
+    }
+
+    &__title {
+        font-size: rem(24);
+        font-weight: 600;
+        margin-bottom: $space-l;
+        color: $color-txt;
+
+        @media (max-width: 768px) {
+            font-size: rem(20);
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: $space-m;
+
+        &__design {
+            @include skill-card(design);
+        }
+
+        &__code {
+            @include skill-card(code);
+        }
+
+        &__tool {
+            @include skill-card(tool);
+        }
+
+        &__ai {
+            @include skill-card(ai);
+        }
+    }
+
+    &__note {
+        margin-top: $space-l;
+        padding-top: $space-l;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+        p {
+            font-size: rem(14);
+            color: $color-gray-700;
+            margin-bottom: $space-s;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+// ===================================
+// 強みセクション
+// ===================================
+
+.strengths {
+    background: linear-gradient(135deg, #FEF2F2 0%, #FFF7ED 100%);
+    padding: rem(64) $space-xl;
+    border-radius: 20px;
+
+    @media (max-width: 768px) {
+        padding: $space-xxxl $space-l;
+    }
+
+    &__header {
+        text-align: center;
+        margin-bottom: $space-xxxl;
+    }
+
+    &__badge {
+        display: inline-block;
+        background: $color-red-500;
+        color: $color-white;
+        padding: rem(12) $space-l;
+        border-radius: 50px;
+        margin-bottom: $space-m;
+        font-size: rem(20);
+        font-weight: 600;
+
+        @media (max-width: 768px) {
+            font-size: rem(16);
+            padding: rem(10) $space-m;
+        }
+    }
+
+    &__title {
+        font-size: rem(36);
+        margin-bottom: $space-m;
+        color: $color-txt;
+
+        @media (max-width: 768px) {
+            font-size: rem(30);
+        }
+    }
+
+    &__subtitle {
+        font-size: rem(18);
+        color: $color-gray-600;
+
+        @media (max-width: 768px) {
+            font-size: rem(16);
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $space-l;
+        max-width: 900px;
+        margin: 0 auto;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            gap: $space-m;
+        }
+    }
+
+    &__item {
+        background: $color-white;
+        padding: $space-xl;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+        border: 2px solid $color-red-500;
+        transition: all 0.3s ease;
+        position: relative;
+
+        @media (max-width: 768px) {
+            padding: $space-l;
+        }
+
+        &:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: url(../images/exclamation.webp) no-repeat center center / contain;
+            transform: rotate(25deg);
+            right: -15px;
+            top: -20px;
+        }
+
+        p {
+            line-height: 1.8;
+            color: $color-gray-800;
+            font-weight: 500;
+        }
+    }
+}
+
+// ===================================
+// SNSセクション
+// ===================================
+
+.sns {
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: $space-l;
+        max-width: 800px;
+        margin: 0 auto;
+
+        @media (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: $space-m;
+        }
+    }
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: $space-m;
+        padding: $space-xl;
+        background: $color-white;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        min-height: 120px;
+
+        @media (max-width: 768px) {
+            padding: $space-l;
+        }
+
+        &:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        &--email {
+            background: #fef2f2;
+            color: $color-red-500;
+        }
+
+        &--blog {
+            background: #eff6ff;
+            color: $color-blue-500;
+        }
+
+        &--instagram {
+            background: #fdf2f8;
+            color: $color-pink-500;
+        }
+
+        &--github {
+            background: $color-gray-100;
+            color: $color-gray-800;
+        }
+    }
+
+    &__name {
+        font-weight: 600;
+        color: $color-gray-700;
+        font-size: rem(14);
+    }
+}
+
+// ===================================
+// プロジェクト詳細ページ
+// ===================================
+
+.project-detail {
+    min-height: 100vh;
+    padding-top: rem(64);
+
+    @media (max-width: 768px) {
+        padding: $space-xxxl $space-l;
+    }
+
+    &__inner {
+        @include inner(900px, 100%);
+    }
+
+    &__header {
+        margin-bottom: rem(64);
+    }
+
+    &__title {
+        font-size: rem(40);
+        margin-bottom: $space-l;
+        color: $color-txt;
+
+        @media (max-width: 768px) {
+            font-size: rem(32);
+        }
+    }
+
+    &__image {
+        margin-top: $space-xl;
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+    }
+
+    &__description {
+        font-size: rem(18);
+        color: $color-gray-500;
+        line-height: 1.8;
+    }
+
+    &__summary {
+        @include section(summary);
+        background-color: $color-bg-light;
+        margin-top: rem(120);
+
+        &__title {
+            @include section_title(summary);
+        }
+    }
+
+    &__theme {
+        padding: rem(30);
+        background-color: #FFF7ED;
+        border-radius: 16px;
+        border: 2px solid #FFE2E2;
+
+        &-group {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        &__title {
+            font-size: rem(28);
+            color: $color-txt;
+        }
+    }
+
+    &__solution {
+        padding: rem(30);
+        background-color: #FEFCE8;
+        border-radius: 16px;
+        border: 2px solid #FEF9C2;
+
+        &-group {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        &__title {
+            font-size: rem(28);
+            color: $color-txt;
+        }
+    }
+
+    &__section__title {
+        @include section_title(ranges);
+    }
+
+    &__range {
+        padding: 30px 30px 30px 50px;
+        background-color: #fff;
+        border-radius: 14px;
+        border-top: 4px solid $color-blue-500;
+        box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.2);
+
+        &__title {
+            color: $color-txt;
+            position: relative;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -28px;
+                top: -9.5%;
+                background: url(../images/range_icon.webp) no-repeat center center /cover;
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        .detail-list {
+            @include detail-list(range);
+
+            li {
+                position: relative;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    left: -28px;
+                    top: 8%;
+                    background: url(../images/check_blue.webp) no-repeat center center /cover;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    &__tech {
+        padding: 30px 30px 30px 50px;
+        background-color: #fff;
+        border-radius: 14px;
+        border-top: 4px solid $color-green-500;
+        box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.2);
+
+        &__title {
+            color: $color-txt;
+            position: relative;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -28px;
+                top: -1.2%;
+                background: url(../images/tech_icon.webp) no-repeat center center /cover;
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        .detail-list {
+            @include detail-list(tech);
+
+            li {
+                position: relative;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    left: -28px;
+                    top: 10%;
+                    background: url(../images/check_green.webp) no-repeat center center /cover;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    &__surroundings {
+        padding: 30px 30px 30px 50px;
+        background-color: #fff;
+        border-radius: 14px;
+        border-top: 4px solid $color-purple-500;
+        box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.2);
+
+        &__title {
+            color: $color-txt;
+            position: relative;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -28px;
+                top: 2.8%;
+                background: url(../images/surroundings_icon.webp) no-repeat center center /cover;
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        .detail-list {
+            @include detail-list(range);
+
+            li {
+                position: relative;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    left: -28px;
+                    top: 8%;
+                    background: url(../images/check_purple.webp) no-repeat center center /cover;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    &__ingenuity {
+        margin-top: rem(120);
+        padding: rem(50) rem(30);
+        background-color: #fff;
+
+        &__title {
+            @include section_title(ingenuity);
+        }
+    }
+
+    &__results {
+        @include section(summary);
+        background-color: #F0FDF4;
+        margin-top: rem(120);
+
+        &__title {
+            @include section_title(results);
+        }
+
+        .results-list {
+            @include detail-list(results);
+            margin: 0 rem(100);
+
+            li {
+                position: relative;
+                background-color: #fff;
+                border-radius: 14px;
+                padding: rem(30) rem(50);
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    left: 17px;
+                    top: 39%;
+                    background: url(../images/check_green.webp) no-repeat center center /cover;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    &__learning {
+        margin-top: rem(120);
+
+        &__title {
+            @include section_title(learning);
+        }
+    }
+}
+
+.back__twin {
+    margin-top: rem(120);
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: rem(30);
+}
+
+.back__triple {
+    margin-top: rem(120);
+}
+
+.back__threegroups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: rem(20);
+    margin-top: rem(50);
+}
+
+
+// ===================================
+// プロジェクト概要
+// ===================================
+
+.project-overview {
+    display: flex;
+    gap: rem(20);
+    align-items: center;
+    margin-bottom: $space-xl;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: $space-l;
+    }
+
+    &__category {
+        display: inline-block;
+        padding: $space-s rem(20);
+        background: linear-gradient(90deg,
+                #FFEDD4 0%,
+                #FCE7F3 100%);
+        color: $color-gray-500;
+        font-size: rem(14);
+        border-radius: 20px;
+        border: 1px solid #FFD6A8;
+        font-weight: 500;
+    }
+
+    &__calender {
+        display: flex;
+        gap: rem(5);
+        align-items: center;
+    }
+
+    &__value {
+        font-size: rem(14);
+        color: $color-text;
+        font-weight: 500;
+    }
+
+    &__valuebg {
+        background-color: $color-bg-light;
+        padding: $space-s rem(20);
+        border-radius: 20px;
+    }
+}
+
+// ===================================
+// 情報カード
+// ===================================
+
+.info-card {
+
+    &__white {
+        background-color: #fff;
+        margin: 0 rem(150);
+        @include card(white);
+    }
+
+    &__red {
+        margin-top: rem(30);
+    }
+
+    &__orange {
+        margin-top: rem(30);
+    }
+
+    &__gradation {
+        padding: rem(50);
+        background: linear-gradient(135deg, #EFF6FF 0%, #FAF5FF 100%);
+        border-radius: 16px;
+        border: 2px solid #DBEAFE;
+    }
+
+    @media (max-width: 768px) {
+        padding: $space-l;
+    }
+
+    p {
+        margin-bottom: $space-m;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.project-card {
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+// ===================================
+// デザイン詳細
+// ===================================
+
+.design-details {
+    &__item {
+        margin-bottom: rem(80);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__title {
+        font-size: rem(24);
+        margin-bottom: $space-l;
+        color: $color-txt;
+
+        @media (max-width: 768px) {
+            font-size: rem(20);
+        }
+    }
+
+    &__text {
+        line-height: 1.8;
+        color: $color-gray-700;
+        margin-bottom: $space-xl;
+    }
+
+    &__image {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: $space-xxxl;
+    }
+}
+
+// ===================================
+// 戻るボタン
+// ===================================
+
+.back-to-works {
+    text-align: center;
+    margin-top: rem(64);
+
+    &__btn {
+        display: inline-block;
+        padding: $space-m $space-xxl;
+        background: $color-main;
+        color: $color-white;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: $color-gray-800;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+// ===================================
+// フッター
+// ===================================
+
+.footer {
+    color: $color-white;
+    padding: rem(100) rem(145);
+    margin-top: rem(96);
+
+    @media (max-width: 768px) {
+        padding: $space-xl $space-l $space-l;
+        margin-top: rem(64);
+    }
+
+    &__inner {
+        @include inner(1200px, 100%);
+        text-align: center;
+    }
+
+    &__nav {
+        display: grid;
+        gap: $space-xl;
+        margin-bottom: $space-xl;
+
+        @media (max-width: 768px) {
+            gap: $space-l;
+        }
+    }
+
+    &__link {
+        color: #ccc;
+        transition: all 0.3s ease;
+
+        &--title {
+            font-size: rem(20);
+            color: $color-txt;
+        }
+
+        &:hover {
+            color: $color-accent;
+        }
+    }
+
+    &__copyright {
+        color: #888;
+        font-size: rem(14);
+    }
+}
+
+
+.mainvisual,
+.works,
+.concept,
+.footer {
+    position: relative;
+}
+
+.concept__bg,
+.footer__bg {
+    position: absolute;
+    inset: 0;
+    background: $color-bg-light;
+    z-index: -2;
+}
+
+.mainvisual__inner,
+.concept__inner,
+.footer__inner,
+.works__inner {
+    position: relative;
+    z-index: 2;
+}
+
+// ===================================
+// スクロールトップボタン
+// ===================================
+
+.scroll-to-top {
+    position: fixed;
+    bottom: $space-xl;
+    right: $space-xl;
+    width: 56px;
+    height: 56px;
+    background: $color-main;
+    color: $color-white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:hover {
+        background: $color-gray-800;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        width: 48px;
+        height: 48px;
+        bottom: $space-l;
+        right: $space-l;
+    }
+
+    &__icon {
+        width: 24px;
+        height: 24px;
+
+        @media (max-width: 768px) {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.puzzle-wrapper {
+    position: relative;
+}
+
+.puzzle-wrapper::after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.puzzle-center {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.piece {
+    position: absolute;
+    width: 240px;
+    top: -300px;
+    left: 0;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.puzzle-container.is-complete {
+
+    .piece-orange {
+        transform: translate(-45.2%, -138%) scale(0.95)
+    }
+
+    .piece-yellow {
+        transform: translate(21.9%, -117.7%) scale(1.028)
+    }
+
+    .piece-lightgreen {
+        transform: translate(49.5%, -80.5%) scale(1.01)
+    }
+
+    .piece-green {
+        transform: translate(48.6%, -0.2%) scale(1.026)
+    }
+
+    .piece-lightblue {
+        transform: translate(15.7%, 55.6%)scale(1.09)
+    }
+
+    .piece-blue {
+        transform: translate(-50.5%, 63.6%) scale(0.919)
+    }
+
+    .piece-navy {
+        transform: translate(-115.1%, 54%) scale(1.09)
+    }
+
+    .piece-purple {
+        transform: translate(-146.1%, -3.2%) scale(1.019)
+    }
+
+    .piece-pink {
+        transform: translate(-145.6%, -83.4%) scale(1.03)
+    }
+
+    .piece-red {
+        transform: translate(-113.9%, -123.6%) scale(1.073)
+    }
+}
+
+// ===================================
+// 背景の落ちるパズルピース
+// ===================================
+
+.falling-puzzles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -10;
+
+    &__piece {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        opacity: 0.6;
+        animation: fall linear infinite;
+
+        @media (max-width: 768px) {
+            width: 60px;
+            height: 60px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(calc(100vh + 100px)) rotate(360deg);
+    }
+}
+
+// ===================================
+// SVG定義
+// ===================================
+
+.svg-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
