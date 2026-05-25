@@ -5,32 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Hikari's Portfolio</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./scss/style.css">
 </head>
 
 <body data-page="profile">
-    <!-- 背景の落ちるパズルピース -->
-    <div class="puzzle-container is-complete">
-        <img src="images/orange@2x.webp" class="piece piece-orange">
-        <img src="images/yellow@2x.webp" class="piece piece-yellow">
-        <img src="images/lightgreen@2x.webp" class="piece piece-lightgreen">
-        <img src="images/green@2x.webp" class="piece piece-green">
-        <img src="images/lightblue@2x.webp" class="piece piece-lightblue">
-        <img src="images/blue@2x.webp" class="piece piece-blue">
-        <img src="images/navy@2x.webp" class="piece piece-navy">
-        <img src="images/purple@2x.webp" class="piece piece-purple">
-        <img src="images/pink@2x.webp" class="piece piece-pink">
-        <img src="images/red@2x.webp" class="piece piece-red">
-    </div>
-    <!-- SVG定義（パズル型クリップパス用） -->
-    <svg class="svg-defs">
-        <defs>
-            <clipPath id="puzzle-clip" clipPathUnits="objectBoundingBox">
-                <path
-                    d="M0.167,0.167 L0.5,0.167 C0.5,0.083 0.583,0 0.667,0 C0.75,0 0.833,0.083 0.833,0.167 L0.833,0.5 C0.917,0.5 1,0.583 1,0.667 C1,0.75 0.917,0.833 0.833,0.833 L0.5,0.833 C0.5,0.917 0.417,1 0.333,1 C0.25,1 0.167,0.917 0.167,0.833 L0.167,0.167 Z" />
-            </clipPath>
-        </defs>
-    </svg>
 
     <!-- ナビゲーション -->
     <header class="header">
@@ -52,50 +30,122 @@
 
     <!-- プロフィール -->
     <main class="profile">
-        <div class="profile__inner">
-            <!-- プロフィールヒーロー -->
-            <div class="profile__hero">
-                <div class="profile__image__wrapper">
-                    <img src="./images/profile_icon (1).PNG" alt="プロフィール写真" class="profile__image">
-                </div>
-                <div class="profile__intro">
-                    <h1>増元ひかり</h1>
-                    <p class="profile__tagline">トライデントコンピュータ専門学校　2年</p>
-                    <p class="profile__intro__role">希望職種：Webデザイナー</p>
-                    <div class="profile__intro__catchphrase">
-                        <p>ユーザーと世界観に寄り添い、アイデアで印象に残るデザインを目指すWebデザイナー志望</p>
-                    </div>
-                </div>
+        <div class="profile__inner profile__twice">
+            <div class="profile__image__wrapper">
+                <img src="./images/profile_icon (1).PNG" alt="プロフィール写真" class="profile__image" width="400px"
+                    height="400px">
+            </div>
+            <div class="profile__intro">
+                <h1 class="profile__name">増元ひかり</h1>
+                <p class="profile__meta">
+                    トライデントコンピュータ専門学校 2年
+                </p>
+                <p class="profile__role">
+                    Webデザイナー志望
+                </p>
+                <p class="profile__catch">
+                    楽しくて、心地いいWeb体験をつくる。
+                </p>
             </div>
         </div>
-
         <!-- 自己紹介 -->
         <section class="profile__introduction">
             <div class="profile__inner">
-                <h2 class="profile__introduction__title">自己紹介</h2>
+
+                <h2 class="profile__introduction__title">About</h2>
+                <p class="profile__introduction__lead">
+                    見やすさと使いやすさを軸に、
+                    どのようにデザインと向き合っているかをまとめています。
+                </p>
+
                 <div class="profile__about">
-                    <div class="profile__about__card">
-                        <p>
-                            Webデザイナーを志望している専門学校生です。
-                            デザインをする際は、媒体やターゲットに合わせたテイスト設計を大切にし、常に「見やすさ・使いやすさ」を意識しています。
-                            例えば、アニメやゲームが好きなユーザーを想定したデザインではキャラクター性のある表現を取り入れたり、和風のサイトでは色使いや雰囲気を崩さないよう工夫しています。また、どの制作においても自分なりのアイデアを一つ取り入れることを意識し、印象に残るデザインを心がけています。
+                    <p class="profile__label">DESIGN POLICY</p>
+
+                    <!-- ファーストメッセージ -->
+                    <div class="profile__about__block is-main fade-in">
+                        <h3 class="profile__about__keyword">
+                            見やすさ・使いやすさ
+                        </h3>
+                        <p class="profile__about__text">
+                            見やすさや使いやすさは、すべてのデザインの土台だと考えています。<br>
+                            どれだけ見た目が魅力的でも、使いにくければ意味がありません。<br><br>
+
+                            そのため、まずはストレスなく使える設計を徹底し、その上でターゲットに合った表現や世界観を重ねていくことを大切にしています。
                         </p>
                     </div>
-                    <div class="profile__about__card">
-                        <p>
-                            可愛らしさや動きのあるデザインを得意としており、制作段階からアニメーションも含めて設計しています。一方で、サイケデリックな表現やおとぎ話のような世界観のあるデザインにも興味があり、今後はより個性のある表現にも挑戦していきたいと考えています。
+                    <div class="profile__about__block is-main-block ">
+                        <div class="profile__vertical">
+                            IDEA
+                        </div>
+                        <h3 class="profile__about__keyword is-main glitch fade-in" data-text="Commitment">
+                            こだわりのアイデアを<br>ひとつ入れる
+                        </h3>
+                        <p class="profile__about__text fade-in">
+                            どの制作でも、自分なりのアイデアを一つは取り入れることを意識しています。<br><br>
+
+                            ただ見ただけでは終わらない、「少し面白い」「印象に残る」と感じてもらえるような工夫を大切にしています。<br><br>
+
+                            デザインの意図を言葉で説明できることで、見る人と作り手が繋がると考えています。
                         </p>
                     </div>
-                    <div class="profile__about__card">
-                        <p>
-                            これまでにブログサイトの制作や、漫画アプリを想定したUIデザイン、和風サイトのデザインなどに取り組みました。進級制作展ではフォトグラファーの方をクライアントとして募集し、ヒアリングからサイト制作まで一貫して行いました。また、デザイン部に所属し、ポスターや本のカバー、シールなどのグラフィック制作にも継続的に取り組んでいます。
+                    <div class="profile__about__block fade-in">
+                        <h3 class="profile__about__keyword is-sub">
+                            ターゲットに合わせる
+                        </h3>
+                        <p class="profile__about__text">
+                            デザインをする際は、媒体や方向性、ペルソナによってテイストを変えることを大切にしています。<br><br>
+
+                            例えば、アニメやゲームが好きなユーザーを想定した場合はキャラクター性のある表現を取り入れたり、和風のサイトでは雰囲気を崩さない色や構成を意識しています。<br><br>
+
+                            一つ一つの要素に意味や意図を持たせることで、見た目だけではなく「なぜこのデザインなのか」が伝わる設計を目指しています。
                         </p>
                     </div>
-                    <div class="profile__about__card">
-                        <p>
-                            将来は、サイトを訪れた人に「面白い」「楽しい」と感じてもらえるような体験を提供できるWebデザイナーを目指しています。クライアントの意図や目的を大切にしながら、その中に自分なりのアイデアや個性を活かしたデザインを提案していきたいと考えています。
+                    <!-- テイスト -->
+                    <div class="profile__about__block fade-in">
+                        <h3 class="profile__about__keyword">
+                            可愛くて、動きのあるデザイン
+                        </h3>
+                        <p class="profile__about__text">
+                            可愛らしさや動きのある表現を得意としており、デザインを考える段階からアニメーションも含めて設計しています。<br><br>
+
+                            一方で、サイケデリックな表現やおとぎ話のような世界観のあるデザインにも惹かれており、今後はより個性のある表現にも挑戦していきたいと考えています。
                         </p>
                     </div>
+                    <div class="profile__about__block fade-in">
+                        <h3 class="profile__about__keyword">
+                            コーディングについて
+                        </h3>
+                        <p class="profile__about__text">
+                            HTML・CSSはWebクリエイター能力認定試験エキスパートを取得しています。<br>
+                            現在はSassを使用し、効率的なコーディングを行っています。<br><br>
+
+                            AIを活用することもありますが、内容を理解した上で修正・調整することを意識しています。<br>
+                            そのため、基礎的な構築や細かな調整は対応可能です。
+                        </p>
+                    </div>
+
+                    <!-- 将来 -->
+                    <div class="profile__about__block fade-in">
+                        <h3 class="profile__about__keyword">
+                            楽しい、面白いを届けたい
+                        </h3>
+                        <p class="profile__about__text">
+                            自分の作ったサイトを見た人に「面白い」「楽しい」と感じてもらえる体験を届けたいと考えています。<br><br>
+
+                            クライアントの意図を大切にしながら、その中に自分のアイデアや個性を少し加えたデザインができるWebデザイナーを目指しています。
+                        </p>
+                    </div>
+                </div>
+                <!-- Aboutの最後に入れる -->
+                <div class="profile__about__block profile__about__block--sub fade-in">
+                    <h3 class="profile__about__keyword profile__about__keyword--small">
+                        About me
+                    </h3>
+                    <p class="profile__about__text">
+                        趣味：旅行、アニメ鑑賞<br>
+                        推し：Travis Japan、SixTONES、Snow Man<br>
+                        好きな食べ物：クリームパスタ、チョコレート
+                    </p>
                 </div>
             </div>
         </section>
@@ -103,75 +153,56 @@
         <!-- スキル -->
         <section class="profile__skill">
             <div class="profile__inner">
-                <h2 class="profile__skill__title">スキル</h2>
-                <div class="skills__grid">
-                    <!-- デザインスキル -->
-                    <div class="skill-card skill-card--design">
-                        <h3 class="skill-card__title">デザインスキル</h3>
-                        <ul class="skill-card__list">
-                            <li class="skill-card__list__design">バナー制作</li>
-                            <li class="skill-card__list__design">UIデザイン（アプリ・Web）</li>
-                            <li class="skill-card__list__design">配色設計・テイスト設計</li>
-                            <li class="skill-card__list__design">アイコン制作</li>
-                        </ul>
-                    </div>
-                    <!-- コーディングスキル -->
-                    <div class="skill-card skill-card--coding">
-                        <h3 class="skill-card__title">コーディングスキル</h3>
-                        <ul class="skill-card__list">
-                            <li class="skill-card__list__code">HTML / CSS</li>
-                            <li class="skill-card__list__code">Sassを用いた効率的なコーディング</li>
-                            <li class="skill-card__list__code">基礎的なWebサイトの構築・調整</li>
-                        </ul>
-                        <div class="skill-card__note">
-                            <p>Webクリエイター能力認定試験 エキスパート取得</p>
-                            <p>AIを活用しながらコードを理解・修正することが可能</p>
-                        </div>
-                    </div>
-                    <!-- 使用ツール -->
-                    <div class="skill-card skill-card--tools">
-                        <h3 class="skill-card__title">使用ツール</h3>
-                        <ul class="skill-card__list">
-                            <li class="skill-card__list__tool">Figma</li>
-                            <li class="skill-card__list__tool">Photoshop</li>
-                            <li class="skill-card__list__tool">Illustrator</li>
-                            <li class="skill-card__list__tool">VS code</li>
-                        </ul>
-                    </div>
-                    <!-- AI -->
-                    <div class="skill-card skill-card--ai">
-                        <h3 class="skill-card__title">使用したことのあるAI</h3>
-                        <ul class="skill-card__list">
-                            <li class="skill-card__list__ai">ChatGPT</li>
-                            <li class="skill-card__list__ai">Google Gemini</li>
-                            <li class="skill-card__list__ai">Claude</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <h2 class="profile__skill__title">Skill</h2>
 
-        <!-- 強み・こだわり -->
-        <section class="profile__section">
-            <div class="strengths">
-                <div class="strengths__header">
-                    <div class="strengths__badge">特に大切にしていること</div>
-                    <h2 class="strengths__title">強み・こだわり</h2>
-                    <p class="strengths__subtitle">デザインにおいて常に心がけている4つのポイント</p>
-                </div>
-                <div class="strengths__grid">
-                    <div class="strengths__item">
-                        <p>ペルソナに合わせたテイスト設計ができる</p>
+                <div class="skills">
+
+                    <!-- デザイン -->
+                    <div class="skills__block">
+                        <h3 class="skills__keyword">Design</h3>
+                        <ul class="skills__list">
+                            <li>バナー制作</li>
+                            <li>UIデザイン（アプリ・Web）</li>
+                            <li>配色設計・テイスト設計</li>
+                            <li>アイコン制作</li>
+                        </ul>
                     </div>
-                    <div class="strengths__item">
-                        <p>必ず1つオリジナルのアイデアを取り入れる</p>
+
+                    <!-- コーディング -->
+                    <div class="skills__block">
+                        <h3 class="skills__keyword">Coding</h3>
+                        <ul class="skills__list">
+                            <li>HTML / CSS</li>
+                            <li>Sassを用いた効率的なコーディング</li>
+                            <li>基礎的なWebサイトの構築・調整</li>
+                        </ul>
+                        <p class="skills__note">
+                            Webクリエイター能力認定試験 エキスパート取得<br>
+                            AIを活用しながらコードの理解・修正が可能
+                        </p>
                     </div>
-                    <div class="strengths__item">
-                        <p>納得がいくまでデザインを作り直す姿勢</p>
+
+                    <!-- ツール -->
+                    <div class="skills__block">
+                        <h3 class="skills__keyword">Tools</h3>
+                        <ul class="skills__list">
+                            <li>Figma</li>
+                            <li>Photoshop</li>
+                            <li>Illustrator</li>
+                            <li>VS Code</li>
+                        </ul>
                     </div>
-                    <div class="strengths__item">
-                        <p>アニメーションまで含めた設計ができる</p>
+
+                    <!-- AI -->
+                    <div class="skills__block">
+                        <h3 class="skills__keyword">AI</h3>
+                        <ul class="skills__list">
+                            <li>ChatGPT</li>
+                            <li>Google Gemini</li>
+                            <li>Claude</li>
+                        </ul>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -180,7 +211,7 @@
         <section class="profile__sns">
             <h2 class="profile__sns__title">SNS・リンク</h2>
             <p class="profile__sns__subtitle">お気軽にご連絡ください</p>
-            <div class="sns__grid">
+            <div class="sns__grid sns__inner">
                 <a href="mailto:hikari09.masu@gmail.com" target="_blank" rel="noopener noreferrer"
                     class="sns__link sns__link--email">
                     <span class="sns__name">Email</span>

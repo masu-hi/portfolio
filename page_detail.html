@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Hikari's Portforio</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./scss/style.css">
 </head>
 
 <body data-page="project-detail">
@@ -66,18 +66,19 @@
         </section>
 
         <!-- プロジェクト詳細説明 -->
-        <section class="project-detail__summary" id="long-description-section">
-            <h2 class="project-detail__summary__title">プロジェクト概要</h2>
-            <div class="info-card__white">
-                <p id="project-long-description"></p>
-            </div>
-        </section>
+        <div class="project-detail__inner">
+            <section class="project-detail__summary" id="long-description-section">
+                <h2 class="project-detail__summary__title">プロジェクト概要</h2>
+                <div class="info-card__white">
+                    <p id="project-long-description"></p>
+                </div>
+            </section>
+        </div>
 
         <!-- 背景・課題 -->
         <div class="project-detail__inner back__twin">
             <section class="project-detail__theme" id="challenge-section">
                 <div class="project-detail__theme-group">
-                    <img src="./images/theme_icon.webp" alt="" class="theme__icon" width="48px" height="48px">
                     <h2 class="project-detail__theme__title">背景・課題</h2>
                 </div>
                 <div class="info-card__red">
@@ -87,7 +88,6 @@
             <!-- ソリューション -->
             <section class="project-detail__solution" id="solution-section">
                 <div class="project-detail__solution-group">
-                    <img src="./images/solution_icon.webp" alt="" class="solution__icon" width="48px" height="48px">
                     <h2 class="project-detail__solution__title">解決策</h2>
                 </div>
                 <div class="info-card__orange">
@@ -118,17 +118,45 @@
         </div>
 
         <!-- 施策・デザインの工夫 -->
+        <div class="project-detail__bg">
+            <div class="project-detail__inner">
+                <section class="project-detail__ingenuity" id="design-section">
+                    <h2 class="project-detail__ingenuity__title">施策・デザインの工夫</h2>
+                    <div class="design-details" id="project-design-details"></div>
+                </section>
+            </div>
+        </div>
+        <!-- Figma設計・制作プロセス -->
         <div class="project-detail__inner">
-            <section class="project-detail__ingenuity" id="design-section">
-                <h2 class="project-detail__ingenuity__title">施策・デザインの工夫</h2>
-                <div class="design-details" id="project-design-details"></div>
+
+            <section class="project-detail__figma" id="figma-section">
+
+                <h2 class="project-detail__figma__title">
+                    Figma設計・制作プロセス
+                </h2>
+
+                <p class="project-detail__figma__text">
+                    Figmaを用いてUI設計・プロトタイプ制作を行いました。
+                </p>
+
+                <div class="figma-gallery" id="project-figma-gallery">
+                </div>
+
             </section>
+
+        </div>
+        <!-- 公開サイト -->
+        <div class="back-to-works">
+            <div class="project-link" id="project-link">
+            </div>
         </div>
         <!-- 成果 -->
-        <section class="project-detail__results" id="results-section">
-            <h2 class="project-detail__results__title">成果・結果</h2>
-            <ul class="results-list" id="project-results"></ul>
-        </section>
+        <div class="project-detail__inner">
+            <section class="project-detail__results" id="results-section">
+                <h2 class="project-detail__results__title">成果・結果</h2>
+                <ul class="results-list" id="project-results"></ul>
+            </section>
+        </div>
         <!-- 学び -->
         <div class="project-detail__inner">
             <section class="project-detail__learning" id="learnings-section">

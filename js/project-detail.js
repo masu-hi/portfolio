@@ -145,6 +145,63 @@ function displayProjectData() {
     } else {
         document.getElementById('design-section').style.display = 'none';
     }
+    // Figma埋め込み
+    if (project.figma && project.figma.length > 0) {
+
+        const figmaGallery = document.getElementById('project-figma-gallery');
+
+        project.figma.forEach(item => {
+
+            // wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'figma-item';
+
+            // title
+            const title = document.createElement('h3');
+            title.className = 'figma-item__title';
+            title.textContent = item.title;
+
+            // iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = item.url;
+            iframe.allowFullscreen = true;
+            iframe.style.height = item.height;
+
+            // append
+            wrapper.appendChild(title);
+            wrapper.appendChild(iframe);
+
+            figmaGallery.appendChild(wrapper);
+
+        });
+
+    } else {
+        document.getElementById('figma-section').style.display = 'none';
+    }
+    // 実サイトリンク
+    // 実サイトリンク
+    if (project.links && project.links.length > 0) {
+
+        const linkContainer =
+            document.getElementById('project-link');
+
+        project.links.forEach(link => {
+
+            const a = document.createElement('a');
+
+            a.href = link.url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+
+            a.className = 'project-link-btn';
+
+            a.textContent = link.title;
+
+            linkContainer.appendChild(a);
+
+        });
+
+    }
 
     // 成果
     if (project.results && project.results.length > 0) {

@@ -82,7 +82,7 @@ $breakpoints: (
     }
 }
 
-@mixin inner($mw: 1000px, $w: 90%) {
+@mixin inner($mw: 1100px, $w: 88%) {
     max-width: $mw;
     width: $w;
     margin-left: auto;
@@ -98,19 +98,20 @@ $breakpoints: (
 }
 
 @mixin section_title($st) {
-    font-size: rem(28);
-    margin-bottom: $space-xl;
-    color: $color-txt;
-    text-align: center;
-    padding-left: $space-m;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.07em;
+    margin-bottom: rem(70);
+    color: #0a0a0a;
+    font-family: $font-family-mincho;
 
-    @media (max-width: 768px) {
-        font-size: rem(20);
+    @include mq(tablet) {
+        font-size: rem(42);
     }
 }
 
 @mixin card($c) {
-    padding: rem(50);
     border-radius: 12px;
     line-height: 1.8;
     color: $color-gray-700;
@@ -136,6 +137,188 @@ $breakpoints: (
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+@mixin magazine-btn-ja($paddingY: 18px, $paddingX: 42px, $fontSize: 14px) {
+    display: inline-block;
+    text-align: center;
+    padding: $paddingY $paddingX;
+    margin-top: rem(80);
+    border: 1px solid #111;
+    background: #fff;
+    color: #111;
+
+    font-size: $fontSize;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+
+    text-decoration: none;
+
+    position: relative;
+
+    transition: 0.3s;
+
+    // 少し雑誌っぽい余白感
+    box-sizing: border-box;
+
+    &::before {
+        content: "";
+
+        position: absolute;
+        top: 8px;
+        left: 8px;
+
+        width: 100%;
+        height: 100%;
+
+        border: 1px solid #111;
+
+        z-index: -1;
+
+        transition: 0.3s;
+    }
+
+    &:hover {
+        background: #111;
+        color: #fff;
+
+        transform: translate(-4px, -4px);
+    }
+
+    &:hover::before {
+        top: 4px;
+        left: 4px;
+    }
+
+    // =========================
+    // モバイル
+    // =========================
+    @media screen and (max-width: 768px) {
+        padding: 14px 26px;
+        margin-top: rem(50);
+        font-size: 13px;
+        letter-spacing: 0.05em;
+
+        &::before {
+            top: 5px;
+            left: 5px;
+        }
+
+        &:hover {
+            transform: translate(-2px, -2px);
+        }
+
+        &:hover::before {
+            top: 2px;
+            left: 2px;
+        }
+    }
+}
+
+// =================================================================
+// Magazine Editorial Style
+// =================================================================
+
+// ---------------------------------
+// エディトリアル見出し
+// ---------------------------------
+
+@mixin editorial-title($number: "01") {
+    position: relative;
+
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.07em;
+
+    margin-bottom: rem(72);
+
+    color: $color-txt;
+
+    &::before {
+        content: $number;
+
+        position: absolute;
+
+        top: -40px;
+        left: -40px;
+
+        font-size: clamp(80px, 12vw, 180px);
+        font-weight: 900;
+        line-height: 1;
+
+        color: rgba(0, 0, 0, 0.04);
+
+        z-index: -1;
+    }
+
+    @include mq(tablet) {
+        font-size: rem(34);
+
+        margin-bottom: rem(48);
+
+        &::before {
+            left: 0;
+            top: -24px;
+
+            font-size: rem(72);
+        }
+    }
+}
+
+// ---------------------------------
+// エディトリアル本文
+// ---------------------------------
+
+@mixin editorial-text {
+    max-width: 720px;
+
+    font-size: rem(16);
+    line-height: 2.2;
+    letter-spacing: 0.02em;
+
+    color: $color-gray-700;
+}
+
+// ---------------------------------
+// エディトリアルカード
+// 「UIカード」ではなく「誌面」風
+// ---------------------------------
+
+@mixin editorial-block {
+    background: transparent;
+
+    border-radius: 0;
+
+    border-top: 1px solid $color-txt;
+
+    padding: rem(32) 0;
+
+    box-shadow: none;
+}
+
+// ---------------------------------
+// 雑誌風ラベル
+// ---------------------------------
+
+@mixin editorial-label($label: "ARTICLE") {
+    position: relative;
+    margin-bottom: rem(80);
+
+    &::before {
+        content: $label;
+
+        display: inline-block;
+
+        margin-bottom: rem(24);
+
+        font-size: rem(12);
+        font-weight: 700;
+        letter-spacing: 0.18em;
+
+        color: $color-gray-400;
+    }
+}
+
 // ===================================
 // リセット＆ベーススタイル
 // ===================================
@@ -153,8 +336,8 @@ html {
 body {
     font-family: $font-family-gothic;
     font-size: rem($font-size-base);
-    line-height: 1.6;
-    color: $color-text;
+    line-height: 1.8;
+    color: $color-gray-600;
     background: $color-bg;
     overflow-x: hidden;
 }
@@ -232,7 +415,7 @@ button {
         align-items: center;
         gap: $space-s;
         font-weight: 500;
-        color: $color-text;
+        color: $color-gray-600;
         transition: all 0.3s ease;
 
         &:hover {
@@ -274,7 +457,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: $space-xl;
     position: relative;
 
@@ -283,22 +465,13 @@ button {
     }
 
     &__title {
-        font-size: rem(70);
-        font-weight: 700;
-        margin-bottom: $space-l;
-        color: $color-txt;
-        letter-spacing: ls(-20);
-
-        @include mq () {
-            font-size: rem(40);
-        }
+        @include section_title(mainvisual);
     }
 
     &__subtitle {
         font-size: rem(24);
         color: $color-text;
-        margin-bottom: $space-xxxl;
-        text-align: center;
+        font-family: $font-family-mincho;
 
         @media (max-width: 768px) {
             font-size: rem(18);
@@ -309,7 +482,6 @@ button {
         display: flex;
         flex-direction: column;
         gap: $space-m;
-        justify-content: center;
         align-items: center;
 
         @media (min-width: 640px) {
@@ -318,39 +490,8 @@ button {
     }
 
     &__cta {
-        display: inline-block;
-        padding: $space-m $space-xl;
-        font-weight: 600;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-
-        @media (max-width: 768px) {
-            padding: rem(14) $space-xl;
-            width: 100%;
-            max-width: 300px;
-        }
-
-        &--primary {
-            background: $color-main;
-            color: $color-white;
-
-            &:hover {
-                background: $color-gray-800;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            }
-        }
-
-        &--secondary {
-            border: 2px solid $color-main;
-            color: $color-main;
-            background: transparent;
-
-            &:hover {
-                background: $color-gray-100;
-                transform: translateY(-2px);
-            }
-        }
+        @include magazine-btn-ja();
+        margin-top: rem(50);
     }
 }
 
@@ -359,7 +500,7 @@ button {
 // ===================================
 
 .concept {
-    padding: rem(96) $space-xl;
+    padding: rem(120) $space-xl;
 
     @media (max-width: 768px) {
         padding: rem(64) $space-l;
@@ -367,35 +508,21 @@ button {
 
     &__inner {
         @include inner();
-        text-align: center;
+        background-color: rgb(255, 255, 255, 0.8);
+        padding: rem(120) rem(50);
     }
 
     &__title {
-        font-size: rem(40);
-        margin-bottom: $space-xl;
-        color: $color-txt;
-
-        @media (max-width: 768px) {
-            font-size: rem(32);
-        }
+        @include section_title(concept);
+        text-align: right;
     }
 
     &__message {
-        font-size: rem(18);
         line-height: 1.8;
         color: $color-text;
-        background-color: $color-white;
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        padding: rem(100) rem(80);
         margin-top: rem(50);
-
-        &--title {
-            font-size: rem(24);
-            margin-bottom: rem(40);
-            color: $color-txt;
-            font-weight: bold;
-        }
+        position: relative;
+        text-align: right;
 
         @media (max-width: 768px) {
             font-size: rem(16);
@@ -409,6 +536,7 @@ button {
 
 .works {
     padding: rem(96) $space-xl;
+    padding-bottom: rem(180);
 
     @media (max-width: 768px) {
         padding: rem(64) $space-l;
@@ -419,22 +547,14 @@ button {
     }
 
     &__header {
-        text-align: center;
         margin-bottom: rem(64);
     }
 
     &__title {
-        font-size: rem(40);
-        margin-bottom: $space-m;
-        color: $color-txt;
-
-        @media (max-width: 768px) {
-            font-size: rem(32);
-        }
+        @include section_title(works);
     }
 
     &__subtitle {
-        font-size: rem(18);
         color: $color-text;
 
         @media (max-width: 768px) {
@@ -464,6 +584,30 @@ button {
             margin-bottom: $space-s;
         }
     }
+
+    &__filter {
+        text-align: center;
+        margin-bottom: 100px;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid $color-border;
+        border-top: 1px solid $color-border;
+        background-color: #fff;
+    }
+}
+
+.filter-btn {
+    display: inline-block;
+    color: $color-gray-500;
+    margin: rem(20);
+
+    &:hover {
+        border-bottom: 1px solid $color-accent;
+        color: $color-accent;
+        transition: .7s;
+    }
 }
 
 // ===================================
@@ -471,17 +615,19 @@ button {
 // ===================================
 
 .project-card {
-    background: $color-white;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 2px solid $color-txt;
+    backdrop-filter: blur(10px);
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: 0.3s;
     cursor: pointer;
     display: block;
 
     &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        transform: translateY(-4px);
+        background: rgba(255, 255, 255, 0.95);
     }
 
     &__image {
@@ -512,7 +658,7 @@ button {
     &__name {
         font-size: rem(24);
         margin-bottom: rem(12);
-        color: $color-txt;
+        color: $color-text;
     }
 
     &__description {
@@ -537,517 +683,272 @@ button {
 }
 
 // ===================================
-// プロフィールページ
+// Profile Page（整理版）
 // ===================================
 
 .profile {
-    min-height: 100vh;
-    padding: rem(96) 0 rem(64);
-
-    @media (max-width: 768px) {
-        padding: rem(64) $space-l $space-xxxl;
-    }
 
     &__inner {
         @include inner(1000px, 100%);
+        margin-top: rem(150);
     }
 
-    &__hero {
-        display: grid;
-        grid-template-columns: 300px 1fr;
-        gap: $space-xxxl;
-        margin-bottom: rem(96);
+    // =========================
+    // Hero
+    // =========================
+    &__twice {
+        display: flex;
         align-items: center;
+        justify-content: space-evenly;
+        gap: rem(100);
 
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-            gap: $space-xl;
-            margin-bottom: rem(64);
+        @include mq() {
+            flex-direction: column;
+            text-align: center;
         }
+    }
+
+    &__image__wrapper {
+        width: 400px;
+        height: 400px;
     }
 
     &__image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-
-        &__wrapper {
-            width: 300px;
-            height: 300px;
-            position: relative;
-
-            @media (max-width: 768px) {
-                width: 250px;
-                height: 250px;
-                margin: 0 auto;
-            }
-        }
     }
 
-    &__intro {
-        h1 {
-            font-size: rem(40);
-            margin-bottom: $space-s;
-            color: $color-txt;
-
-            @media (max-width: 768px) {
-                font-size: rem(32);
-            }
-        }
+    &__name {
+        @include section_title(profile);
+        margin-bottom: rem(50);
     }
 
-    &__tagline {
-        font-size: rem(20);
-        color: $color-gray-600;
-        margin-bottom: $space-m;
-
-        @media (max-width: 768px) {
-            font-size: rem(18);
-        }
-    }
-
-    &__intro__role {
-        font-size: rem(18);
+    &__meta {
+        margin-top: rem(14);
         color: $color-gray-500;
-        margin-bottom: $space-l;
-
-        @media (max-width: 768px) {
-            font-size: rem(16);
-        }
     }
 
-    &__intro__catchphrase {
-        background: linear-gradient(to right, $color-orange-50, $color-pink-50);
-        padding: $space-l $space-xl;
-        border-radius: 16px;
-
-        @media (max-width: 768px) {
-            padding: $space-m $space-l;
-        }
-
-        p {
-            font-size: rem(18);
-            line-height: 1.8;
-            color: $color-gray-700;
-
-            @media (max-width: 768px) {
-                font-size: rem(16);
-            }
-        }
+    &__role {
+        margin-top: rem(6);
+        color: $color-gray-400;
     }
 
+    &__catch {
+        margin-top: rem(24);
+        font-size: rem(32);
+        font-weight: 700;
+        line-height: 1.4;
+        font-family: $font-family-mincho;
+    }
+
+    // =========================
+    // About
+    // =========================
     &__introduction {
-        margin-bottom: rem(120);
-
-        @media (max-width: 768px) {
-            margin-bottom: rem(64);
-        }
-
-        &__title {
-            @include section_title(introduction);
-        }
+        margin-top: rem(120);
     }
 
-    &__skill {
-        margin-bottom: rem(120);
+    &__introduction__title {
+        font-size: rem(28);
+        margin-bottom: rem(30);
+        color: $color-txt;
+    }
 
-        &__title {
-            @include section_title(skill);
-        }
+    &__introduction__lead {
+        margin-bottom: rem(80);
+        color: $color-gray-500;
+    }
+
+    &__label {
+        font-size: rem(12);
+        letter-spacing: 0.2em;
+        color: $color-gray-400;
+        margin-bottom: rem(50);
     }
 
     &__about {
-        display: flex;
-        flex-direction: column;
-        gap: $space-xl;
-        background: $color-white;
-        border-radius: 16px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        padding: rem(50) rem(50);
+        position: relative;
 
-        &__card {
-            padding-bottom: rem(20);
+        &__block {
+            margin-bottom: rem(300);
 
-            @media (max-width: 768px) {
-                padding: $space-l;
+            &:nth-child(even) {
+                margin-left: rem(120);
+
+                @include mq() {
+                    margin-left: 0;
+                }
             }
+        }
 
-            p {
-                line-height: 1.8;
-                color: $color-gray-700;
-            }
+        &__keyword {
+            font-size: rem(48);
+            font-weight: 700;
+            line-height: 1.3;
+            color: $color-txt;
+        }
+
+        &__text {
+            margin-top: rem(16);
+            font-size: rem(16);
+            line-height: 2;
+            color: $color-gray-600;
+            max-width: 520px;
+        }
+
+        &__keyword--small {
+            font-size: rem(24);
         }
     }
 
-    &__sns {
-        margin-top: rem(120);
+    &__vertical {
+        position: absolute;
+        left: -60px;
+        top: 0;
+        writing-mode: vertical-rl;
+        font-size: rem(14);
+        letter-spacing: 0.3em;
+        color: $color-gray-400;
+    }
 
-        &__title {
-            @include section_title(sns);
-        }
+    // =========================
+    // Skill（雑誌風）
+    // =========================
+    &__skill {
+        margin-top: rem(160);
+    }
 
-        &__subtitle {
-            font-size: rem(18);
-            color: $color-gray-600;
-            text-align: center;
-            margin-bottom: $space-xxxl;
-
-            @media (max-width: 768px) {
-                font-size: rem(16);
-                margin-bottom: $space-xl;
-            }
-        }
+    &__skill__title {
+        font-size: rem(28);
+        margin-bottom: rem(80);
     }
 }
 
-// ===================================
-// スキルセクション
-// ===================================
+.is-main {
+    font-size: rem(64);
+    line-height: 1.2;
+
+    &-block {
+        position: relative;
+        margin: rem(400) 0;
+    }
+}
+
+.is-main::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-size: rem(120);
+    color: rgba(0, 0, 0, 0.05);
+    z-index: -1;
+}
+
+.glitch {
+    position: relative;
+
+    &::before,
+    &::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0.2;
+    }
+
+    &::before {
+        color: #999;
+        transform: translate(1px, 1px);
+    }
+
+    &::after {
+        color: #ccc;
+        transform: translate(-1px, -1px);
+    }
+}
+
+// =========================
+// Skills（シンプル版）
+// =========================
 
 .skills {
-    &__grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: $space-xl;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: rem(80);
 
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-            gap: $space-l;
-        }
-    }
-}
-
-.skill-card {
-    background: $color-white;
-    padding: $space-xl;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-
-    @media (max-width: 768px) {
-        padding: $space-l;
+    @include mq() {
+        grid-template-columns: 1fr;
     }
 
-    &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    &--design {
-        border: 4px solid $color-orange-200;
-
-        .skill-card__title {
-            color: $color-orange-500;
-            position: relative;
-
-            &::before {
-                content: "";
-                display: inline-block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: url(../images/design_icon.webp) no-repeat center center/cover;
-                width: 28px;
-                height: 28px;
-            }
-        }
-
-        .skill-card__list__item {
-            background: $color-white;
-        }
-    }
-
-    &--coding {
-        border: 4px solid $color-pink-200;
-
-        .skill-card__title {
-            color: $color-pink-500;
-            position: relative;
-
-            &::before {
-                content: "";
-                display: inline-block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: url(../images/code_icon.webp) no-repeat center center/cover;
-                width: 28px;
-                height: 28px;
-            }
-        }
-
-        .skill-card__list__item {
-            background: $color-white;
-        }
-    }
-
-    &--tools {
-        border: 4px solid $color-blue-200;
-
-        .skill-card__title {
-            color: $color-blue-500;
-            position: relative;
-
-            &::before {
-                content: "";
-                display: inline-block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: url(../images/tool_icon.webp) no-repeat center center/cover;
-                width: 28px;
-                height: 28px;
-            }
-        }
-
-        .skill-card__list__item {
-            background: $color-white;
-        }
-    }
-
-    &--ai {
-        border: 4px solid $color-purple-200;
-
-        .skill-card__title {
-            color: $color-purple-500;
-            position: relative;
-
-            &::before {
-                content: "";
-                display: inline-block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: url(../images/ai_icon.webp) no-repeat center center/cover;
-                width: 28px;
-                height: 28px;
-            }
-        }
-
-        .skill-card__list__item {
-            background: $color-white;
-        }
-    }
-
-    &__title {
-        font-size: rem(24);
-        font-weight: 600;
-        margin-bottom: $space-l;
-        color: $color-txt;
-
-        @media (max-width: 768px) {
-            font-size: rem(20);
-        }
+    &__keyword {
+        font-size: rem(32);
+        font-weight: 700;
+        margin-bottom: rem(30);
     }
 
     &__list {
-        display: flex;
-        flex-direction: column;
-        gap: $space-m;
-
-        &__design {
-            @include skill-card(design);
-        }
-
-        &__code {
-            @include skill-card(code);
-        }
-
-        &__tool {
-            @include skill-card(tool);
-        }
-
-        &__ai {
-            @include skill-card(ai);
+        li {
+            border-bottom: 1px solid $color-border;
+            padding-bottom: rem(10);
+            margin-bottom: rem(10);
         }
     }
 
     &__note {
-        margin-top: $space-l;
-        padding-top: $space-l;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-
-        p {
-            font-size: rem(14);
-            color: $color-gray-700;
-            margin-bottom: $space-s;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
+        margin-top: rem(16);
+        font-size: rem(14);
+        color: $color-gray-500;
     }
 }
 
-// ===================================
-// 強みセクション
-// ===================================
+// =========================
+// SNS
+// =========================
 
-.strengths {
-    background: linear-gradient(135deg, #FEF2F2 0%, #FFF7ED 100%);
-    padding: rem(64) $space-xl;
-    border-radius: 20px;
-
-    @media (max-width: 768px) {
-        padding: $space-xxxl $space-l;
-    }
-
-    &__header {
-        text-align: center;
-        margin-bottom: $space-xxxl;
-    }
-
-    &__badge {
-        display: inline-block;
-        background: $color-red-500;
-        color: $color-white;
-        padding: rem(12) $space-l;
-        border-radius: 50px;
-        margin-bottom: $space-m;
-        font-size: rem(20);
-        font-weight: 600;
-
-        @media (max-width: 768px) {
-            font-size: rem(16);
-            padding: rem(10) $space-m;
-        }
-    }
+.profile__sns {
+    margin: rem(160) 0;
 
     &__title {
-        font-size: rem(36);
-        margin-bottom: $space-m;
-        color: $color-txt;
-
-        @media (max-width: 768px) {
-            font-size: rem(30);
-        }
+        text-align: center;
+        margin-bottom: rem(16);
     }
 
     &__subtitle {
-        font-size: rem(18);
-        color: $color-gray-600;
-
-        @media (max-width: 768px) {
-            font-size: rem(16);
-        }
-    }
-
-    &__grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: $space-l;
-        max-width: 900px;
-        margin: 0 auto;
-
-        @media (max-width: 768px) {
-            grid-template-columns: 1fr;
-            gap: $space-m;
-        }
-    }
-
-    &__item {
-        background: $color-white;
-        padding: $space-xl;
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
-        border: 2px solid $color-red-500;
-        transition: all 0.3s ease;
-        position: relative;
-
-        @media (max-width: 768px) {
-            padding: $space-l;
-        }
-
-        &:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: url(../images/exclamation.webp) no-repeat center center / contain;
-            transform: rotate(25deg);
-            right: -15px;
-            top: -20px;
-        }
-
-        p {
-            line-height: 1.8;
-            color: $color-gray-800;
-            font-weight: 500;
-        }
+        text-align: center;
+        margin-bottom: rem(48);
+        color: $color-gray-500;
     }
 }
 
-// ===================================
-// SNSセクション
-// ===================================
-
 .sns {
+    &__inner {
+        @include inner(1000px, 100%);
+    }
+
+
+
     &__grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: $space-l;
-        max-width: 800px;
-        margin: 0 auto;
+        gap: rem(24);
 
-        @media (max-width: 768px) {
+        @include mq() {
             grid-template-columns: repeat(2, 1fr);
-            gap: $space-m;
         }
     }
 
     &__link {
         display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: center;
-        gap: $space-m;
-        padding: $space-xl;
-        background: $color-white;
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        min-height: 120px;
-
-        @media (max-width: 768px) {
-            padding: $space-l;
-        }
+        align-items: center;
+        padding: rem(20);
+        border: 1px solid $color-border;
+        transition: 0.3s;
 
         &:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        &--email {
-            background: #fef2f2;
-            color: $color-red-500;
-        }
-
-        &--blog {
-            background: #eff6ff;
-            color: $color-blue-500;
-        }
-
-        &--instagram {
-            background: #fdf2f8;
-            color: $color-pink-500;
-        }
-
-        &--github {
             background: $color-gray-100;
-            color: $color-gray-800;
         }
-    }
-
-    &__name {
-        font-weight: 600;
-        color: $color-gray-700;
-        font-size: rem(14);
     }
 }
 
@@ -1056,295 +957,245 @@ button {
 // ===================================
 
 .project-detail {
-    min-height: 100vh;
-    padding-top: rem(64);
+    padding-top: rem(90);
+    background-color: rgb(255, 255, 255, .8);
 
-    @media (max-width: 768px) {
-        padding: $space-xxxl $space-l;
+    @include mq(tablet) {
+        padding-top: rem(80);
     }
 
     &__inner {
-        @include inner(900px, 100%);
+        @include inner(980px, 90%);
     }
+
+    // ===================================
+    // Header
+    // ===================================
 
     &__header {
-        margin-bottom: rem(64);
-    }
+        margin-bottom: rem(240);
 
-    &__title {
-        font-size: rem(40);
-        margin-bottom: $space-l;
-        color: $color-txt;
-
-        @media (max-width: 768px) {
-            font-size: rem(32);
+        @include mq(tablet) {
+            margin-bottom: rem(140);
         }
     }
 
-    &__image {
-        margin-top: $space-xl;
+    &__title {
+        font-size: clamp(48px, 8vw, 96px);
 
-        img {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            object-fit: cover;
+        font-weight: 900;
+
+        line-height: 1;
+
+        letter-spacing: -0.05em;
+
+        max-width: 10ch;
+
+        margin-bottom: rem(32);
+
+        @include mq(tablet) {
+            font-size: rem(42);
         }
     }
 
     &__description {
+        @include editorial-text;
+
         font-size: rem(18);
+
         color: $color-gray-500;
-        line-height: 1.8;
     }
+
+    &__image {
+        margin-top: rem(80);
+
+        img {
+            width: 100%;
+
+            border-radius: 0;
+
+            object-fit: cover;
+        }
+    }
+
+    // ===================================
+    // 概要
+    // ===================================
 
     &__summary {
-        @include section(summary);
-        background-color: $color-bg-light;
-        margin-top: rem(120);
+        margin-top: rem(260);
 
-        &__title {
-            @include section_title(summary);
-        }
-    }
+        background: transparent;
 
-    &__theme {
-        padding: rem(30);
-        background-color: #FFF7ED;
-        border-radius: 16px;
-        border: 2px solid #FFE2E2;
-
-        &-group {
-            display: flex;
-            gap: 5px;
-            align-items: center;
+        .project-detail__inner {
+            padding: 0;
+            background: transparent;
         }
 
         &__title {
-            font-size: rem(28);
-            color: $color-txt;
+            @include editorial-title("01");
         }
     }
 
+    // ===================================
+    // 背景・課題
+    // ===================================
+
+    &__theme,
     &__solution {
-        padding: rem(30);
-        background-color: #FEFCE8;
-        border-radius: 16px;
-        border: 2px solid #FEF9C2;
-
-        &-group {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-        }
-
-        &__title {
-            font-size: rem(28);
-            color: $color-txt;
-        }
+        @include editorial-block;
+        border-top-width: 2px;
     }
+
+    &__theme__title,
+    &__solution__title {
+        font-size: rem(36);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-bottom: rem(20);
+    }
+
+    // ===================================
+    // section title
+    // ===================================
 
     &__section__title {
-        @include section_title(ranges);
+        @include editorial-title("02");
     }
 
-    &__range {
-        padding: 30px 30px 30px 50px;
-        background-color: #fff;
-        border-radius: 14px;
-        border-top: 4px solid $color-blue-500;
-        box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.2);
-
-        &__title {
-            color: $color-txt;
-            position: relative;
-
-            &::before {
-                content: "";
-                display: inline-block;
-                position: absolute;
-                left: -28px;
-                top: -9.5%;
-                background: url(../images/range_icon.webp) no-repeat center center /cover;
-                width: 25px;
-                height: 25px;
-            }
-        }
-
-        .detail-list {
-            @include detail-list(range);
-
-            li {
-                position: relative;
-
-                &::before {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    left: -28px;
-                    top: 8%;
-                    background: url(../images/check_blue.webp) no-repeat center center /cover;
-                    width: 20px;
-                    height: 20px;
-                }
-            }
-        }
+    &__ingenuity__title {
+        @include editorial-title("03");
     }
 
-    &__tech {
-        padding: 30px 30px 30px 50px;
-        background-color: #fff;
-        border-radius: 14px;
-        border-top: 4px solid $color-green-500;
-        box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.2);
-
-        &__title {
-            color: $color-txt;
-            position: relative;
-
-            &::before {
-                content: "";
-                display: inline-block;
-                position: absolute;
-                left: -28px;
-                top: -1.2%;
-                background: url(../images/tech_icon.webp) no-repeat center center /cover;
-                width: 25px;
-                height: 25px;
-            }
-        }
-
-        .detail-list {
-            @include detail-list(tech);
-
-            li {
-                position: relative;
-
-                &::before {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    left: -28px;
-                    top: 10%;
-                    background: url(../images/check_green.webp) no-repeat center center /cover;
-                    width: 20px;
-                    height: 20px;
-                }
-            }
-        }
+    &__figma__title {
+        @include editorial-title("04");
     }
 
+    &__results__title {
+        @include editorial-title("05");
+    }
+
+    &__learning__title {
+        @include editorial-title("06");
+    }
+
+    // ===================================
+    // 技術カード
+    // ===================================
+
+    &__range,
+    &__tech,
     &__surroundings {
-        padding: 30px 30px 30px 50px;
-        background-color: #fff;
-        border-radius: 14px;
-        border-top: 4px solid $color-purple-500;
-        box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.2);
+        background: transparent;
 
-        &__title {
-            color: $color-txt;
-            position: relative;
+        border-radius: 0;
 
-            &::before {
-                content: "";
-                display: inline-block;
-                position: absolute;
-                left: -28px;
-                top: 2.8%;
-                background: url(../images/surroundings_icon.webp) no-repeat center center /cover;
-                width: 25px;
-                height: 25px;
-            }
-        }
+        border-top: 2px solid $color-txt;
 
-        .detail-list {
-            @include detail-list(range);
+        box-shadow: none;
 
-            li {
-                position: relative;
+        padding: rem(30) 0;
 
-                &::before {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    left: -28px;
-                    top: 8%;
-                    background: url(../images/check_purple.webp) no-repeat center center /cover;
-                    width: 20px;
-                    height: 20px;
-                }
-            }
+        h3 {
+            font-size: rem(28);
+            margin-bottom: rem(24);
         }
     }
+
+    // ===================================
+    // 工夫
+    // ===================================
 
     &__ingenuity {
-        margin-top: rem(120);
-        padding: rem(50) rem(30);
-        background-color: #fff;
+        margin-top: rem(260);
+        padding-top: 0;
+    }
 
-        &__title {
-            @include section_title(ingenuity);
+    &__bg {
+        background: transparent;
+    }
+
+    // ===================================
+    // Figma
+    // ===================================
+
+    &__figma {
+        margin-top: rem(260);
+
+        &__text {
+            @include editorial-text;
         }
     }
 
-    &__results {
-        @include section(summary);
-        background-color: #F0FDF4;
-        margin-top: rem(120);
+    // ===================================
+    // 成果
+    // ===================================
 
-        &__title {
-            @include section_title(results);
-        }
+    &__results {
+        background: transparent;
+
+        margin-top: rem(260);
 
         .results-list {
-            @include detail-list(results);
-            margin: 0 rem(100);
+            margin: 0;
 
             li {
-                position: relative;
-                background-color: #fff;
-                border-radius: 14px;
-                padding: rem(30) rem(50);
+                background: transparent;
 
-                &::before {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    left: 17px;
-                    top: 39%;
-                    background: url(../images/check_green.webp) no-repeat center center /cover;
-                    width: 20px;
-                    height: 20px;
-                }
+                border-radius: 0;
+
+                border-top: 1px solid $color-border;
+
+                padding: rem(28) 0 rem(28) rem(36);
             }
         }
     }
 
-    &__learning {
-        margin-top: rem(120);
+    // ===================================
+    // 学び
+    // ===================================
 
-        &__title {
-            @include section_title(learning);
+    &__learning {
+        margin-top: rem(260);
+    }
+
+    &__summary,
+    &__ingenuity,
+    &__learning {
+
+        .project-detail__inner {
+            max-width: 760px;
         }
     }
 }
 
-.back__twin {
-    margin-top: rem(120);
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: rem(30);
+.project-detail__summary {
+    @include editorial-label("SUMMARY");
+}
+
+.project-detail__ingenuity {
+    @include editorial-label("DESIGN");
+}
+
+.project-detail__results {
+    @include editorial-label("RESULT");
+}
+
+.project-detail__learning {
+    @include editorial-label("LEARNING");
+}
+
+.project-detail h1,
+.project-detail h2 {
+    font-family: $font-family-mincho;
 }
 
 .back__triple {
-    margin-top: rem(120);
+    margin-top: rem(100);
 }
 
-.back__threegroups {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: rem(20);
-    margin-top: rem(50);
+.project-link-btn {
+    @include magazine-btn-ja();
 }
 
 
@@ -1353,46 +1204,31 @@ button {
 // ===================================
 
 .project-overview {
-    display: flex;
-    gap: rem(20);
-    align-items: center;
-    margin-bottom: $space-xl;
+    display: grid;
+    row-gap: rem(10);
+    margin-bottom: rem(48);
 
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-        gap: $space-l;
-    }
-
-    &__category {
+    &__category,
+    &__valuebg {
         display: inline-block;
-        padding: $space-s rem(20);
-        background: linear-gradient(90deg,
-                #FFEDD4 0%,
-                #FCE7F3 100%);
-        color: $color-gray-500;
-        font-size: rem(14);
-        border-radius: 20px;
-        border: 1px solid #FFD6A8;
-        font-weight: 500;
+        background: transparent;
+        border: 1px solid $color-border;
+        border-radius: 999px;
+        padding: rem(8) rem(18);
+        font-size: rem(12);
+        letter-spacing: 0.08em;
     }
 
     &__calender {
         display: flex;
-        gap: rem(5);
+        gap: rem(10);
         align-items: center;
     }
+}
 
-    &__value {
-        font-size: rem(14);
-        color: $color-text;
-        font-weight: 500;
-    }
-
-    &__valuebg {
-        background-color: $color-bg-light;
-        padding: $space-s rem(20);
-        border-radius: 20px;
-    }
+.calender {
+    width: 20px;
+    height: 20px;
 }
 
 // ===================================
@@ -1401,37 +1237,21 @@ button {
 
 .info-card {
 
-    &__white {
-        background-color: #fff;
-        margin: 0 rem(150);
-        @include card(white);
-    }
-
-    &__red {
-        margin-top: rem(30);
-    }
-
-    &__orange {
-        margin-top: rem(30);
-    }
-
+    &__white,
+    &__red,
+    &__orange,
     &__gradation {
-        padding: rem(50);
-        background: linear-gradient(135deg, #EFF6FF 0%, #FAF5FF 100%);
-        border-radius: 16px;
-        border: 2px solid #DBEAFE;
-    }
+        background: transparent;
 
-    @media (max-width: 768px) {
-        padding: $space-l;
+        border-radius: 0;
+
+        border: none;
+
+        padding: 0;
     }
 
     p {
-        margin-bottom: $space-m;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
+        @include editorial-text;
     }
 }
 
@@ -1448,35 +1268,29 @@ button {
 // ===================================
 
 .design-details {
-    &__item {
-        margin-bottom: rem(80);
 
-        &:last-child {
-            margin-bottom: 0;
-        }
+    &__item {
+        margin-bottom: rem(120);
+        @include editorial-label("DESIGN");
     }
 
     &__title {
-        font-size: rem(24);
-        margin-bottom: $space-l;
-        color: $color-txt;
-
-        @media (max-width: 768px) {
-            font-size: rem(20);
-        }
+        font-size: rem(36);
+        font-weight: 800;
+        line-height: 1.3;
+        margin-bottom: rem(32);
+        max-width: 22ch;
+        font-family: $font-family-mincho;
     }
 
     &__text {
-        line-height: 1.8;
-        color: $color-gray-700;
-        margin-bottom: $space-xl;
+        @include editorial-text;
     }
 
     &__image {
-        width: 100%;
-        height: auto;
-        border-radius: 12px;
-        margin-bottom: $space-xxxl;
+        margin-top: rem(56);
+
+        border-radius: 0;
     }
 }
 
@@ -1486,22 +1300,10 @@ button {
 
 .back-to-works {
     text-align: center;
-    margin-top: rem(64);
 
     &__btn {
-        display: inline-block;
-        padding: $space-m $space-xxl;
-        background: $color-main;
-        color: $color-white;
-        font-weight: 600;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-
-        &:hover {
-            background: $color-gray-800;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
+        @include magazine-btn-ja;
+        margin-bottom: rem(180);
     }
 }
 
@@ -1512,7 +1314,6 @@ button {
 .footer {
     color: $color-white;
     padding: rem(100) rem(145);
-    margin-top: rem(96);
 
     @media (max-width: 768px) {
         padding: $space-xl $space-l $space-l;
@@ -1578,56 +1379,6 @@ button {
     z-index: 2;
 }
 
-// ===================================
-// スクロールトップボタン
-// ===================================
-
-.scroll-to-top {
-    position: fixed;
-    bottom: $space-xl;
-    right: $space-xl;
-    width: 56px;
-    height: 56px;
-    background: $color-main;
-    color: $color-white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 99;
-
-    &.visible {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    &:hover {
-        background: $color-gray-800;
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    @media (max-width: 768px) {
-        width: 48px;
-        height: 48px;
-        bottom: $space-l;
-        right: $space-l;
-    }
-
-    &__icon {
-        width: 24px;
-        height: 24px;
-
-        @media (max-width: 768px) {
-            width: 20px;
-            height: 20px;
-        }
-    }
-}
 
 .puzzle-wrapper {
     position: relative;
