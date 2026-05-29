@@ -1056,6 +1056,11 @@ button {
 
     &__inner {
         @include inner(980px, 90%);
+
+        &--figma {
+            max-width: 1180px;
+            width: 94%;
+        }
     }
 
     // ===================================
@@ -1273,6 +1278,61 @@ button {
 
 .project-detail__learning {
     @include editorial-label("LEARNING");
+}
+
+.figma-gallery {
+    display: grid;
+    gap: rem(72);
+    margin-top: rem(48);
+    width: 100%;
+}
+
+.figma-item {
+    width: 100%;
+
+    &__title {
+        font-family: $font-family-mincho;
+        font-size: rem(28);
+        color: $color-txt;
+        margin-bottom: rem(18);
+    }
+
+    iframe {
+        display: block;
+        width: 100%;
+        min-height: 720px;
+        border: 1px solid $color-border;
+        background: $color-white;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-detail__inner--figma {
+        width: 92%;
+    }
+
+    .figma-gallery {
+        gap: rem(48);
+        margin-top: rem(36);
+    }
+
+    .figma-item {
+        &__title {
+            font-size: rem(22);
+        }
+
+        iframe {
+            height: 520px !important;
+            min-height: 520px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .figma-item iframe {
+        height: 430px !important;
+        min-height: 430px;
+    }
 }
 
 .project-detail h1,

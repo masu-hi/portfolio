@@ -743,6 +743,10 @@ button {
   margin-left: auto;
   margin-right: auto;
 }
+.project-detail__inner--figma {
+  max-width: 1180px;
+  width: 94%;
+}
 .project-detail__header {
   margin-bottom: 15rem;
 }
@@ -1094,6 +1098,52 @@ button {
   color: #999;
 }
 
+.figma-gallery {
+  display: grid;
+  gap: 4.5rem;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.figma-item {
+  width: 100%;
+}
+.figma-item__title {
+  font-family: "Times New Roman", Times, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+  font-size: 1.75rem;
+  color: #0a0a0a;
+  margin-bottom: 1.125rem;
+}
+.figma-item iframe {
+  display: block;
+  width: 100%;
+  min-height: 720px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .project-detail__inner--figma {
+    width: 92%;
+  }
+  .figma-gallery {
+    gap: 3rem;
+    margin-top: 2.25rem;
+  }
+  .figma-item__title {
+    font-size: 1.375rem;
+  }
+  .figma-item iframe {
+    height: 520px !important;
+    min-height: 520px;
+  }
+}
+@media (max-width: 480px) {
+  .figma-item iframe {
+    height: 430px !important;
+    min-height: 430px;
+  }
+}
 .project-detail h1,
 .project-detail h2 {
   font-family: "Times New Roman", Times, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
