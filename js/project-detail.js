@@ -135,7 +135,9 @@ function displayProjectData() {
             if (detail.images) {
                 detail.images.forEach(src => {
                     const img = document.createElement('img');
+                    img.className = 'design-details__image';
                     img.src = src;
+                    img.alt = `${detail.title}の参考画像`;
                     item.appendChild(img);
                 });
             }
@@ -213,6 +215,25 @@ function displayProjectData() {
         });
     } else {
         document.getElementById('results-section').style.display = 'none';
+    }
+
+    // 成果画像
+    if (project.resultImages && project.resultImages.length > 0) {
+        const resultImagesContainer = document.getElementById('project-result-images');
+
+        project.resultImages.forEach((src, index) => {
+            const figure = document.createElement('figure');
+            figure.className = 'result-images__item';
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `${project.title} 成果画像 ${index + 1}`;
+
+            figure.appendChild(img);
+            resultImagesContainer.appendChild(figure);
+        });
+    } else {
+        document.getElementById('result-images-section').style.display = 'none';
     }
 
     // 学び
