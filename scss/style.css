@@ -760,8 +760,8 @@ button {
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.05em;
-  max-width: 10ch;
   margin-bottom: 2rem;
+  white-space: pre-line;
 }
 @media (max-width: 768px) {
   .project-detail__title {
@@ -1304,6 +1304,7 @@ button {
   margin-bottom: 2rem;
   max-width: 22ch;
   font-family: "Times New Roman", Times, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+  white-space: pre-line;
 }
 .design-details__text {
   max-width: 720px;

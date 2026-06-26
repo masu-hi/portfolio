@@ -1084,9 +1084,9 @@ button {
 
         letter-spacing: -0.05em;
 
-        max-width: 10ch;
-
         margin-bottom: rem(32);
+
+        white-space: pre-line;
 
         @include mq(tablet) {
             font-size: rem(42);
@@ -1461,6 +1461,7 @@ button {
         margin-bottom: rem(32);
         max-width: 22ch;
         font-family: $font-family-mincho;
+        white-space: pre-line;
     }
 
     &__text {
