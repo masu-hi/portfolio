@@ -50,10 +50,21 @@ function displayProjectData() {
     document.getElementById('project-description').textContent = project.description || '';
     document.getElementById('project-timeline').textContent = project.timeline || '';
     document.getElementById('project-role').textContent = project.role || '';
-    const image = document.getElementById("project-image");
+    const imageContainer = document.getElementById("project-image");
 
-    image.src = project.image;
-    image.alt = project.title;
+    if (Array.isArray(project.image)) {
+        project.image.forEach(src => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = project.title;
+            imageContainer.appendChild(img);
+        });
+    } else {
+        const img = document.createElement("img");
+        img.src = project.image;
+        img.alt = project.title;
+        imageContainer.appendChild(img);
+    }
     // プロジェクト詳細説明
     if (project.longDescription) {
         document.getElementById('project-long-description').textContent = project.longDescription;

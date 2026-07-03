@@ -779,10 +779,13 @@ button {
 }
 .project-detail__image {
   margin-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
 }
 .project-detail__image img {
   width: 100%;
-  border-radius: 0;
+  display: block;
   -o-object-fit: cover;
      object-fit: cover;
 }

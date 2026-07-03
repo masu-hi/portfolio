@@ -1103,14 +1103,16 @@ button {
 
     &__image {
         margin-top: rem(80);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: rem(40);
 
         img {
             width: 100%;
-
-            border-radius: 0;
-
+            display: block;
             object-fit: cover;
         }
+
     }
 
     // ===================================
