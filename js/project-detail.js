@@ -128,33 +128,47 @@ function displayProjectData() {
     // 施策・デザインの工夫
     if (project.designDetails && project.designDetails.length > 0) {
         const designContainer = document.getElementById('project-design-details');
-        project.designDetails.forEach(detail => {
-            const item = document.createElement('div');
-            item.className = 'design-details__item';
+        const modal = createDesignModal();
+        const map = createPointMap(project, modal);
 
-            const title = document.createElement('h3');
-            title.className = 'design-details__title';
-            title.textContent = detail.title;
-            item.appendChild(title);
+        if (map) {
+            designContainer.classList.add('design-details--point-map');
+            designContainer.appendChild(map);
+        } else {
+            project.designDetails.forEach((detail, index) => {
+                const item = document.createElement('button');
+                item.className = 'design-details__item';
+                item.type = 'button';
+                item.setAttribute('aria-haspopup', 'dialog');
 
-            const description = document.createElement('p');
-            description.className = 'design-details__text';
-            description.textContent = detail.description;
-            item.appendChild(description);
+                const label = document.createElement('span');
+                label.className = 'design-details__label';
+                label.textContent = `POINT ${String(index + 1).padStart(2, '0')}`;
+                item.appendChild(label);
 
-            // 画像がある場合は表示
-            if (detail.images) {
-                detail.images.forEach(src => {
+                if (detail.images && detail.images.length > 0) {
+                    const imageWrap = document.createElement('span');
+                    imageWrap.className = 'design-details__thumb';
+
                     const img = document.createElement('img');
-                    img.className = 'design-details__image';
-                    img.src = src;
-                    img.alt = `${detail.title}の参考画像`;
-                    item.appendChild(img);
-                });
-            }
+                    img.src = detail.images[0];
+                    img.alt = '';
+                    imageWrap.appendChild(img);
+                    item.appendChild(imageWrap);
+                }
 
-            designContainer.appendChild(item);
-        });
+                const title = document.createElement('span');
+                title.className = 'design-details__title';
+                title.textContent = detail.title;
+                item.appendChild(title);
+
+                item.addEventListener('click', () => {
+                    openDesignModal(modal, detail, index);
+                });
+
+                designContainer.appendChild(item);
+            });
+        }
     } else {
         document.getElementById('design-section').style.display = 'none';
     }
@@ -253,6 +267,315 @@ function displayProjectData() {
     } else {
         document.getElementById('learnings-section').style.display = 'none';
     }
+}
+
+function createPointMap(project, modal) {
+    const fallbackImage = getPointMapFallbackImage(project);
+    const hasCustomSections = project.pointSections && project.pointSections.length > 0;
+
+    if (!hasCustomSections && !fallbackImage) {
+        return null;
+    }
+
+    const map = document.createElement('div');
+    map.className = 'point-map';
+
+    const sections = hasCustomSections
+        ? project.pointSections
+        : [{
+            title: project.title,
+            label: '作品画像',
+            image: fallbackImage,
+            points: project.designDetails.map((detail, index) => ({
+                detailIndex: index,
+                x: detail.point ? detail.point.x : getDefaultPointPosition(index, project.designDetails.length).x,
+                y: detail.point ? detail.point.y : getDefaultPointPosition(index, project.designDetails.length).y
+            }))
+        }];
+
+    if (sections.length > 1) {
+        const controls = document.createElement('div');
+        controls.className = 'point-map__controls';
+
+        const prev = document.createElement('button');
+        prev.className = 'point-map__arrow';
+        prev.type = 'button';
+        prev.setAttribute('aria-label', '前の画像へ');
+        prev.textContent = '←';
+
+        const tabs = document.createElement('div');
+        tabs.className = 'point-map__tabs';
+
+        const next = document.createElement('button');
+        next.className = 'point-map__arrow';
+        next.type = 'button';
+        next.setAttribute('aria-label', '次の画像へ');
+        next.textContent = '→';
+
+        controls.appendChild(prev);
+        controls.appendChild(tabs);
+        controls.appendChild(next);
+        map.appendChild(controls);
+
+        sections.forEach((section, sectionIndex) => {
+            const tab = document.createElement('button');
+            tab.className = 'point-map__tab';
+            tab.type = 'button';
+            tab.textContent = section.label || section.title || `IMAGE ${sectionIndex + 1}`;
+            tab.addEventListener('click', () => activatePointSection(map, sectionIndex));
+            tabs.appendChild(tab);
+        });
+
+        prev.addEventListener('click', () => {
+            const current = Number(map.dataset.activeSection || 0);
+            activatePointSection(map, (current - 1 + sections.length) % sections.length);
+        });
+
+        next.addEventListener('click', () => {
+            const current = Number(map.dataset.activeSection || 0);
+            activatePointSection(map, (current + 1) % sections.length);
+        });
+    }
+
+    const stage = document.createElement('div');
+    stage.className = 'point-map__stage';
+
+    sections.forEach((section, sectionIndex) => {
+        const slide = document.createElement('div');
+        slide.className = 'point-map__slide';
+
+        if (section.notes && section.notes.length > 0) {
+            const notes = document.createElement('div');
+            notes.className = 'point-map__notes';
+
+            section.notes.forEach(note => {
+                const noteItem = document.createElement('article');
+                noteItem.className = 'point-map__note';
+                const isInlineImageLayout = !['below', 'grid'].includes(note.imageLayout);
+                if (note.images && note.images.length > 0 && isInlineImageLayout) {
+                    noteItem.classList.add('point-map__note--with-images');
+                }
+
+                const noteBody = document.createElement('div');
+                noteBody.className = 'point-map__note-body';
+
+                const noteLabel = document.createElement('p');
+                noteLabel.className = 'point-map__note-label';
+                noteLabel.textContent = note.label || 'NOTE';
+
+                const noteTitle = document.createElement('h3');
+                noteTitle.className = 'point-map__note-title';
+                noteTitle.textContent = note.title;
+
+                const noteText = document.createElement('p');
+                noteText.className = 'point-map__note-text';
+                noteText.textContent = note.description;
+
+                noteBody.appendChild(noteLabel);
+                noteBody.appendChild(noteTitle);
+                noteBody.appendChild(noteText);
+                noteItem.appendChild(noteBody);
+
+                if (note.images && note.images.length > 0) {
+                    const noteImages = document.createElement('div');
+                    noteImages.className = 'point-map__note-images';
+                    if (note.imageLayout === 'below') {
+                        noteImages.classList.add('point-map__note-images--below');
+                    }
+                    if (note.imageLayout === 'grid') {
+                        noteImages.classList.add('point-map__note-images--grid');
+                    }
+
+                    note.images.forEach(src => {
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.alt = `${note.title}の参考画像`;
+                        noteImages.appendChild(img);
+                    });
+
+                    noteItem.appendChild(noteImages);
+                }
+
+                notes.appendChild(noteItem);
+            });
+
+            slide.appendChild(notes);
+        }
+
+        const imageWrap = document.createElement('div');
+        imageWrap.className = 'point-map__image-wrap';
+
+        const sectionImages = Array.isArray(section.images) && section.images.length > 0
+            ? section.images
+            : [section.image];
+
+        if (sectionImages.length > 1) {
+            imageWrap.classList.add('point-map__image-wrap--multiple');
+        }
+
+        sectionImages.filter(Boolean).forEach((src, imageIndex) => {
+            const img = document.createElement('img');
+            img.className = 'point-map__image';
+            img.src = src;
+            img.alt = `${project.title} ${section.label || section.title || ''}の画面画像 ${imageIndex + 1}`;
+            imageWrap.appendChild(img);
+        });
+
+        (section.points || []).forEach((point, pointIndex) => {
+            const detail = project.designDetails[point.detailIndex];
+            if (!detail) {
+                return;
+            }
+
+            const button = document.createElement('button');
+            button.className = 'point-map__marker';
+            button.type = 'button';
+            button.style.setProperty('--point-x', `${point.x}%`);
+            button.style.setProperty('--point-y', `${point.y}%`);
+            button.setAttribute('aria-label', `POINT ${String(pointIndex + 1).padStart(2, '0')}：${detail.title}`);
+            button.setAttribute('aria-haspopup', 'dialog');
+            const ringId = `point-ring-${sectionIndex}-${pointIndex}`;
+            button.innerHTML = `
+                <svg class="point-map__ring" viewBox="0 0 120 120" aria-hidden="true">
+                    <defs>
+                        <path id="${ringId}" d="M60,60 m-53,0 a53,53 0 1,1 106,0 a53,53 0 1,1 -106,0"></path>
+                    </defs>
+                    <text>
+                        <textPath href="#${ringId}" startOffset="0">
+                            CLICK CLICK CLICK CLICK CLICK CLICK CLICK CLICK CLICK CLICK
+                        </textPath>
+                    </text>
+                </svg>
+                <span>POINT</span>
+            `;
+
+            button.addEventListener('click', () => {
+                openDesignModal(modal, detail, pointIndex);
+            });
+
+            imageWrap.appendChild(button);
+        });
+
+        slide.appendChild(imageWrap);
+        stage.appendChild(slide);
+    });
+
+    map.appendChild(stage);
+    activatePointSection(map, 0);
+
+    return map;
+}
+
+function getPointMapFallbackImage(project) {
+    if (project.pointImage) {
+        return project.pointImage;
+    }
+
+    if (Array.isArray(project.image)) {
+        return project.image.find(Boolean) || '';
+    }
+
+    if (project.image) {
+        return project.image;
+    }
+
+    const detailWithImage = project.designDetails?.find(detail => detail.images && detail.images.length > 0);
+    return detailWithImage ? detailWithImage.images[0] : '';
+}
+
+function getDefaultPointPosition(index, total) {
+    const columns = Math.min(3, Math.max(1, total));
+    const rows = Math.ceil(total / columns);
+    const column = index % columns;
+    const row = Math.floor(index / columns);
+    const x = columns === 1 ? 50 : 24 + (column * (52 / Math.max(1, columns - 1)));
+    const y = rows === 1 ? 50 : 24 + (row * (52 / Math.max(1, rows - 1)));
+
+    return { x, y };
+}
+
+function activatePointSection(map, activeIndex) {
+    map.dataset.activeSection = String(activeIndex);
+
+    map.querySelectorAll('.point-map__slide').forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.classList.toggle('is-active', isActive);
+        slide.toggleAttribute('hidden', !isActive);
+    });
+
+    map.querySelectorAll('.point-map__tab').forEach((tab, index) => {
+        const isActive = index === activeIndex;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-pressed', String(isActive));
+    });
+}
+
+function createDesignModal() {
+    const modal = document.createElement('div');
+    modal.className = 'design-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="design-modal__overlay" data-modal-close></div>
+        <div class="design-modal__panel" tabindex="-1">
+            <button class="design-modal__close" type="button" aria-label="閉じる" data-modal-close>×</button>
+            <p class="design-modal__label"></p>
+            <h3 class="design-modal__title"></h3>
+            <div class="design-modal__images"></div>
+            <p class="design-modal__text"></p>
+        </div>
+    `;
+
+    modal.querySelectorAll('[data-modal-close]').forEach(element => {
+        element.addEventListener('click', () => closeDesignModal(modal));
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeDesignModal(modal);
+        }
+    });
+
+    document.body.appendChild(modal);
+    return modal;
+}
+
+function openDesignModal(modal, detail, index) {
+    const label = modal.querySelector('.design-modal__label');
+    const title = modal.querySelector('.design-modal__title');
+    const text = modal.querySelector('.design-modal__text');
+    const images = modal.querySelector('.design-modal__images');
+    const panel = modal.querySelector('.design-modal__panel');
+
+    label.textContent = `POINT ${String(index + 1).padStart(2, '0')}`;
+    title.textContent = detail.title;
+    text.textContent = detail.description;
+    images.innerHTML = '';
+
+    if (detail.images && detail.images.length > 0) {
+        detail.images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `${detail.title}の参考画像`;
+            images.appendChild(img);
+        });
+        images.style.display = '';
+    } else {
+        images.style.display = 'none';
+    }
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('is-modal-open');
+    panel.focus();
+}
+
+function closeDesignModal(modal) {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-modal-open');
 }
 
 // ページ読み込み時に実行

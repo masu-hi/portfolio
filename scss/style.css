@@ -267,15 +267,11 @@ button {
     font-size: 2.625rem;
   }
 }
-.concept__title {
-  text-align: right;
-}
 .concept__message {
   line-height: 1.8;
   color: #1f2730;
   margin-top: 3.125rem;
   position: relative;
-  text-align: right;
 }
 @media (max-width: 768px) {
   .concept__message {
@@ -1286,8 +1282,32 @@ button {
   transform: translateY(-5px);
 }
 
+.design-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+.design-details--point-map {
+  display: block;
+}
 .design-details__item {
-  margin-bottom: 7.5rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  display: grid;
+  align-content: start;
+  gap: 1.125rem;
+  width: 100%;
+  min-height: 16.25rem;
+  margin: 0;
+  padding: 1.625rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 0;
+  background: #fff;
+  color: #0a0a0a;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   position: relative;
   margin-bottom: 5rem;
 }
@@ -1300,11 +1320,51 @@ button {
   letter-spacing: 0.18em;
   color: #999;
 }
+.design-details__item::before {
+  display: none;
+}
+.design-details__item:hover, .design-details__item:focus-visible {
+  transform: translateY(-6px);
+  border-color: #0a0a0a;
+  box-shadow: 12px 12px 0 rgba(249, 115, 22, 0.16);
+  outline: none;
+}
+.design-details__label {
+  display: inline-flex;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.3125rem 0.75rem;
+  border: 1px solid #0a0a0a;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  font-family: "Hiragino Kaku Gothic Pro", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+}
+.design-details__thumb {
+  display: block;
+  aspect-ratio: 16/10;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  background: #f9fafb;
+}
+.design-details__thumb img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.design-details__item:hover .design-details__thumb img, .design-details__item:focus-visible .design-details__thumb img {
+  transform: scale(1.04);
+}
 .design-details__title {
-  font-size: 2.25rem;
+  display: block;
+  font-size: 1.75rem;
   font-weight: 800;
   line-height: 1.3;
-  margin-bottom: 2rem;
   max-width: 22ch;
   font-family: "Times New Roman", Times, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
   white-space: pre-line;
@@ -1327,13 +1387,395 @@ button {
 }
 
 @media (max-width: 768px) {
+  .design-details {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .design-details__item {
+    min-height: 13.125rem;
+    padding: 1.375rem;
+  }
+  .design-details__title {
+    font-size: 1.5rem;
+  }
   .design-details__image {
     max-width: 420px;
     margin-top: 2.25rem;
   }
 }
+.point-map {
+  width: min(900px, 100%);
+  margin-right: auto;
+  margin-left: auto;
+}
+.point-map__controls {
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem;
+  align-items: center;
+  gap: 1.125rem;
+  margin-bottom: 1.75rem;
+}
+.point-map__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem;
+}
+.point-map__tab, .point-map__arrow {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #0a0a0a;
+  background: #fff;
+  color: #0a0a0a;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.point-map__tab {
+  min-height: 2.375rem;
+  padding: 0.5625rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.point-map__tab.is-active, .point-map__tab:hover, .point-map__tab:focus-visible {
+  background: #0a0a0a;
+  color: #fff;
+  outline: none;
+}
+.point-map__arrow {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 1.375rem;
+  line-height: 1;
+}
+.point-map__arrow:hover, .point-map__arrow:focus-visible {
+  background: #0a0a0a;
+  color: #fff;
+  outline: none;
+  transform: translateY(-2px);
+}
+.point-map__slide[hidden] {
+  display: none;
+}
+.point-map__notes {
+  display: grid;
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+.point-map__note {
+  padding: 1.75rem 0;
+}
+.point-map__note--with-images {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(8.75rem, 13.75rem);
+  align-items: start;
+  gap: 2rem;
+}
+.point-map__note-label {
+  display: inline-flex;
+  margin-bottom: 0.875rem;
+  padding: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+}
+.point-map__note-title {
+  margin-bottom: 1.375rem;
+  font-family: "Times New Roman", Times, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+  font-size: 1.625rem;
+  line-height: 1.35;
+}
+.point-map__note-text {
+  max-width: 720px;
+  font-size: 1rem;
+  line-height: 2.2;
+  letter-spacing: 0.02em;
+  color: #4b5563;
+  white-space: pre-line;
+}
+.point-map__note-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 0;
+}
+.point-map__note-images--below {
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+}
+.point-map__note-images img {
+  display: block;
+  width: min(180px, 100%);
+  height: auto;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+}
+.point-map__note-images--below img {
+  width: min(720px, 100%);
+}
+.point-map__note-images--grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: stretch;
+  margin-top: 1.5rem;
+}
+.point-map__note-images--grid img {
+  width: 100%;
+}
+.point-map__image-wrap {
+  position: relative;
+  width: 100%;
+  background: #fff;
+}
+.point-map__image-wrap--multiple {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 1.5rem;
+}
+.point-map__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #e5e5e5;
+}
+.point-map__marker {
+  position: absolute;
+  top: var(--point-y);
+  left: var(--point-x);
+  display: grid;
+  place-items: center;
+  width: 7rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid #0a0a0a;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.72);
+  color: #0a0a0a;
+  font-family: "Hiragino Kaku Gothic Pro", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.point-map__marker:hover, .point-map__marker:focus-visible {
+  z-index: 2;
+  background: rgba(249, 115, 22, 0.9);
+  box-shadow: 0 0 0 0.4375rem rgba(249, 115, 22, 0.18);
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.point-map__marker:hover .point-map__ring, .point-map__marker:focus-visible .point-map__ring {
+  animation-play-state: paused;
+}
+.point-map__marker span {
+  position: relative;
+  z-index: 1;
+  padding: 0.25rem 0.5rem;
+  background: rgba(255, 255, 255, 0.82);
+}
+.point-map__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  animation: pointRingRotate 10s linear infinite;
+}
+.point-map__ring text {
+  fill: #0a0a0a;
+  font-family: "Hiragino Kaku Gothic Pro", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 800;
+  letter-spacing: 0.125rem;
+}
+
+@keyframes pointRingRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .point-map {
+    width: 100%;
+  }
+  .point-map__controls {
+    grid-template-columns: 2.625rem 1fr 2.625rem;
+    gap: 0.625rem;
+    margin-bottom: 1.375rem;
+  }
+  .point-map__tabs {
+    gap: 0.5rem;
+  }
+  .point-map__tab {
+    min-height: 2.125rem;
+    padding: 0.5rem 0.6875rem;
+    font-size: 0.6875rem;
+  }
+  .point-map__arrow {
+    width: 2.625rem;
+    height: 2.625rem;
+    font-size: 1.125rem;
+  }
+  .point-map__note {
+    padding: 1.75rem 1.375rem;
+  }
+  .point-map__note--with-images {
+    display: block;
+  }
+  .point-map__note-title {
+    font-size: 1.375rem;
+  }
+  .point-map__note-images {
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+  }
+  .point-map__note-images--grid {
+    grid-template-columns: 1fr;
+  }
+  .point-map__image-wrap {
+    box-shadow: none;
+  }
+  .point-map__image-wrap--multiple {
+    grid-template-columns: 1fr;
+    gap: 1.125rem;
+  }
+  .point-map__marker {
+    width: 4.5rem;
+    font-size: 0.625rem;
+  }
+  .point-map__marker span {
+    padding: 0.1875rem 0.3125rem;
+  }
+  .point-map__ring text {
+    font-size: 0.5rem;
+    letter-spacing: 0.09375rem;
+  }
+}
+.is-modal-open {
+  overflow: hidden;
+}
+
+.design-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.design-modal.is-open {
+  pointer-events: auto;
+  opacity: 1;
+}
+.design-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.5);
+}
+.design-modal__panel {
+  position: relative;
+  width: min(760px, 100%);
+  max-height: min(760px, 88vh);
+  overflow: auto;
+  padding: 2.625rem;
+  background: #fff;
+  border: 1px solid #0a0a0a;
+  box-shadow: 18px 18px 0 rgba(249, 115, 22, 0.28);
+}
+.design-modal__close {
+  position: absolute;
+  top: 1.125rem;
+  right: 1.125rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fff;
+  color: #0a0a0a;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.design-modal__label {
+  display: inline-flex;
+  margin-bottom: 1.125rem;
+  padding: 0.3125rem 0.75rem;
+  border: 1px solid #0a0a0a;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.12em;
+}
+.design-modal__title {
+  margin-bottom: 1.5rem;
+  padding-right: 2.625rem;
+  font-family: "Times New Roman", Times, "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+  font-size: 2.125rem;
+  line-height: 1.35;
+  white-space: pre-line;
+}
+.design-modal__images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.125rem;
+  margin-bottom: 1.75rem;
+}
+.design-modal__images img {
+  width: 100%;
+  display: block;
+  border: 1px solid #e5e5e5;
+  background: #f9fafb;
+}
+.design-modal__text {
+  max-width: 720px;
+  font-size: 1rem;
+  line-height: 2.2;
+  letter-spacing: 0.02em;
+  color: #4b5563;
+  white-space: pre-line;
+}
+
+@media (max-width: 768px) {
+  .design-modal {
+    padding: 1rem;
+  }
+  .design-modal__panel {
+    padding: 1.875rem 1.375rem;
+    box-shadow: 10px 10px 0 rgba(249, 115, 22, 0.24);
+  }
+  .design-modal__title {
+    font-size: 1.625rem;
+  }
+  .design-modal__images {
+    grid-template-columns: 1fr;
+  }
+}
 .back-to-works {
   text-align: center;
+}
+.back-to-works--project-link {
+  margin-top: 4.375rem;
+  margin-bottom: 4.375rem;
 }
 .back-to-works__btn {
   display: inline-block;

@@ -523,7 +523,6 @@ button {
 
     &__title {
         @include section_title(concept);
-        text-align: right;
     }
 
     &__message {
@@ -531,7 +530,6 @@ button {
         color: $color-text;
         margin-top: rem(50);
         position: relative;
-        text-align: right;
 
         @media (max-width: 768px) {
             font-size: rem(16);
@@ -1450,17 +1448,84 @@ button {
 // ===================================
 
 .design-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: rem(28);
+
+    &--point-map {
+        display: block;
+    }
 
     &__item {
-        margin-bottom: rem(120);
+        appearance: none;
+        display: grid;
+        align-content: start;
+        gap: rem(18);
+        width: 100%;
+        min-height: rem(260);
+        margin: 0;
+        padding: rem(26);
+        border: 1px solid $color-border;
+        border-radius: 0;
+        background: $color-white;
+        color: $color-txt;
+        text-align: left;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         @include editorial-label("DESIGN");
+
+        &::before {
+            display: none;
+        }
+
+        &:hover,
+        &:focus-visible {
+            transform: translateY(-6px);
+            border-color: $color-txt;
+            box-shadow: 12px 12px 0 rgba(249, 115, 22, 0.16);
+            outline: none;
+        }
+    }
+
+    &__label {
+        display: inline-flex;
+        width: fit-content;
+        padding: rem(5) rem(12);
+        border: 1px solid $color-txt;
+        border-radius: 999px;
+        font-size: rem(11);
+        line-height: 1;
+        letter-spacing: 0.12em;
+        font-family: $font-family-gothic;
+    }
+
+    &__thumb {
+        display: block;
+        aspect-ratio: 16 / 10;
+        width: 100%;
+        overflow: hidden;
+        border: 1px solid $color-border;
+        background: $color-bg-light;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+    }
+
+    &__item:hover &__thumb img,
+    &__item:focus-visible &__thumb img {
+        transform: scale(1.04);
     }
 
     &__title {
-        font-size: rem(36);
+        display: block;
+        font-size: rem(28);
         font-weight: 800;
         line-height: 1.3;
-        margin-bottom: rem(32);
         max-width: 22ch;
         font-family: $font-family-mincho;
         white-space: pre-line;
@@ -1483,9 +1548,444 @@ button {
 
 @media (max-width: 768px) {
     .design-details {
+        grid-template-columns: 1fr;
+        gap: rem(20);
+
+        &__item {
+            min-height: rem(210);
+            padding: rem(22);
+        }
+
+        &__title {
+            font-size: rem(24);
+        }
+
         &__image {
             max-width: 420px;
             margin-top: rem(36);
+        }
+    }
+}
+
+.point-map {
+    width: min(900px, 100%);
+    margin-right: auto;
+    margin-left: auto;
+
+    &__controls {
+        display: grid;
+        grid-template-columns: rem(48) 1fr rem(48);
+        align-items: center;
+        gap: rem(18);
+        margin-bottom: rem(28);
+    }
+
+    &__tabs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: rem(10);
+    }
+
+    &__tab,
+    &__arrow {
+        appearance: none;
+        border: 1px solid $color-txt;
+        background: $color-white;
+        color: $color-txt;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    &__tab {
+        min-height: rem(38);
+        padding: rem(9) rem(16);
+        border-radius: 999px;
+        font-size: rem(13);
+        font-weight: 700;
+        line-height: 1.2;
+
+        &.is-active,
+        &:hover,
+        &:focus-visible {
+            background: $color-txt;
+            color: $color-white;
+            outline: none;
+        }
+    }
+
+    &__arrow {
+        display: grid;
+        place-items: center;
+        width: rem(48);
+        height: rem(48);
+        border-radius: 50%;
+        font-size: rem(22);
+        line-height: 1;
+
+        &:hover,
+        &:focus-visible {
+            background: $color-txt;
+            color: $color-white;
+            outline: none;
+            transform: translateY(-2px);
+        }
+    }
+
+    &__slide[hidden] {
+        display: none;
+    }
+
+    &__notes {
+        display: grid;
+        gap: rem(28);
+        margin-bottom: rem(48);
+    }
+
+    &__note {
+        padding: rem(28) 0;
+
+        &--with-images {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(rem(140), rem(220));
+            align-items: start;
+            gap: rem(32);
+        }
+    }
+
+    &__note-label {
+        display: inline-flex;
+        margin-bottom: rem(14);
+        padding: 0;
+        font-size: rem(11);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.12em;
+    }
+
+    &__note-title {
+        margin-bottom: rem(22);
+        font-family: $font-family-mincho;
+        font-size: rem(26);
+        line-height: 1.35;
+    }
+
+    &__note-text {
+        @include editorial-text;
+        white-space: pre-line;
+    }
+
+    &__note-images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: rem(16);
+        justify-content: flex-end;
+        margin-top: 0;
+
+        &--below {
+            justify-content: flex-start;
+            margin-top: rem(24);
+        }
+
+        img {
+            display: block;
+            width: min(180px, 100%);
+            height: auto;
+            border: 1px solid $color-border;
+            background: $color-white;
+        }
+
+        &--below img {
+            width: min(720px, 100%);
+        }
+
+        &--grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            justify-content: stretch;
+            margin-top: rem(24);
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    &__image-wrap {
+        position: relative;
+        width: 100%;
+        background: $color-white;
+
+        &--multiple {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: start;
+            gap: rem(24);
+        }
+    }
+
+    &__image {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid $color-border;
+    }
+
+    &__marker {
+        position: absolute;
+        top: var(--point-y);
+        left: var(--point-x);
+        display: grid;
+        place-items: center;
+        width: rem(112);
+        aspect-ratio: 1;
+        padding: 0;
+        border: 1px solid $color-txt;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.72);
+        color: $color-txt;
+        font-family: $font-family-gothic;
+        font-size: rem(13);
+        font-weight: 800;
+        line-height: 1;
+        cursor: pointer;
+        transform: translate(-50%, -50%);
+        transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover,
+        &:focus-visible {
+            z-index: 2;
+            background: rgba(249, 115, 22, 0.9);
+            box-shadow: 0 0 0 rem(7) rgba(249, 115, 22, 0.18);
+            outline: none;
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        &:hover .point-map__ring,
+        &:focus-visible .point-map__ring {
+            animation-play-state: paused;
+        }
+
+        span {
+            position: relative;
+            z-index: 1;
+            padding: rem(4) rem(8);
+            background: rgba(255, 255, 255, 0.82);
+        }
+    }
+
+    &__ring {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        animation: pointRingRotate 10s linear infinite;
+
+        text {
+            fill: $color-txt;
+            font-family: $font-family-gothic;
+            font-size: rem(9);
+            font-weight: 800;
+            letter-spacing: rem(2);
+        }
+    }
+}
+
+@keyframes pointRingRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .point-map {
+        width: 100%;
+
+        &__controls {
+            grid-template-columns: rem(42) 1fr rem(42);
+            gap: rem(10);
+            margin-bottom: rem(22);
+        }
+
+        &__tabs {
+            gap: rem(8);
+        }
+
+        &__tab {
+            min-height: rem(34);
+            padding: rem(8) rem(11);
+            font-size: rem(11);
+        }
+
+        &__arrow {
+            width: rem(42);
+            height: rem(42);
+            font-size: rem(18);
+        }
+
+        &__note {
+            padding: rem(28) rem(22);
+
+            &--with-images {
+                display: block;
+            }
+        }
+
+        &__note-title {
+            font-size: rem(22);
+        }
+
+        &__note-images {
+            justify-content: flex-start;
+            margin-top: rem(24);
+
+            &--grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        &__image-wrap {
+            box-shadow: none;
+
+            &--multiple {
+                grid-template-columns: 1fr;
+                gap: rem(18);
+            }
+        }
+
+        &__marker {
+            width: rem(72);
+            font-size: rem(10);
+
+            span {
+                padding: rem(3) rem(5);
+            }
+        }
+
+        &__ring {
+            text {
+                font-size: rem(8);
+                letter-spacing: rem(1.5);
+            }
+        }
+    }
+}
+
+.is-modal-open {
+    overflow: hidden;
+}
+
+.design-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: rem(24);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.is-open {
+        pointer-events: auto;
+        opacity: 1;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.5);
+    }
+
+    &__panel {
+        position: relative;
+        width: min(760px, 100%);
+        max-height: min(760px, 88vh);
+        overflow: auto;
+        padding: rem(42);
+        background: $color-white;
+        border: 1px solid $color-txt;
+        box-shadow: 18px 18px 0 rgba(249, 115, 22, 0.28);
+    }
+
+    &__close {
+        position: absolute;
+        top: rem(18);
+        right: rem(18);
+        display: grid;
+        place-items: center;
+        width: rem(40);
+        height: rem(40);
+        border: 1px solid $color-border;
+        border-radius: 50%;
+        background: $color-white;
+        color: $color-txt;
+        font-size: rem(24);
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    &__label {
+        display: inline-flex;
+        margin-bottom: rem(18);
+        padding: rem(5) rem(12);
+        border: 1px solid $color-txt;
+        border-radius: 999px;
+        font-size: rem(11);
+        line-height: 1;
+        letter-spacing: 0.12em;
+    }
+
+    &__title {
+        margin-bottom: rem(24);
+        padding-right: rem(42);
+        font-family: $font-family-mincho;
+        font-size: rem(34);
+        line-height: 1.35;
+        white-space: pre-line;
+    }
+
+    &__images {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: rem(18);
+        margin-bottom: rem(28);
+
+        img {
+            width: 100%;
+            display: block;
+            border: 1px solid $color-border;
+            background: $color-bg-light;
+        }
+    }
+
+    &__text {
+        @include editorial-text;
+        white-space: pre-line;
+    }
+}
+
+@media (max-width: 768px) {
+    .design-modal {
+        padding: rem(16);
+
+        &__panel {
+            padding: rem(30) rem(22);
+            box-shadow: 10px 10px 0 rgba(249, 115, 22, 0.24);
+        }
+
+        &__title {
+            font-size: rem(26);
+        }
+
+        &__images {
+            grid-template-columns: 1fr;
         }
     }
 }
@@ -1496,6 +1996,11 @@ button {
 
 .back-to-works {
     text-align: center;
+
+    &--project-link {
+        margin-top: rem(70);
+        margin-bottom: rem(70);
+    }
 
     &__btn {
         @include magazine-btn-ja;
