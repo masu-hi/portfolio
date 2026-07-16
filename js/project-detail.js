@@ -14,7 +14,7 @@ async function loadProjectData() {
       <div style="text-align: center; padding: 4rem 0;">
         <h2>データの読み込みに失敗しました</h2>
         <p style="margin-top: 1rem;">
-          <a href="index.html#portfolio" style="color: #f97316;">作品一覧に戻る</a>
+          <a href="page_works.html" style="color: #f97316;">作品一覧に戻る</a>
         </p>
       </div>
     `;
@@ -37,7 +37,7 @@ function displayProjectData() {
       <div style="text-align: center; padding: 4rem 0;">
         <h2>プロジェクトが見つかりません</h2>
         <p style="margin-top: 1rem;">
-          <a href="index.html#portfolio" style="color: #f97316;">作品一覧に戻る</a>
+          <a href="page_works.html" style="color: #f97316;">作品一覧に戻る</a>
         </p>
       </div>
     `;
@@ -51,14 +51,21 @@ function displayProjectData() {
     document.getElementById('project-timeline').textContent = project.timeline || '';
     document.getElementById('project-role').textContent = project.role || '';
     const imageContainer = document.getElementById("project-image");
+    if (project.imageLayout) {
+        imageContainer.classList.add(`project-detail__image--${project.imageLayout}`);
+    }
 
     if (Array.isArray(project.image)) {
-        project.image.forEach(src => {
-            const img = document.createElement("img");
-            img.src = src;
-            img.alt = project.title;
-            imageContainer.appendChild(img);
-        });
+        if (project.imageLayout === 'carousel') {
+            imageContainer.appendChild(createProjectImageCarousel(project));
+        } else {
+            project.image.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.alt = project.title;
+                imageContainer.appendChild(img);
+            });
+        }
     } else {
         const img = document.createElement("img");
         img.src = project.image;
@@ -128,46 +135,51 @@ function displayProjectData() {
     // 施策・デザインの工夫
     if (project.designDetails && project.designDetails.length > 0) {
         const designContainer = document.getElementById('project-design-details');
-        const modal = createDesignModal();
-        const map = createPointMap(project, modal);
 
-        if (map) {
-            designContainer.classList.add('design-details--point-map');
-            designContainer.appendChild(map);
+        if (project.designDetailsMode === 'notes') {
+            renderDesignNotes(designContainer, project.designDetails);
         } else {
-            project.designDetails.forEach((detail, index) => {
-                const item = document.createElement('button');
-                item.className = 'design-details__item';
-                item.type = 'button';
-                item.setAttribute('aria-haspopup', 'dialog');
+            const modal = createDesignModal();
+            const map = createPointMap(project, modal);
 
-                const label = document.createElement('span');
-                label.className = 'design-details__label';
-                label.textContent = `POINT ${String(index + 1).padStart(2, '0')}`;
-                item.appendChild(label);
+            if (map) {
+                designContainer.classList.add('design-details--point-map');
+                designContainer.appendChild(map);
+            } else {
+                project.designDetails.forEach((detail, index) => {
+                    const item = document.createElement('button');
+                    item.className = 'design-details__item';
+                    item.type = 'button';
+                    item.setAttribute('aria-haspopup', 'dialog');
 
-                if (detail.images && detail.images.length > 0) {
-                    const imageWrap = document.createElement('span');
-                    imageWrap.className = 'design-details__thumb';
+                    const label = document.createElement('span');
+                    label.className = 'design-details__label';
+                    label.textContent = `POINT ${String(index + 1).padStart(2, '0')}`;
+                    item.appendChild(label);
 
-                    const img = document.createElement('img');
-                    img.src = detail.images[0];
-                    img.alt = '';
-                    imageWrap.appendChild(img);
-                    item.appendChild(imageWrap);
-                }
+                    if (detail.images && detail.images.length > 0) {
+                        const imageWrap = document.createElement('span');
+                        imageWrap.className = 'design-details__thumb';
 
-                const title = document.createElement('span');
-                title.className = 'design-details__title';
-                title.textContent = detail.title;
-                item.appendChild(title);
+                        const img = document.createElement('img');
+                        img.src = detail.images[0];
+                        img.alt = '';
+                        imageWrap.appendChild(img);
+                        item.appendChild(imageWrap);
+                    }
 
-                item.addEventListener('click', () => {
-                    openDesignModal(modal, detail, index);
+                    const title = document.createElement('span');
+                    title.className = 'design-details__title';
+                    title.textContent = detail.title;
+                    item.appendChild(title);
+
+                    item.addEventListener('click', () => {
+                        openDesignModal(modal, detail, index);
+                    });
+
+                    designContainer.appendChild(item);
                 });
-
-                designContainer.appendChild(item);
-            });
+            }
         }
     } else {
         document.getElementById('design-section').style.display = 'none';
@@ -267,6 +279,171 @@ function displayProjectData() {
     } else {
         document.getElementById('learnings-section').style.display = 'none';
     }
+
+    renderProjectPagination(projectId);
+}
+
+function renderProjectPagination(currentProjectId) {
+    const pagination = document.getElementById('project-pagination');
+    if (!pagination) return;
+
+    const projectIds = Object.keys(projectsData);
+    const currentIndex = projectIds.indexOf(currentProjectId);
+    if (currentIndex === -1) {
+        pagination.style.display = 'none';
+        return;
+    }
+
+    const prevId = projectIds[currentIndex - 1];
+    const nextId = projectIds[currentIndex + 1];
+
+    pagination.innerHTML = '';
+    pagination.appendChild(createProjectPaginationItem(prevId, 'prev'));
+
+    const worksLink = document.createElement('a');
+    worksLink.href = 'page_works.html';
+    worksLink.className = 'project-pagination__list';
+    worksLink.textContent = '作品一覧';
+    pagination.appendChild(worksLink);
+
+    pagination.appendChild(createProjectPaginationItem(nextId, 'next'));
+}
+
+function createProjectPaginationItem(projectId, direction) {
+    const label = direction === 'prev' ? '前の作品' : '次の作品';
+    const item = projectId ? document.createElement('a') : document.createElement('span');
+    item.className = `project-pagination__item project-pagination__item--${direction}`;
+
+    if (!projectId) {
+        item.classList.add('is-disabled');
+        item.setAttribute('aria-disabled', 'true');
+        item.innerHTML = `
+            <span class="project-pagination__label">${label}</span>
+            <span class="project-pagination__title">ありません</span>
+        `;
+        return item;
+    }
+
+    const project = projectsData[projectId];
+    item.href = `page_detail.html?id=${encodeURIComponent(projectId)}`;
+    item.innerHTML = `
+        <span class="project-pagination__label">${label}</span>
+        <span class="project-pagination__title">${project.title || ''}</span>
+    `;
+
+    return item;
+}
+
+function createProjectImageCarousel(project) {
+    const carousel = document.createElement('div');
+    carousel.className = 'project-image-carousel';
+
+    const controls = document.createElement('div');
+    controls.className = 'project-image-carousel__controls';
+
+    const prev = document.createElement('button');
+    prev.className = 'project-image-carousel__arrow';
+    prev.type = 'button';
+    prev.setAttribute('aria-label', '前の画像へ');
+    prev.textContent = '←';
+
+    const tabs = document.createElement('div');
+    tabs.className = 'project-image-carousel__tabs';
+
+    const next = document.createElement('button');
+    next.className = 'project-image-carousel__arrow';
+    next.type = 'button';
+    next.setAttribute('aria-label', '次の画像へ');
+    next.textContent = '→';
+
+    controls.appendChild(prev);
+    controls.appendChild(tabs);
+    controls.appendChild(next);
+    carousel.appendChild(controls);
+
+    const stage = document.createElement('div');
+    stage.className = 'project-image-carousel__stage';
+
+    project.image.forEach((src, index) => {
+        const tab = document.createElement('button');
+        tab.className = 'project-image-carousel__tab';
+        tab.type = 'button';
+        tab.textContent = project.imageLabels?.[index] || `IMAGE ${index + 1}`;
+        tab.addEventListener('click', () => activateProjectImage(carousel, index));
+        tabs.appendChild(tab);
+
+        const slide = document.createElement('figure');
+        slide.className = 'project-image-carousel__slide';
+
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${project.title} ${tab.textContent}の画像`;
+
+        slide.appendChild(img);
+        stage.appendChild(slide);
+    });
+
+    prev.addEventListener('click', () => {
+        const current = Number(carousel.dataset.activeImage || 0);
+        activateProjectImage(carousel, (current - 1 + project.image.length) % project.image.length);
+    });
+
+    next.addEventListener('click', () => {
+        const current = Number(carousel.dataset.activeImage || 0);
+        activateProjectImage(carousel, (current + 1) % project.image.length);
+    });
+
+    carousel.appendChild(stage);
+    activateProjectImage(carousel, 0);
+
+    return carousel;
+}
+
+function activateProjectImage(carousel, activeIndex) {
+    carousel.dataset.activeImage = String(activeIndex);
+
+    carousel.querySelectorAll('.project-image-carousel__slide').forEach((slide, index) => {
+        const isActive = index === activeIndex;
+        slide.classList.toggle('is-active', isActive);
+        slide.toggleAttribute('hidden', !isActive);
+    });
+
+    carousel.querySelectorAll('.project-image-carousel__tab').forEach((tab, index) => {
+        const isActive = index === activeIndex;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-pressed', String(isActive));
+    });
+}
+
+function renderDesignNotes(container, details) {
+    container.classList.add('design-details--point-map');
+
+    const notes = document.createElement('div');
+    notes.className = 'point-map__notes';
+
+    details.forEach((detail, index) => {
+        const note = document.createElement('article');
+        note.className = 'point-map__note';
+
+        const label = document.createElement('p');
+        label.className = 'point-map__note-label';
+        label.textContent = `NOTE ${String(index + 1).padStart(2, '0')}`;
+
+        const title = document.createElement('h3');
+        title.className = 'point-map__note-title';
+        title.textContent = detail.title;
+
+        const text = document.createElement('p');
+        text.className = 'point-map__note-text';
+        text.textContent = detail.description;
+
+        note.appendChild(label);
+        note.appendChild(title);
+        note.appendChild(text);
+        notes.appendChild(note);
+    });
+
+    container.appendChild(notes);
 }
 
 function createPointMap(project, modal) {
@@ -351,7 +528,7 @@ function createPointMap(project, modal) {
             section.notes.forEach(note => {
                 const noteItem = document.createElement('article');
                 noteItem.className = 'point-map__note';
-                const isInlineImageLayout = !['below', 'grid'].includes(note.imageLayout);
+                const isInlineImageLayout = !['below', 'grid', 'small'].includes(note.imageLayout);
                 if (note.images && note.images.length > 0 && isInlineImageLayout) {
                     noteItem.classList.add('point-map__note--with-images');
                 }
@@ -379,11 +556,8 @@ function createPointMap(project, modal) {
                 if (note.images && note.images.length > 0) {
                     const noteImages = document.createElement('div');
                     noteImages.className = 'point-map__note-images';
-                    if (note.imageLayout === 'below') {
-                        noteImages.classList.add('point-map__note-images--below');
-                    }
-                    if (note.imageLayout === 'grid') {
-                        noteImages.classList.add('point-map__note-images--grid');
+                    if (note.imageLayout) {
+                        noteImages.classList.add(`point-map__note-images--${note.imageLayout}`);
                     }
 
                     note.images.forEach(src => {
@@ -404,6 +578,12 @@ function createPointMap(project, modal) {
 
         const imageWrap = document.createElement('div');
         imageWrap.className = 'point-map__image-wrap';
+        if (section.imageFit) {
+            imageWrap.classList.add(`point-map__image-wrap--${section.imageFit}`);
+        }
+        if (section.imageDisplay) {
+            imageWrap.classList.add(`point-map__image-wrap--${section.imageDisplay}`);
+        }
 
         const sectionImages = Array.isArray(section.images) && section.images.length > 0
             ? section.images
@@ -553,8 +733,15 @@ function openDesignModal(modal, detail, index) {
     title.textContent = detail.title;
     text.textContent = detail.description;
     images.innerHTML = '';
+    images.className = 'design-modal__images';
+    modal.classList.remove('design-modal--has-images');
+
+    if (detail.modalImageLayout) {
+        images.classList.add(`design-modal__images--${detail.modalImageLayout}`);
+    }
 
     if (detail.images && detail.images.length > 0) {
+        modal.classList.add('design-modal--has-images');
         detail.images.forEach(src => {
             const img = document.createElement('img');
             img.src = src;

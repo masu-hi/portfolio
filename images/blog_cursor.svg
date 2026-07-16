@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="b" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64">
+<svg id="_レイヤー_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 64 64">
+  <!-- Generator: Adobe Illustrator 30.5.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 3)  -->
   <defs>
     <style>
-      .d {
+      .st0 {
         isolation: isolate;
       }
     </style>
   </defs>
-  <g id="c" data-name=" レイヤー 1">
-    <image class="d" width="64" height="64" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDkuMS1jMDAzIDc5Ljk2OTBhODdmYywgMjAyNS8wMy8wNi0yMDo1MDoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI2LjYgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjQ0OUNGQzY4NkQ4MTFGMDhFNjNBNjVCQjU5QTYzOTEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjQ0OUNGQzc4NkQ4MTFGMDhFNjNBNjVCQjU5QTYzOTEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGNDQ5Q0ZDNDg2RDgxMUYwOEU2M0E2NUJCNTlBNjM5MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGNDQ5Q0ZDNTg2RDgxMUYwOEU2M0E2NUJCNTlBNjM5MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PkjiRQkAAAHjSURBVHja7Jq9TsMwEMdjQCztwMICojwCAomBgRdgy1MgJlTxEDwA7N0YWDIwMTEyIRAqsPPRBQkxtBtSuCAVGRQ3Tnt2zuezdHKVeOj9crmc72+V53kS85hLIh8L4x8vz7c9mG7AztY6mx8xRsAd2AnYAGCcg+2BzXMHoMY5AJxdhukVbFG7PwA77axvHVP88xj56zcCIOzfYbrQbw6HoxWYrmJKgj3N+aR7cJTsbOxexwTgsgj7wvnD/W7Sv3/4ubi61MqjAACvwVeRCNvt1vZj/+nPQq4Q1P9EopSa6PTb50ixTIJlo8xZbpFQWQlyh2BVCnOGYL0X4Aqh1maII4Tau0FuEKbaDnOCMHU/gAuEmRoiHCDM3BEKHQJKSyxkCGg9wVAhoDZFQ4SA3hUODYKTtnhIEJzpAqFAcCqMhADBuTJEHYIXaYwyBG/aIFUIXsVRihC8q8PUIDQij1OC0Nj5ACoQJgojPoZJfLERZTCEkcYB1H3yOgQ2AAwQ0pJlmQ7BuTTWYE5IDctS7FxBBoDmVFqxFBVC9KfEBIAAEADkvgJZxdLMVEkGHwEWEFCdJ1UI2VaG2JUgyRxgesIuDmgpOS4vXwEBIAAEgAAQAAJAAAgAASAABIAAEAACILbxLcAAI3vw/Oe2lNIAAAAASUVORK5CYII="/>
-  </g>
+  <image class="st0" width="64" height="64" xlink:href="../../../Documents/htdocs/blog/wp-content/themes/19_blog/images/cursor.png"/>
 </svg>
