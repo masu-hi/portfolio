@@ -1,240 +1,157 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Works Hikari's Portforio</title>
-    <link rel="stylesheet" href="./scss/style.css?v=20260716-4">
+    <meta name="theme-color" content="#171416">
+    <meta name="description" content="増元ひかりの制作作品。Webサイト、UI・UX、グラフィックデザインの制作をご紹介します。">
+    <title>Works | Hikari's Portfolio</title>
+    <link rel="stylesheet" href="scss/theater-program.css?v=20261016">
+    <script src="js/theater-program.js?v=20261016" defer></script>
 </head>
-
-<body data-page="page_works">
-    <div class="puzzle-container is-complete">
-        <img src="images/orange@2x.webp" class="piece piece-orange">
-        <img src="images/yellow@2x.webp" class="piece piece-yellow">
-        <img src="images/lightgreen@2x.webp" class="piece piece-lightgreen">
-        <img src="images/green@2x.webp" class="piece piece-green">
-        <img src="images/lightblue@2x.webp" class="piece piece-lightblue">
-        <img src="images/blue@2x.webp" class="piece piece-blue">
-        <img src="images/navy@2x.webp" class="piece piece-navy">
-        <img src="images/purple@2x.webp" class="piece piece-purple">
-        <img src="images/pink@2x.webp" class="piece piece-pink">
-        <img src="images/red@2x.webp" class="piece piece-red">
-    </div>
-    <header class="header">
-        <nav class="nav">
-            <div class="nav__inner">
-                <a href="index.html" class="nav__back">
-                    <svg class="nav__back__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                    <span>Home</span>
-                </a>
-                <div class="nav__links">
-                    <a href="profile.html" class="nav__link">Profile</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <section id="portfolio" class="works">
-        <div class="works__inner">
-            <div class="works__header">
-                <h2 class="works__title">Works</h2>
-            </div>
-            <div class="works__filter">
-                <button class="filter-btn active" data-category="all">すべて</button>
-                <button class="filter-btn" data-category="web">Webサイト制作</button>
-                <button class="filter-btn" data-category="ui">UIデザイン</button>
-                <button class="filter-btn" data-category="graphic">グラフィックデザイン</button>
-            </div>
-            <div class="works__grid">
-                <!-- プロジェクトカード1: GLASSY-PHOTO -->
-                <a href="page_detail.html?id=glassy-photo" class="project-card" data-category="web">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">Webサイト制作</span>
-                        <h3 class="project-card__name">GLASSY-PHOTO</h3>
-                        <p class="project-card__description">
-                            ウェディングフォトグラファーの公式サイト。温かさと親しみやすさを大切にした、アットホームな雰囲気のWebサイトを制作。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">HTML/CSS (Sass)</span>
-                            <span class="project-card__tech__tag">デザイン</span>
-                            <span class="project-card__tech__tag">ロゴ</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="page_detail.html?id=portfolio-site" class="project-card" data-category="web">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">Webサイト制作</span>
-                        <h3 class="project-card__name">ポートフォリオサイト</h3>
-                        <p class="project-card__description">
-                            パズルと雑誌をテーマに、作品・強み・人柄がひとつにつながって見えるよう設計したポートフォリオサイト。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">HTML/CSS (Sass)</span>
-                            <span class="project-card__tech__tag">GSAP</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="page_detail.html?id=blog-site" class="project-card" data-category="web">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">Webサイト制作</span>
-                        <h3 class="project-card__name">ブログ制作</h3>
-                        <p class="project-card__description">
-                            緑と、時計をコンセプトにし、おとぎ話のような世界観を演出。なおかつ見やすい構成を意識しました。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">HTML/CSS</span>
-                            <span class="project-card__tech__tag">デザイン</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- プロジェクトカード3: コーポレートサイト -->
-                <a href="page_detail.html?id=mangafurubari-ui" class="project-card" data-category="ui">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">UIデザイン</span>
-                        <h3 class="project-card__name">マンガUI制作</h3>
-                        <p class="project-card__description">
-                            マンガのUIデザインをしました。ペルソナに合ったゲームっぽいイラストが特徴です。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Figma</span>
-                            <span class="project-card__tech__tag">ロゴ</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- プロジェクトカード5: ダッシュボードアプリ -->
-                <a href="page_detail.html?id=kiratomo-note" class="project-card" data-category="ui">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">UIデザイン</span>
-                        <h3 class="project-card__name">グループ制作（大阪）</h3>
-                        <p class="project-card__description">
-                            初対面の4人チームで、3日間のWeb合宿に参加。企画・デザイン・実装・発表までを協力して進めました。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                            <span class="project-card__tech__tag">ディレクション</span>
-                            <span class="project-card__tech__tag">HTML/CSS</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- プロジェクトカード6: ランディングページ -->
-                <a href="page_detail.html?id=wafu-restaurant" class="project-card" data-category="ui">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">UIデザイン</span>
-                        <h3 class="project-card__name">和風レストランWebサイトデザイン</h3>
-                        <p class="project-card__description">
-                            落ち着いた空間で食事を楽しみたい30〜50代の大人層をターゲットに、宿坊の和風レストランを想定したWebサイトを制作。静寂と上質さを視覚的に表現。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Figma</span>
-                            <span class="project-card__tech__tag">デザイン</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="page_detail.html?id=dental-business-card" class="project-card" data-category="graphic">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">グラフィックデザイン</span>
-                        <h3 class="project-card__name">歯科医院 名刺デザイン</h3>
-                        <p class="project-card__description">
-                            高級志向の歯科医院と地域密着型の歯科医院、それぞれのペルソナに合わせて印象を差別化した名刺デザイン。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Illustrator</span>
-                            <span class="project-card__tech__tag">名刺デザイン</span>
-                            <span class="project-card__tech__tag">ロゴ制作</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="page_detail.html?id=open-campus-banner" class="project-card" data-category="graphic">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">グラフィックデザイン</span>
-                        <h3 class="project-card__name">オープンキャンパス バナー</h3>
-                        <p class="project-card__description">
-                            タイポグラフィをテーマに、コンピュータの学校らしさと未来への期待感を文字表現で伝えたオープンキャンパスバナー。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Illustrator</span>
-                            <span class="project-card__tech__tag">バナーデザイン</span>
-                            <span class="project-card__tech__tag">タイポグラフィ</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="page_detail.html?id=okehazama-flyer" class="project-card" data-category="graphic">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">グラフィックデザイン</span>
-                        <h3 class="project-card__name">桶狭間の戦い フライヤー</h3>
-                        <p class="project-card__description">
-                            グリッドをテーマに、和の要素と戦場の緊張感を重ねて表現した桶狭間の戦いの宣伝フライヤー。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Illustrator</span>
-                            <span class="project-card__tech__tag">フライヤーデザイン</span>
-                            <span class="project-card__tech__tag">グリッド</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="page_detail.html?id=uyamuya-cd-jacket" class="project-card" data-category="graphic">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">グラフィックデザイン</span>
-                        <h3 class="project-card__name">CDジャケット・円盤ジャケット</h3>
-                        <p class="project-card__description">
-                            SixTONES『うやむや』を題材に、リズムと曖昧さを幾何学模様で表現したCDジャケット・円盤ジャケット。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Illustrator</span>
-                            <span class="project-card__tech__tag">ジャケットデザイン</span>
-                            <span class="project-card__tech__tag">幾何学模様</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="page_detail.html?id=carnival-night-cd-jacket" class="project-card" data-category="graphic">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">グラフィックデザイン</span>
-                        <h3 class="project-card__name">CDジャケット・歌詞カード</h3>
-                        <p class="project-card__description">
-                            嵐『Carnival Night part2』を題材に、夜の遊園地をテーマとして、ネオンの光や観覧車をモチーフに夢のような時間を表現したCDジャケット・歌詞カード。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Illustrator</span>
-                            <span class="project-card__tech__tag">ジャケットデザイン</span>
-                            <span class="project-card__tech__tag">歌詞カードデザイン</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-        </div>
-    </section>
-    <footer class="footer">
-        <div class="footer__bg"></div>
-        <div class="footer__inner">
-            <nav class="footer__nav">
-                <p class="footer__link--title">Quicklink</p>
-                <a href="index.html" class="footer__link">Home</a>
-                <a href="profile.html" class="footer__link">Profile</a>
+<body class="program-page">
+    <a class="skip-link" href="#program-list">作品一覧へスキップ</a>
+    <div class="program-entrance">
+        <picture class="program-curtain" aria-hidden="true">
+            <source media="(max-width: 700px)" srcset="images/curtain_mobile_matched_poster.webp">
+            <img src="images/curtain_desktop_matched_poster.webp" alt="" fetchpriority="high">
+        </picture>
+        <header class="program-header">
+            <a class="program-brand" href="index.html">Hikari's Portfolio</a>
+            <nav aria-label="メインナビゲーション">
+                <a href="index.html">Home</a><a href="page_works.html" aria-current="page">Works</a><a href="profile.html">Profile</a>
             </nav>
-            <p class="footer__copyright">© <span id="current-year"></span> 増元ひかり ポートフォリオ. All rights reserved.</p>
+        </header>
+        <div class="program-title">
+            <p class="program-eyebrow">HIKARI MASUMOTO / DESIGN COLLECTION</p>
+            <h1>THE <em>PROGRAM</em><span>作品一覧</span></h1>
+            <div class="program-title__credit"><span>WEB / GRAPHIC / UI・UX</span><span>2025 — 2026</span></div>
         </div>
-    </footer>
-
-    <!-- GSAP本体（必須） -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-
-    <!-- ScrollTrigger -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-
-    <!-- 自分のJS（最後） -->
-    <script src="js/main.js"></script>
+    </div>
+    <main id="program-list" class="program-main" tabindex="-1">
+        <div class="program-index">
+            <div class="program-filters" role="group" aria-label="作品ジャンルで絞り込み" hidden>
+                <button type="button" data-filter="all" aria-pressed="true">ALL <span data-filter-count></span></button>
+                <button type="button" data-filter="web" aria-pressed="false">WEB <span data-filter-count></span></button>
+                <button type="button" data-filter="graphic" aria-pressed="false">GRAPHIC <span data-filter-count></span></button>
+                <button type="button" data-filter="ui" aria-pressed="false">UI・UX <span data-filter-count></span></button>
+            </div>
+            <p class="program-count" aria-live="polite" aria-atomic="true"><span id="program-count">11</span> WORKS</p>
+        </div>
+        <section class="program-grid" aria-label="制作作品">
+            <article class="program-work" data-category="web">
+                <a href="page_detail.html?id=glassy-photo" class="program-work__link">
+                    <div class="program-work__visual">
+                        <img src="images/images-001.webp" alt="GLASSY-PHOTOのカメラのファインダーをモチーフにしたサムネイル" width="1200" height="700" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 01</span><p>デザイン / ロゴ・イラスト / HTML・CSS</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 01 / WEB DESIGN</span><time datetime="2025">2025</time></div>
+                    <h2>GLASSY-PHOTO</h2><p class="program-work__subtitle">ウェディングフォトグラファーの公式サイト</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="web">
+                <a href="page_detail.html?id=portfolio-site" class="program-work__link">
+                    <div class="program-work__visual">
+                        <img src="images/portfolio_mainvisual.webp" alt="パズルをテーマにしたポートフォリオサイト" width="2934" height="1826" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 02</span><p>情報設計 / デザイン / JavaScript・GSAP</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 02 / WEB DESIGN</span><time datetime="2026">2026</time></div>
+                    <h2>Portfolio Site</h2><p class="program-work__subtitle">ポートフォリオサイト</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="web">
+                <a href="page_detail.html?id=blog-site" class="program-work__link">
+                    <div class="program-work__visual">
+                        <img src="images/blog_mainvisual.webp" alt="Tick Tack Wonderの時計をモチーフにしたブログのビジュアル" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 03</span><p>デザイン / WordPress / HTML・CSS</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 03 / WEB DESIGN</span><time datetime="2025">2025</time></div>
+                    <h2>Tick Tack Wonder</h2><p class="program-work__subtitle">ブログサイト</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="ui">
+                <a href="page_detail.html?id=mangafurubari-ui" class="program-work__link">
+                    <div class="program-work__visual program-work__visual--icon">
+                        <img src="images/ui_icon.webp" alt="マンガアプリの魔法使いをモチーフにしたアイコン" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 04</span><p>UIデザイン / プロトタイプ</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 04 / UI・UX DESIGN</span><time datetime="2025">2025</time></div>
+                    <h2>マンガアプリ UIデザイン</h2><p class="program-work__subtitle">ペルソナから考えるアプリの画面設計</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="ui">
+                <a href="page_detail.html?id=kiratomo-note" class="program-work__link">
+                    <div class="program-work__visual program-work__visual--icon">
+                        <img src="images/kiratomo-note_icon.webp" alt="キラトモノートのアプリアイコン" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 05</span><p>進行管理 / UIデザイン / コーディング</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 05 / UI・UX · TEAM</span><time datetime="2026">2026</time></div>
+                    <h2>キラトモノート</h2><p class="program-work__subtitle">大阪Web合宿 / 4人でつくった3日間の作品</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="web">
+                <a href="page_detail.html?id=wafu-restaurant" class="program-work__link">
+                    <div class="program-work__visual">
+                        <img src="images/wafu_mainvisual.webp" alt="和風レストランのWebサイトデザイン" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 06</span><p>Figma / デザイン / イラスト</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 06 / WEB DESIGN</span><time datetime="2025">2025</time></div>
+                    <h2>和風レストラン</h2><p class="program-work__subtitle">静けさと上質さを伝えるWebサイトデザイン</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="graphic">
+                <a href="page_detail.html?id=dental-business-card" class="program-work__link">
+                    <div class="program-work__visual program-work__visual--pair">
+                        <img src="images/dental_images1.webp" alt="高級志向の歯科医院の名刺デザイン" loading="lazy" decoding="async"><img src="images/dental_images2.webp" alt="地域密着型の歯科医院の名刺デザイン" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 07</span><p>リサーチ / ロゴ制作 / 紙面設計</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 07 / GRAPHIC DESIGN</span><time datetime="2026">2026</time></div>
+                    <h2>歯科医院 名刺デザイン</h2><p class="program-work__subtitle">異なるペルソナに合わせた、ふたつの表情</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="graphic">
+                <a href="page_detail.html?id=open-campus-banner" class="program-work__link">
+                    <div class="program-work__visual">
+                        <img src="images/15_banner.webp" alt="タイポグラフィで未来への期待を表現したオープンキャンパスバナー" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 08</span><p>タイポグラフィ / バナーデザイン / Illustrator</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 08 / GRAPHIC DESIGN</span><time datetime="2026">2026</time></div>
+                    <h2>オープンキャンパス バナー</h2><p class="program-work__subtitle">文字から伝える、学校らしさと未来への期待</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="graphic">
+                <a href="page_detail.html?id=okehazama-flyer" class="program-work__link">
+                    <div class="program-work__visual">
+                        <img src="images/okehazama.webp" alt="桶狭間の戦いをテーマにしたフライヤー" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 09</span><p>グリッド設計 / 配色設計 / Illustrator</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 09 / GRAPHIC DESIGN</span><time datetime="2026">2026</time></div>
+                    <h2>桶狭間の戦い</h2><p class="program-work__subtitle">グリッドをテーマにした宣伝フライヤー</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="graphic">
+                <a href="page_detail.html?id=uyamuya-cd-jacket" class="program-work__link">
+                    <div class="program-work__visual program-work__visual--pair">
+                        <img src="images/cd_jacket.webp" alt="SixTONES『うやむや』を題材にしたCDジャケット" loading="lazy" decoding="async"><img src="images/cd_disk.webp" alt="幾何学模様を使った円盤ジャケット" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 10</span><p>幾何学模様 / ジャケットデザイン / Illustrator</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 10 / GRAPHIC DESIGN</span><time datetime="2026">2026</time></div>
+                    <h2>うやむや</h2><p class="program-work__subtitle">CDジャケット・円盤ジャケット</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+            <article class="program-work" data-category="graphic">
+                <a href="page_detail.html?id=carnival-night-cd-jacket" class="program-work__link">
+                    <div class="program-work__visual program-work__visual--pair">
+                        <img src="images/carnival-night_cd-jacket.webp" alt="嵐『Carnival Night part2』を題材にしたCDジャケット" loading="lazy" decoding="async"><img src="images/carnival-night_lyrics-card.webp" alt="夜の遊園地をテーマにした歌詞カード" loading="lazy" decoding="async">
+                        <div class="program-work__notes"><span>PRODUCTION NOTES / 11</span><p>ジャケット・歌詞カード / Illustrator</p></div>
+                    </div>
+                    <div class="program-work__meta"><span>No. 11 / GRAPHIC DESIGN</span><time datetime="2026">2026</time></div>
+                    <h2>Carnival Night part2</h2><p class="program-work__subtitle">CDジャケット・歌詞カード</p><span class="program-work__arrow" aria-hidden="true">↗</span>
+                </a>
+            </article>
+        </section>
+        <div class="program-end"><span>END OF PROGRAM</span><a href="profile.html">Behind the designs.<span>つくり手について ↗</span></a></div>
+    </main>
+    <footer class="program-footer"><a href="index.html">Hikari's Portfolio</a><nav aria-label="フッターナビゲーション"><a href="index.html">Home</a><a href="profile.html">Profile</a><a href="#program-list">Back to works ↑</a></nav><small>© <span id="current-year">2026</span> Hikari Masumoto</small></footer>
 </body>
-
 </html>

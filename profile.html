@@ -1,265 +1,174 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Hikari's Portfolio</title>
-    <link rel="stylesheet" href="./scss/style.css?v=20260716-4">
+    <meta name="theme-color" content="#100b0d">
+    <title>Profile | Hikari's Portfolio</title>
+    <link rel="stylesheet" href="./scss/style.css">
+    <link rel="stylesheet" href="./scss/theater-profile.css?v=20261015-chart">
 </head>
-
-<body data-page="profile">
-
-    <!-- ナビゲーション -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav__inner">
-                <a href="index.html" class="nav__back">
-                    <svg class="nav__back__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                    <span>Home</span>
-                </a>
-                <div class="nav__links">
-                    <a href="page_works.html" class="nav__link">Works</a>
-                </div>
-            </div>
+<body data-page="theater-profile" class="theater-profile-page">
+    <picture class="theater-profile__curtain" aria-hidden="true">
+        <source media="(max-width: 700px)" srcset="images/curtain_mobile_matched_poster.webp">
+        <img src="images/curtain_desktop_matched_poster.webp" alt="" fetchpriority="high">
+    </picture>
+    <header class="theater-profile__header">
+        <a class="theater-profile__brand" href="index.html">Hikari's Portfolio</a>
+        <nav aria-label="メインナビゲーション">
+            <a href="index.html">Home</a>
+            <a href="page_works.html">Works</a>
+            <a href="profile.html" aria-current="page">Profile</a>
         </nav>
     </header>
-
-    <!-- プロフィール -->
-    <main class="profile">
-        <div class="profile__inner profile__twice">
-            <div class="profile__image__wrapper">
-                <img src="./images/profile_icon.webp" alt="プロフィール写真" class="profile__image" width="400px"
-                    height="400px">
-            </div>
-            <div class="profile__intro">
-                <h1 class="profile__name">増元ひかり</h1>
-                <p class="profile__meta">
-                    トライデントコンピュータ専門学校 2年
-                </p>
-                <p class="profile__role">
-                    Webデザイナー志望
-                </p>
-                <p class="profile__catch">
-                    楽しくて、心地いいWeb体験をつくる。
-                </p>
-            </div>
-        </div>
-        <!-- 自己紹介 -->
-        <section class="profile__introduction">
-            <div class="profile__inner">
-
-                <h2 class="profile__introduction__title">About</h2>
-                <p class="profile__introduction__lead">
-                    見やすさと使いやすさを軸に、
-                    どのようにデザインと向き合っているかをまとめています。
-                </p>
-
-                <div class="profile__about">
-                    <p class="profile__label">DESIGN POLICY</p>
-
-                    <!-- ファーストメッセージ -->
-                    <div class="profile__about__block is-main fade-in">
-                        <h3 class="profile__about__keyword">
-                            見やすさ・使いやすさ
-                        </h3>
-                        <p class="profile__about__text">
-                            見やすさや使いやすさは、すべてのデザインの土台だと考えています。<br>
-                            どれだけ見た目が魅力的でも、使いにくければ意味がありません。<br><br>
-
-                            そのため、まずはストレスなく使える設計を徹底し、その上でターゲットに合った表現や世界観を重ねていくことを大切にしています。
-                        </p>
-                    </div>
-                    <div class="profile__about__block is-main-block ">
-                        <div class="profile__vertical">
-                            IDEA
-                        </div>
-                        <h3 class="profile__about__keyword is-main glitch fade-in" data-text="Commitment">
-                            こだわりのアイデアを<br>ひとつ入れる
-                        </h3>
-                        <p class="profile__about__text fade-in">
-                            どの制作でも、自分なりのアイデアを一つは取り入れることを意識しています。<br><br>
-
-                            ただ見ただけでは終わらない、「少し面白い」「印象に残る」と感じてもらえるような工夫を大切にしています。<br><br>
-
-                            デザインの意図を言葉で説明できることで、見る人と作り手が繋がると考えています。
-                        </p>
-                    </div>
-                    <div class="profile__about__block fade-in">
-                        <h3 class="profile__about__keyword is-sub">
-                            ターゲットに合わせる
-                        </h3>
-                        <p class="profile__about__text">
-                            デザインをする際は、媒体や方向性、ペルソナによってテイストを変えることを大切にしています。<br><br>
-
-                            例えば、アニメやゲームが好きなユーザーを想定した場合はキャラクター性のある表現を取り入れたり、和風のサイトでは雰囲気を崩さない色や構成を意識しています。<br><br>
-
-                            一つ一つの要素に意味や意図を持たせることで、見た目だけではなく「なぜこのデザインなのか」が伝わる設計を目指しています。
-                        </p>
-                    </div>
-                    <!-- テイスト -->
-                    <div class="profile__about__block fade-in">
-                        <h3 class="profile__about__keyword">
-                            可愛くて、動きのあるデザイン
-                        </h3>
-                        <p class="profile__about__text">
-                            可愛らしさや動きのある表現を得意としており、デザインを考える段階からアニメーションも含めて設計しています。<br><br>
-
-                            一方で、サイケデリックな表現やおとぎ話のような世界観のあるデザインにも惹かれており、今後はより個性のある表現にも挑戦していきたいと考えています。
-                        </p>
-                    </div>
-                    <div class="profile__about__block fade-in">
-                        <h3 class="profile__about__keyword">
-                            コーディングについて
-                        </h3>
-                        <p class="profile__about__text">
-                            HTML・CSSはWebクリエイター能力認定試験エキスパートを取得しています。<br>
-                            現在はSassを使用し、効率的なコーディングを行っています。<br><br>
-
-                            AIを活用することもありますが、内容を理解した上で修正・調整することを意識しています。<br>
-                            そのため、基礎的な構築や細かな調整は対応可能です。
-                        </p>
-                    </div>
-
-                    <!-- 将来 -->
-                    <div class="profile__about__block fade-in">
-                        <h3 class="profile__about__keyword">
-                            楽しい、面白いを届けたい
-                        </h3>
-                        <p class="profile__about__text">
-                            自分の作ったサイトを見た人に「面白い」「楽しい」と感じてもらえる体験を届けたいと考えています。<br><br>
-
-                            クライアントの意図を大切にしながら、その中に自分のアイデアや個性を少し加えたデザインができるWebデザイナーを目指しています。
-                        </p>
-                    </div>
+    <main>
+        <section class="theater-profile__intro" aria-labelledby="profile-title">
+            <article class="profile-poster">
+                <div class="profile-poster__edition"><span>HIKARI'S PORTFOLIO PRESENTS</span><span>PROFILE / No. 01</span></div>
+                <p class="profile-poster__billing">A PORTRAIT OF A DESIGNER</p>
+                <h1 id="profile-title" class="profile-poster__title"><span>HIKARI</span><span>MASUMOTO</span></h1>
+                <div class="profile-poster__scene">
+                    <span class="profile-poster__cue" aria-hidden="true">Click!<span>↓</span></span>
+                    <a class="profile-poster__topic profile-poster__topic--taste" href="#design-taste" data-poster-topic><small>01 / THE AESTHETIC</small><strong>Design<br>Taste</strong><span>Playful. Thoughtful.</span></a>
+                    <figure class="profile-poster__portrait">
+                        <img src="images/profile-retro-americana-v2.png" alt="丸眼鏡をかけ、頬に手を添える増元ひかりのレトロなイラスト" width="1254" height="1254" fetchpriority="high">
+                    </figure>
+                    <a class="profile-poster__topic profile-poster__topic--interests" href="#interests" data-poster-topic><small>02 / OFF STAGE</small><strong>INTERESTS</strong><span>Little things I love.</span></a>
+                    <a class="profile-poster__topic profile-poster__topic--process" href="#process" data-poster-topic><small>03 / BEHIND THE WORK</small><strong>The Process</strong></a>
+                    <a class="profile-poster__topic profile-poster__topic--policy" href="#policy" data-poster-topic><small>04 / PHILOSOPHY</small><strong>Care &amp;<br>Craft</strong></a>
                 </div>
-                <!-- Aboutの最後に入れる -->
-                <div class="profile__about__block profile__about__block--sub fade-in">
-                    <h3 class="profile__about__keyword profile__about__keyword--small">
-                        About me
-                    </h3>
-                    <p class="profile__about__text">
-                        趣味：旅行、アニメ鑑賞<br>
-                        好きな食べ物：クリームパスタ、チョコレート
-                    </p>
-                </div>
+                <div class="profile-poster__copy"><p>A little discovery.<br>A lot of care.</p><span>WEB &amp; GRAPHIC DESIGN / INTERACTIVE CRAFT</span></div>
+                <nav class="profile-poster__cast" aria-label="プロフィールの詳細">
+                    <a href="#about" data-poster-topic><small>THE DESIGNER</small><strong>About Me</strong></a>
+                    <a href="#toolbox" data-poster-topic><small>THE TOOLKIT</small><strong>Skills &amp; Tools</strong></a>
+                </nav>
+                <div class="profile-poster__credits"><span>CONCEPT, DESIGN &amp; CRAFT / HIKARI MASUMOTO</span><span>TRIDENT COMPUTER COLLEGE</span></div>
+            </article>
+        </section>
+        <div class="theater-profile__program">
+            <section id="about" class="theater-profile__section" data-poster-content aria-labelledby="about-title">
+                    <p class="theater-profile__eyebrow">PROFILE</p>
+                    <h2 id="about-title">簡単なプロフィール</h2>
+                    <dl class="basic-profile">
+                        <div><dt>名前</dt><dd>増元 ひかり <span lang="en">Hikari Masumoto</span></dd></div>
+                        <div><dt>所属</dt><dd>トライデントコンピュータ専門学校<br>Webデザイン学科</dd></div>
+                        <div><dt>出身地</dt><dd>愛知県</dd></div>
+                        <div><dt>誕生日</dt><dd><time datetime="2002-09-20">2002年9月20日</time></dd></div>
+                        <div><dt>目指す仕事</dt><dd>デザイナー<span class="basic-profile__specialty">Webデザイン・グラフィックデザイン</span></dd></div>
+                        <div><dt>資格・免許</dt><dd><ul class="basic-profile__qualifications"><li>Webクリエイター能力認定試験 エキスパート</li><li>実用英語技能検定 準2級</li><li>普通自動車運転免許</li></ul></dd></div>
+                    </dl>
+                    <div class="profile-origin">
+                        <h3>Webデザインを目指したきっかけ</h3>
+                        <p>幼い頃から、看板や横断幕をつくることが好きでした。そうした役割を任されることも多く、ものづくりは「自分にできること」だと感じていました。</p>
+                        <p>その経験から、クリエイティブな仕事に進みたいと考えるようになりました。デジタル化が進む中で、デザインを仕事にするならWebの分野で挑戦したいと思い、Webデザインの道を選びました。</p>
+                        <p>現在はWebだけでなく、グラフィックにも携わるデザイナーを目指しています。</p>
+                    </div>
+            </section>
+        <section id="design-taste" class="theater-profile__section" data-poster-content aria-labelledby="taste-title">
+            <p class="theater-profile__eyebrow">01 / DESIGN TASTE</p>
+            <h2 id="taste-title">可愛い、派手、少し意外。</h2>
+            <p class="theater-profile__lead">可愛らしさのあるデザインと、にぎやかで大胆なデザインに惹かれます。色やモチーフがぎゅっと詰まった表現や、サイケデリックな世界観も好きです。</p>
+            <div class="profile-notes">
+                <h3>好きな色は、オレンジと紫。</h3>
+                <dl class="taste-colors">
+                    <div><dt><span class="taste-colors__swatch taste-colors__swatch--orange" aria-hidden="true"></span>Orange</dt><dd>温かさを感じられて、自分にも合っていると思う色です。</dd></div>
+                    <div><dt><span class="taste-colors__swatch taste-colors__swatch--purple" aria-hidden="true"></span>Purple</dt><dd>上品にも、ハロウィンのように可愛らしくもなる色。選ばれる機会は少ないかもしれませんが、表情の幅広さに魅力を感じます。</dd></div>
+                </dl>
+                <h3>にぎやかな中に、その人らしいセンスがある。</h3>
+                <p>たくさんの要素を組み合わせながら、ひとつの世界観にまとめるデザインに憧れます。自分でつくるのはまだ難しいからこそ、個性のある絵や大胆な表現ができる人をすごいと感じます。</p>
+                <h3>心に残っているサイト</h3>
+                <ul class="design-references">
+                    <li><a href="https://deli-planet.com/" target="_blank" rel="noopener noreferrer">Deli-Planet <span aria-hidden="true">↗</span></a><p>可愛さと派手さ、少しレトロな雰囲気。個性のあるイラストにも惹かれます。</p></li>
+                    <li><a href="https://lululun.com/shop/pages/lululun_15th" target="_blank" rel="noopener noreferrer">LuLuLun 15th Anniversary <span aria-hidden="true">↗</span></a><p>上品さと可愛らしさが一緒にあるところ。最後まで飽きずに見られる体験が好きです。</p></li>
+                    <li><a href="https://www.dot-st.com/nikoand/cp/2026_wigglewiggle" target="_blank" rel="noopener noreferrer">niko and ... × wiggle wiggle <span aria-hidden="true">↗</span></a><p>派手で可愛く、ずっと何かが動いている。見やすさだけでは語れない、センスのある表現に惹かれます。</p></li>
+                </ul>
             </div>
         </section>
-
-        <!-- スキル -->
-        <section class="profile__skill">
-            <div class="profile__inner">
-                <h2 class="profile__skill__title">Skill</h2>
-
-                <div class="skills">
-
-                    <!-- デザイン -->
-                    <div class="skills__block">
-                        <h3 class="skills__keyword">Design</h3>
-                        <ul class="skills__list">
-                            <li>バナー制作</li>
-                            <li>UIデザイン（アプリ・Web）</li>
-                            <li>配色設計・テイスト設計</li>
-                            <li>アイコン制作</li>
-                        </ul>
-                    </div>
-
-                    <!-- コーディング -->
-                    <div class="skills__block">
-                        <h3 class="skills__keyword">Coding</h3>
-                        <ul class="skills__list">
-                            <li>HTML / CSS</li>
-                            <li>Sassを用いた効率的なコーディング</li>
-                            <li>基礎的なWebサイトの構築・調整</li>
-                        </ul>
-                        <p class="skills__note">
-                            Webクリエイター能力認定試験 エキスパート取得<br>
-                            AIを活用しながらコードの理解・修正が可能
-                        </p>
-                    </div>
-
-                    <!-- ツール -->
-                    <div class="skills__block">
-                        <h3 class="skills__keyword">Tools</h3>
-                        <ul class="skills__list">
-                            <li>Figma</li>
-                            <li>Photoshop</li>
-                            <li>Illustrator</li>
-                            <li>VS Code</li>
-                        </ul>
-                    </div>
-
-                    <!-- AI -->
-                    <div class="skills__block">
-                        <h3 class="skills__keyword">AI</h3>
-                        <ul class="skills__list">
-                            <li>ChatGPT</li>
-                            <li>Google Gemini</li>
-                            <li>Claude</li>
-                        </ul>
-                    </div>
-
-                </div>
+        <section id="interests" class="theater-profile__section" data-poster-content aria-labelledby="interests-title">
+            <p class="theater-profile__eyebrow">02 / INTERESTS</p>
+            <h2 id="interests-title">旅と音楽と、好きな世界。</h2>
+            <p class="theater-profile__lead">趣味は旅行と、アニメ・音楽鑑賞。ライブに合わせて出かけたり、好きな作品の世界に浸ったりして過ごしています。</p>
+            <div class="profile-notes profile-interests">
+                <article><p class="profile-notes__label">01 / TRAVEL &amp; LIVE</p><h3>ライブの前後も、旅の楽しみ。</h3><p>およそ2か月に1回は、ほかの県へ旅行しています。旅先でライブに参加するだけでなく、前後の時間にご当地グルメや観光スポットを巡るのも楽しみです。</p></article>
+                <article><p class="profile-notes__label">02 / MUSIC</p><h3>ジャンルよりも、曲の雰囲気に惹かれます。</h3><p>J-POP、K-POP、洋楽、アニソンまで幅広く聴きます。特に好きなアーティストはTravis Japan、ブルーノ・マーズ、King Gnu。流行にこだわらず、大人っぽくて艶のある曲調に惹かれます。</p><p>King Gnuのライブにはまだ参加したことがなく、いつか行ってみたいと思っています。</p></article>
+                <article><p class="profile-notes__label">03 / FILM</p><h3>何度でも帰りたくなる、魔法の世界。</h3><p>好きな映画はハリー・ポッターシリーズ。『賢者の石』から『死の秘宝 PART2』まで何度も見返しています。特に好きなのは『秘密の部屋』と『不死鳥の騎士団』です。</p><p>東京のスタジオツアーにも繰り返し足を運ぶくらい、あの世界観が好きです。</p></article>
+                <article><p class="profile-notes__label">04 / DAYS OFF</p><h3>家族や愛犬と過ごす休日。</h3><p>休日は愛犬と遊んだり、家族と買い物やゲームを楽しんだり。ドッグランや散歩のために、少し遠くまで出かけることもあります。</p></article>
             </div>
         </section>
-
-        <!-- SNS・リンク -->
-        <section class="profile__sns">
-            <h2 class="profile__sns__title">SNS・リンク</h2>
-            <p class="profile__sns__subtitle">お気軽にご連絡ください</p>
-            <div class="sns__grid sns__inner">
-                <a href="mailto:hikari09.masu@gmail.com" target="_blank" rel="noopener noreferrer"
-                    class="sns__link sns__link--email">
-                    <span class="sns__name">Email</span>
-                </a>
-                <a href="https://rumc-hk.sub.jp/blog/" target="_blank" rel="noopener noreferrer"
-                    class="sns__link sns__link--blog">
-                    <span class="sns__name">Blog</span>
-                </a>
-                <a href="https://www.instagram.com/hk_stv01.01" target="_blank" rel="noopener noreferrer"
-                    class="sns__link sns__link--instagram">
-                    <span class="sns__name">Instagram</span>
-                </a>
-                <a href="https://github.com/masu-hi/promotion_site" target="_blank" rel="noopener noreferrer"
-                    class="sns__link sns__link--github">
-                    <span class="sns__name">Github</span>
-                </a>
+        <section id="process" class="theater-profile__section" data-poster-content aria-labelledby="process-title">
+            <p class="theater-profile__eyebrow">03 / THE PROCESS</p>
+            <h2 id="process-title">構成と土台から、世界をつくる。</h2>
+            <p class="theater-profile__lead">いちばん好きなのは、ワイヤーフレームを考える時間です。何をどこに置き、どう見せるか。構成と土台を整えてから、デザインと動きを重ねていきます。</p>
+            <ol class="profile-process">
+                <li><span>01 / RESEARCH</span><h3>届けたい相手を決め、調べる。</h3><p>ターゲットを決めて参考サイトを探し、関連する分野のデータも調べます。必要に応じて数値を算出し、制作の方向性を考えます。</p></li>
+                <li><span>02 / STRUCTURE</span><h3>必要な情報と機能を整理する。</h3><p>サイトマップを作り、アプリやサイトに必要な情報・機能を洗い出します。どんな順番なら伝わりやすいか、全体の構成を考えます。</p></li>
+                <li><span>03 / WIREFRAME &amp; ROUGH</span><h3>構成を、目に見える形にする。</h3><p>ワイヤーフレームで画面の土台を組み立てます。グラフィックデザインでは下絵をいくつか描き、アイデアを比べながら形を探します。</p></li>
+                <li><span>04 / DESIGN</span><h3>Figmaで、世界観を仕立てる。</h3><p>画面をデザインする工程も好きです。アイデアを出したり、細部までこだわったりするため、ここには特に時間をかけています。</p></li>
+                <li><span>05 / BUILD &amp; REFINE</span><h3>実装して、細かな違和感を直す。</h3><p>コーディングは楽しい一方、特にJavaScriptを一から書くことはまだ苦手です。AIの力も借りながら内容を理解し、細かな修正は自分でも行って、表示や動きを調整します。</p></li>
+            </ol>
+        </section>
+        <section id="policy" class="theater-profile__section" data-poster-content aria-labelledby="policy-title">
+            <p class="theater-profile__eyebrow">DESIGN POLICY</p>
+            <h2 id="policy-title">世界観を入口に、使いやすさをその先に。</h2>
+            <p class="theater-profile__lead">見やすいだけでなく、「面白い」と思ってもらえること。そして、見た人が笑顔になること。そんな、記憶に残る作品を目指しています。</p>
+            <div class="theater-profile__policies">
+                <article><span>01 / WORLDVIEW</span><h3>まず、世界観で心をつかむ。</h3><p>いちばん大切にしているのは世界観です。デザインの専門知識がない方にも、その作品らしさや面白さは伝わると思っています。最初の印象に残る、入り込んでみたくなる世界をつくりたいです。</p></article>
+                <article><span>02 / USABILITY</span><h3>「わからない」で終わらせない。</h3><p>世界観が魅力的でも、情報を見つけにくかったり、操作に迷ったりすると離れてしまいます。目的の情報にたどり着けること、迷わず使えることも妥協したくありません。</p></article>
+                <article><span>03 / SMALL DETAILS</span><h3>細かな動きまで、面白く。</h3><p>見やすさを土台に、触ったときの反応や細部の動きにもこだわります。「面白い」を届けるのは簡単ではないからこそ、もう少し見ていたくなる工夫を重ねたいと思っています。</p></article>
             </div>
+            <div class="profile-notes profile-encouragement">
+                <h3>「面白い」のひと言が、次をつくる力になる。</h3>
+                <p>進級制作展で叔父のウェディングフォトグラファーのサイトを制作したとき、作品を見た叔父が「すごい！可愛らしくて、面白い仕掛けもあるね！」と言ってくれたことが、とてもうれしかったです。</p>
+                <p>面接で制作途中のポートフォリオを見ていただいた際にも、「すごい面白い！こんなことできないよ！」と声をかけていただいたことが印象に残っています。</p>
+                <p>そうした言葉をいただくと、もっといい作品をつくろうという気持ちになります。見る人の反応が、制作を続けるモチベーションになっています。</p>
+            </div>
+        </section>
+        <section id="toolbox" class="theater-profile__section" data-poster-content aria-labelledby="toolbox-title">
+            <p class="theater-profile__eyebrow">THE CREATIVE CAST</p>
+            <h2 id="toolbox-title">制作を支える、わたしの配役表。</h2>
+            <p class="skill-billing__legend">制作で使用 / AIと制作 / 経験あり / 学習中</p>
+            <div class="skill-billing" aria-label="スキルと担当できること">
+                <details open><summary><span class="skill-billing__number" aria-hidden="true">01</span><span class="skill-billing__name">HTML / CSS / SCSS<small>STAGE BUILDING</small></span><span class="skill-billing__status">制作で使用</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>担当 / マークアップ・スタイリング</span><p>基本的なコードを書くことができます。構造や見た目を組み立て、細かな修正にも取り組んでいます。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">02</span><span class="skill-billing__name">JavaScript<small>MOTION DIRECTION</small></span><span class="skill-billing__status skill-billing__status--ai">AIと制作</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>担当 / 動き・インタラクション</span><p>一からコードを書くことは苦手で、AIを活用することが多いです。コードの意味を理解しながら、自分でも修正や調整を行います。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">03</span><span class="skill-billing__name">Figma<small>SCREEN DESIGN</small></span><span class="skill-billing__status">制作で使用</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>担当 / 画面設計・プロトタイピング</span><p>画面デザイン、コンポーネント、オートレイアウト、プロトタイプを使えます。まだ使いこなせていない機能も学び、表現や制作の幅を広げたいです。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">04</span><span class="skill-billing__name">Photoshop<small>IMAGE MAKING</small></span><span class="skill-billing__status">制作で使用</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>担当 / 写真加工・画面デザイン</span><p>トリミングや写真の加工、画面デザインなど、基本的な操作ができます。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">05</span><span class="skill-billing__name">Illustrator<small>GRAPHIC DESIGN</small></span><span class="skill-billing__status">制作で使用</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>担当 / グラフィック・立体表現</span><p>グラデーションや3D機能を含む、基本的な操作ができます。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">06</span><span class="skill-billing__name">Firebase<small>DATA &amp; ACCOUNTS</small></span><span class="skill-billing__status skill-billing__status--experience">経験あり</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>経験 / データ保存</span><p>触った回数はまだ2回ほどですが、商品のデータベース保存や、ログインに使う会員情報の保存を経験しました。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">07</span><span class="skill-billing__name">GitHub<small>TEAM PRODUCTION</small></span><span class="skill-billing__status">制作で使用</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>担当 / 更新管理・チームでの取りまとめ</span><p>リポジトリやブランチの作成、プッシュ・プル、更新管理ができます。グループ制作ではメイン側の管理も担当し、メンバーの変更を取り込んでマージしました。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">08</span><span class="skill-billing__name">Blender<small>SCENE DIRECTION</small></span><span class="skill-billing__status skill-billing__status--ai">AIと制作</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>担当 / スクリプトによるシーン制作</span><p>自分でモデリングすることはまだ得意ではありませんが、スクリプトを取り込んで制作する流れには慣れました。配置・大きさ・色・動きを考え、AIに細かく指示しながら形にしています。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">09</span><span class="skill-billing__name">PHP<small>SERVER-SIDE CODE</small></span><span class="skill-billing__status skill-billing__status--experience">経験あり</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>経験 / 授業での学習</span><p>授業で学び、面白いと感じた言語です。JavaScriptよりも取り組みやすいと感じています。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">10</span><span class="skill-billing__name">InDesign<small>PRINT &amp; LAYOUT</small></span><span class="skill-billing__status skill-billing__status--learning">学習中</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>稽古中 / 紙面のレイアウト</span><p>最近使い始め、ボックスの使い方に慣れてきたところです。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">11</span><span class="skill-billing__name">Premiere Pro<small>VIDEO EDITING</small></span><span class="skill-billing__status skill-billing__status--learning">学習中</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>稽古中 / 映像編集</span><p>趣味で手ぶれ補正を使ったことがあります。授業でも学び始めたので、自分でもさらに勉強していきたいです。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">12</span><span class="skill-billing__name">WordPress<small>BLOG PRODUCTION</small></span><span class="skill-billing__status skill-billing__status--experience">経験あり</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>経験 / ブログ開設</span><p>ブログを開設した際に使いました。開設自体は難しく感じませんでしたが、機能を作り込んだり設定を調整したりすることには、まだ自信がありません。</p></div></details>
+                <details><summary><span class="skill-billing__number" aria-hidden="true">13</span><span class="skill-billing__name">React<small>COMPONENTS</small></span><span class="skill-billing__status skill-billing__status--learning">学習中</span><span class="skill-billing__cue" aria-hidden="true">＋</span></summary><div class="skill-billing__part"><span>稽古中 / コンポーネントの復習</span><p>授業でコンポーネントを学びました。最近はあまり触れておらず、忘れている部分もあるため、改めて学び直したいと思っています。</p></div></details>
+            </div>
+            <p class="theater-profile__qualification">Webクリエイター能力認定試験 エキスパート取得。</p>
+        </section>
+        <section class="theater-profile__section theater-profile__applause" aria-labelledby="applause-title">
+            <p class="theater-profile__eyebrow">CURTAIN CALL</p>
+            <h2 id="applause-title">ここまで見てくれて、<br>ありがとう。</h2>
+            <button id="applause-button" class="applause-button" type="button" hidden><strong aria-hidden="true">BRAVO!</strong><span>拍手を送る</span></button>
+            <p id="applause-message" role="status" aria-live="polite"></p>
+            <a class="theater-profile__works-link" href="page_works.html">作品も見ていく <span aria-hidden="true">↗</span></a>
+        </section>
+        <section class="theater-profile__section theater-profile__contact-section" aria-labelledby="contact-title">
+            <p class="theater-profile__eyebrow">STAY IN TOUCH</p>
+            <h2 id="contact-title">つながる</h2>
+            <nav class="theater-profile__contact" aria-label="連絡先とSNS">
+                <a href="mailto:hikari09.masu@gmail.com">Email</a>
+                <a href="https://rumc-hk.sub.jp/blog/" target="_blank" rel="noopener noreferrer">Blog</a>
+                <a href="https://www.instagram.com/hk_stv01.01" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://github.com/masu-hi/promotion_site" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </nav>
         </section>
         </div>
     </main>
-
-    <!-- フッター -->
-    <footer class="footer">
-        <div class="footer__bg"></div>
-        <div class="footer__inner">
-            <nav class="footer__nav">
-                <p class="footer__link--title">Quicklink</p>
-                <a href="index.html" class="footer__link">Home</a>
-                <a href="page_works.html" class="footer__link">Works</a>
-            </nav>
-            <p class="footer__copyright">© <span id="current-year"></span> 増元ひかり ポートフォリオ. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- トップに戻るボタン -->
-    <button id="scroll-to-top" class="scroll-to-top" aria-label="トップに戻る">
-        <svg class="scroll-to-top__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
-    </button>
-
-    <!-- GSAP本体 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-
-    <!-- ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-    <!-- 自分のJS（これが最後） -->
-    <script src="js/main.js"></script>
+    <dialog id="profile-dialog" class="profile-dialog" aria-labelledby="profile-dialog-title">
+        <form method="dialog" class="profile-dialog__bar"><button type="submit" aria-label="詳細を閉じる" title="詳細を閉じる" autofocus><span aria-hidden="true">×</span></button></form>
+        <div id="profile-dialog-content" class="profile-dialog__content"></div>
+    </dialog>
+    <footer class="theater-profile__footer"><p>Hikari's Portfolio</p><nav aria-label="フッターナビゲーション"><a href="index.html">Home</a><a href="page_works.html">Works</a><a href="mailto:hikari09.masu@gmail.com">Contact</a></nav><small>© <span id="current-year"></span> 増元ひかり Portfolio.</small></footer>
+    <script src="js/script.js?v=20260929"></script>
+    <script src="js/theater-profile.js?v=20261015-chart"></script>
 </body>
-
 </html>

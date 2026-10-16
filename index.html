@@ -4,188 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100b0d">
     <title>Hikari's Portfolio</title>
     <link rel="stylesheet" href="./scss/style.css">
+    <link rel="stylesheet" href="./scss/theater-hero.css?v=20261012-layers">
+    <link rel="stylesheet" href="./scss/theater-works.css?v=20261012-exit">
+    <noscript><style>.theater-hero__title, .theater-hero__header, .theater-hero__scroll { opacity: 1; visibility: visible; transform: none; } .theater-hero__stage img, .theater-hero__curtains img { filter: none !important; }</style></noscript>
 </head>
 
 <body data-page="home">
-    <!-- 背景の落ちるパズルピース -->
-    <div class="puzzle-container is-complete">
-        <img src="images/orange@2x.webp" class="piece piece-orange">
-        <img src="images/yellow@2x.webp" class="piece piece-yellow">
-        <img src="images/lightgreen@2x.webp" class="piece piece-lightgreen">
-        <img src="images/green@2x.webp" class="piece piece-green">
-        <img src="images/lightblue@2x.webp" class="piece piece-lightblue">
-        <img src="images/blue@2x.webp" class="piece piece-blue">
-        <img src="images/navy@2x.webp" class="piece piece-navy">
-        <img src="images/purple@2x.webp" class="piece piece-purple">
-        <img src="images/pink@2x.webp" class="piece piece-pink">
-        <img src="images/red@2x.webp" class="piece piece-red">
-    </div>
-    <!-- メインビジュアル -->
-    <section class="mainvisual">
-        <div class="mainvisual__inner">
-            <h1 class="mainvisual__title">Portfolio</h1>
-            <p class="mainvisual__subtitle">一つひとつのプロジェクトが、完成されたパズルのピース</p>
-            <div class="mainvisual__buttons">
-                <a href="page_works.html" class="mainvisual__cta mainvisual__cta--primary">作品を見る</a>
-                <a href="profile.html" class="mainvisual__cta mainvisual__cta--secondary">プロフィール</a>
-            </div>
+    <main>
+        <div class="theater-sequence" id="theater-sequence">
+        <section id="hero" class="theater-hero is-animating" aria-labelledby="stage-title">
+            <picture class="theater-hero__stage">
+                <source media="(max-width: 700px)" type="image/webp" srcset="images/stage_plate_mobile.webp">
+                <source media="(max-width: 700px)" srcset="images/stage_plate_mobile.jpg">
+                <source type="image/webp" srcset="images/stage_plate_desktop.webp">
+                <img id="stage" src="images/stage_plate_desktop.jpg" alt="奥の赤い幕と白い階段を、あたたかな照明が照らす舞台。" fetchpriority="high">
+            </picture>
+            <picture class="theater-hero__curtains" aria-hidden="true">
+                <source media="(max-width: 700px)" type="image/webp" srcset="images/curtain_foreground_mobile.webp">
+                <source media="(max-width: 700px)" srcset="images/curtain_foreground_mobile.png">
+                <source type="image/webp" srcset="images/curtain_foreground_desktop.webp">
+                <img id="stage-curtains" src="images/curtain_foreground_desktop.png" alt="" fetchpriority="high">
+            </picture>
+            <header class="theater-hero__header">
+                <a class="theater-hero__brand" href="index.html" aria-label="Hikari's Portfolio ホーム">Hikari's Portfolio</a>
+                <nav aria-label="メインナビゲーション">
+                    <a href="page_works.html">Works</a>
+                    <a href="profile.html">Profile</a>
+                </nav>
+            </header>
+            <h1 id="stage-title" class="theater-hero__title">
+                <span class="theater-hero__title-scroll">
+                <span class="theater-hero__title-inner">
+                    <span class="theater-hero__welcome">Welcome To</span>
+                    <span class="theater-hero__name">Hikari's Portfolio</span>
+                </span>
+                </span>
+            </h1>
+            <video id="opening" class="theater-hero__opening" hidden muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+            <div id="pending" class="theater-hero__pending" hidden role="status">舞台の背景を読み込めませんでした。<a href="page_works.html">作品一覧へ</a></div>
+            <a class="theater-hero__scroll" href="#crafts" aria-label="作品紹介へスクロール">Works <span aria-hidden="true">↓</span></a>
+            <div id="stage-works-heading" class="stage-works__heading"><p>ON STAGE</p><h2 id="stage-works-title">Works</h2></div>
+            <section id="crafts" class="stage-works" aria-labelledby="stage-works-title">
+                <div id="stage-work-list" class="stage-works__list"></div>
+                <div id="stage-encore" class="stage-works__encore">
+                    <p>THE COLLECTION</p>
+                    <h3>ほかの作品も、<br>ご覧ください。</h3>
+                    <a class="theater-text-link" href="page_works.html">作品をもっと見る <span aria-hidden="true">↗</span></a>
+                    <a class="stage-works__backstage-link" href="#backstage">舞台裏へ <span aria-hidden="true">↓</span></a>
+                </div>
+                <div class="stage-works__controls" aria-label="作品の切り替え">
+                    <button id="stage-prev" type="button" aria-label="前の作品" title="前の作品">←</button>
+                    <p id="stage-work-count" aria-live="polite" aria-atomic="true">01 / 03</p>
+                    <button id="stage-next" type="button" aria-label="次の作品" title="次の作品">→</button>
+                    <a class="stage-works__all" href="page_works.html">All Works <span aria-hidden="true">↗</span></a>
+                </div>
+            </section>
+        </section>
         </div>
-    </section>
-
-    <!-- コンセプトセクション -->
-    <section id="concept" class="concept">
-        <div class="concept__bg"></div>
-        <div class="concept__inner">
-            <h2 class="concept__title">Concept</h2>
-            <div class="concept__message">
-                <p>
-                    パズルのように、一つひとつのプロジェクトが持つ独自の価値。それらが組み合わさることで、より大きな価値を生み出す。
-                    このポートフォリオは、私がこれまで積み重ねてきた経験と学びの集大成です。
-                    それぞれの作品が持つストーリーと、技術への情熱をお伝えできれば幸いです。
-                </p>
+        <noscript><p class="stage-works-fallback"><a href="page_works.html">作品一覧を見る</a></p></noscript>
+        <section id="backstage" class="backstage" aria-labelledby="backstage-title">
+            <picture class="backstage__background" aria-hidden="true">
+                <source media="(max-width: 700px)" type="image/webp" srcset="images/backstage_mobile.webp">
+                <source media="(max-width: 700px)" srcset="images/backstage_mobile.jpg">
+                <source type="image/webp" srcset="images/backstage_desktop.webp">
+                <img src="images/backstage_desktop.jpg" alt="" loading="lazy" decoding="async">
+            </picture>
+            <div class="backstage__inner">
+                <div class="backstage__portrait">
+                    <img src="images/profile_icon.webp" alt="増元ひかりのプロフィール画像" width="400" height="400" loading="lazy">
+                    <p>Hikari Masumoto</p>
+                </div>
+                <div class="backstage__copy">
+                    <p class="backstage__eyebrow">ACT II / BEHIND THE SCENES</p>
+                    <h2 id="backstage-title">Profile</h2>
+                    <p class="backstage__name">増元ひかり</p>
+                    <p class="backstage__lead">心地よさの中に、<br>ちいさな発見を。</p>
+                    <p class="backstage__description">見やすく、使いやすく。その土台に少しの遊び心を重ねて、楽しくて心地いいWeb体験をつくります。</p>
+                    <a class="theater-text-link" href="profile.html">プロフィールをもっと見る <span aria-hidden="true">↗</span></a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- ポートフォリオセクション -->
-    <section id="portfolio" class="works">
-        <div class="works__inner">
-            <div class="works__header">
-                <h2 class="works__title">Works</h2>
-                <p class="works__subtitle">これまで制作したWebサイトの一部をご紹介します</p>
-            </div>
-
-            <div class="works__grid">
-                <!-- プロジェクトカード1: GLASSY-PHOTO -->
-                <a href="page_detail.html?id=glassy-photo" class="project-card">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">Webサイト制作</span>
-                        <h3 class="project-card__name">GLASSY-PHOTO</h3>
-                        <p class="project-card__description">
-                            ウェディングフォトグラファーの公式サイト。温かさと親しみやすさを大切にした、アットホームな雰囲気のWebサイトを制作。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">HTML/CSS (Sass)</span>
-                            <span class="project-card__tech__tag">デザイン</span>
-                            <span class="project-card__tech__tag">ロゴ</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="page_detail.html?id=portfolio-site" class="project-card">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">Portfolio</span>
-                        <h3 class="project-card__name">ポートフォリオサイト</h3>
-                        <p class="project-card__description">
-                            パズルと雑誌をテーマに、作品・強み・人柄がひとつにつながって見えるよう設計したポートフォリオサイト。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">HTML/CSS (Sass)</span>
-                            <span class="project-card__tech__tag">GSAP</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="page_detail.html?id=blog-site" class="project-card">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">Webサイト制作</span>
-                        <h3 class="project-card__name">ブログ制作</h3>
-                        <p class="project-card__description">
-                            緑と、時計をコンセプトにし、おとぎ話のような世界観を演出。なおかつ見やすい構成を意識しました。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">HTML/CSS</span>
-                            <span class="project-card__tech__tag">デザイン</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- プロジェクトカード3: コーポレートサイト -->
-                <a href="page_detail.html?id=mangafurubari-ui" class="project-card">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">UIデザイン</span>
-                        <h3 class="project-card__name">マンガUI制作</h3>
-                        <p class="project-card__description">
-                            マンガのUIデザインをしました。ペルソナに合ったゲームっぽいイラストが特徴です。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Figma</span>
-                            <span class="project-card__tech__tag">ロゴ</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-                <!-- プロジェクトカード5: ダッシュボードアプリ -->
-                <a href="page_detail.html?id=kiratomo-note" class="project-card">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">UIデザイン</span>
-                        <h3 class="project-card__name">グループ制作（大阪）</h3>
-                        <p class="project-card__description">
-                            初対面の4人チームで、3日間のWeb合宿に参加。企画・デザイン・実装・発表までを協力して進めました。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                            <span class="project-card__tech__tag">ディレクション</span>
-                            <span class="project-card__tech__tag">HTML/CSS</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- プロジェクトカード6: ランディングページ -->
-                <a href="page_detail.html?id=wafu-restaurant" class="project-card">
-                    <div class="project-card__content">
-                        <span class="project-overview__category">Webサイト制作</span>
-                        <h3 class="project-card__name">和風サイトデザイン</h3>
-                        <p class="project-card__description">
-                            和風がコンセプトのレストランのWebサイトをデザインしました。黒を貴重に日本の伝統色のみを使って作りました。
-                        </p>
-                        <div class="project-card__tech">
-                            <span class="project-card__tech__tag">Figma</span>
-                            <span class="project-card__tech__tag">デザイン</span>
-                            <span class="project-card__tech__tag">イラスト制作</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="works__more">
-                <a href="page_works.html" class="mainvisual__cta mainvisual__cta--primary">さらに多くの作品を見る</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- フッター -->
-    <footer class="footer">
-        <div class="footer__bg"></div>
-        <div class="footer__inner">
-            <nav class="footer__nav">
-                <p class="footer__link--title">Quicklink</p>
-                <a href="page_works.html" class="footer__link">Works</a>
-                <a href="profile.html" class="footer__link">Profile</a>
-            </nav>
-            <p class="footer__copyright">© <span id="current-year"></span> 増元ひかり ポートフォリオ. All rights reserved.</p>
-        </div>
+    <footer class="atelier-footer">
+        <p>Hikari's Portfolio</p>
+        <nav aria-label="フッターナビゲーション">
+            <a href="page_works.html">Works</a>
+            <a href="profile.html">Profile</a>
+            <a href="mailto:hikari09.masu@gmail.com">Contact</a>
+        </nav>
+        <small>© <span id="current-year"></span> 増元ひかり Portfolio.</small>
     </footer>
 
-    <!-- トップに戻るボタン -->
-    <button id="scroll-to-top" class="scroll-to-top" aria-label="トップに戻る">
-        <svg class="scroll-to-top__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
-    </button>
-
-    <!-- GSAP本体（必須） -->
+    <script src="js/floating_opening.js?v=20261012-layers"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-
-    <!-- ScrollTrigger -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-
-    <!-- 自分のJS（最後） -->
-    <script src="js/main.js"></script>
+    <script src="js/script.js?v=20260929"></script>
+    <script src="js/theater-works.js?v=20261012-exit"></script>
 </body>
 
 </html>

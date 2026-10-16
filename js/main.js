@@ -50,7 +50,7 @@ function initPuzzleAnimation() {
   if (pieces.length === 0) return;
 
   const page = document.body.dataset.page;
-  console.log("page:", page);
+  if (page === "page_works" || document.body.classList.contains("atelier-project-page")) return;
   // ★ 分岐
   if (page === "project-detail") {
     initSimpleFall(pieces);
@@ -256,7 +256,69 @@ function initFadeIn() {
     );
   });
 }
+
+function initPageUtilities() {
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  const scrollBtn = document.getElementById('scroll-to-top');
+  if (!scrollBtn) return;
+
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('is-visible', window.scrollY > 500);
+  });
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
+function initAtelierWorks() {
+  const thumbnails = {
+    'glassy-photo': 'images/images-001.webp',
+    'portfolio-site': 'images/portfolio_mainvisual.webp',
+    'blog-site': 'images/blog_mainvisual.webp',
+    'mangafurubari-ui': 'images/ui_icon.webp',
+    'kiratomo-note': 'images/kiratomo-note_icon.webp',
+    'wafu-restaurant': 'images/wafu_mainvisual.webp',
+    'dental-business-card': 'images/dental_images1.webp',
+    'open-campus-banner': 'images/15_banner.webp',
+    'okehazama-flyer': 'images/okehazama.webp',
+    'uyamuya-cd-jacket': 'images/cd_jacket.webp',
+    'carnival-night-cd-jacket': 'images/carnival-night_cd-jacket.webp'
+  };
+
+  document.querySelectorAll('.works__grid .project-card').forEach((card) => {
+    const id = new URL(card.href).searchParams.get('id');
+    if (!thumbnails[id] || card.querySelector('.project-card__visual')) return;
+    const visual = document.createElement('div');
+    visual.className = 'project-card__visual';
+    const image = document.createElement('img');
+    image.src = thumbnails[id];
+    image.alt = '';
+    visual.appendChild(image);
+    card.prepend(visual);
+  });
+
+  const rollingTools = document.querySelectorAll('.works-pencil, .project-pencil');
+  if (!rollingTools.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  window.addEventListener('scroll', () => {
+    const distance = Math.min(130, window.scrollY * .09);
+    rollingTools.forEach((tool, index) => {
+      tool.style.translate = `${index % 2 ? distance : -distance}px`;
+      tool.style.rotate = `${(index % 2 ? 1 : -1) * distance * .8}deg`;
+    });
+  }, { passive: true });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initPuzzleAnimation();
   initFadeIn();
+  initPageUtilities();
+  initAtelierWorks();
 });

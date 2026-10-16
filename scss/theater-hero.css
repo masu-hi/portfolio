@@ -1,0 +1,79 @@
+.theater-hero {
+  position: relative;
+  isolation: isolate;
+  height: 100vh;
+  height: 100svh;
+  min-height: 400px;
+  overflow: hidden;
+  background: #100b0d;
+  color: #f5ecda;
+  letter-spacing: 0;
+}
+.theater-hero__stage, .theater-hero__stage img, .theater-hero__curtains, .theater-hero__curtains img, .theater-hero__opening {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.theater-hero__stage img, .theater-hero__curtains img, .theater-hero__opening {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+.theater-hero__stage { z-index: 0; }
+.theater-hero__curtains { z-index: 20; pointer-events: none; }
+.theater-hero__stage img, .theater-hero__curtains img { transition: filter 1000ms ease; }
+.theater-hero.is-animating .theater-hero__stage img, .theater-hero.is-animating .theater-hero__curtains img { filter: brightness(.48); }
+.theater-hero.is-lit .theater-hero__stage img, .theater-hero.is-lit .theater-hero__curtains img { filter: brightness(1); }
+.theater-hero__title {
+  position: absolute;
+  z-index: 10;
+  top: 36%;
+  left: 18%;
+  right: 18%;
+  margin: 0;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  line-height: 1.2;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: opacity 900ms ease, transform 1200ms ease;
+}
+.theater-hero__welcome { display: block; font-size: 28px; margin-bottom: 18px; }
+.theater-hero__name { display: block; font-size: 64px; color: #fff3dc; text-shadow: 0 -1px 0 #fff8, 0 2px 3px #19070b66; }
+.theater-hero.title-ready .theater-hero__title { opacity: 1; visibility: visible; transform: translateY(0); }
+.theater-hero.title-ready .theater-hero__title-inner { display: block; animation: theater-title-float 6s ease-in-out 1.3s infinite; }
+@keyframes theater-title-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+.theater-hero__opening { z-index: 50; pointer-events: none; transition: opacity 350ms ease; }
+.theater-hero__opening[hidden], .theater-hero__pending[hidden] { display: none; }
+.theater-hero__opening.is-leaving { opacity: 0; }
+.theater-hero__pending { position: absolute; z-index: 60; inset: 0; display: grid; align-content: center; justify-items: center; gap: 18px; padding: 30px; background: #191316; font: 16px/1.8 sans-serif; text-align: center; }
+.theater-hero__pending a { text-decoration: underline; }
+.theater-hero__header { position: absolute; z-index: 30; inset: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 5%; font-size: 14px; }
+.theater-hero__brand { font-family: Georgia, 'Times New Roman', serif; font-size: 20px; }
+.theater-hero__header nav { display: flex; gap: 24px; }
+.theater-hero__scroll { position: absolute; z-index: 30; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 8px 16px; background: #100b0d99; border-radius: 4px; font-size: 14px; }
+.theater-hero__header, .theater-hero__scroll { opacity: 0; visibility: hidden; transition: opacity 900ms ease; }
+.theater-hero.title-ready .theater-hero__header, .theater-hero.title-ready .theater-hero__scroll { opacity: 1; visibility: visible; }
+.theater-hero a:focus-visible { outline: 2px solid #fff3dc; outline-offset: 6px; }
+@media (min-width: 701px) and (max-width: 1100px) {
+  .theater-hero__name { font-size: 42px; }
+  .theater-hero__welcome { font-size: 22px; margin-bottom: 12px; }
+}
+@media (max-width: 700px) {
+  .theater-hero__title { top: 40%; left: 11%; right: 11%; }
+  .theater-hero__name { font-size: 34px; }
+  .theater-hero__welcome { font-size: 21px; margin-bottom: 18px; }
+  .theater-hero__header { align-items: flex-start; flex-direction: column; gap: 12px; padding-top: 18px; }
+  .theater-hero__header nav { gap: 22px; }
+}
+@media (max-width: 360px) {
+  .theater-hero__name { font-size: 28px; }
+  .theater-hero__welcome { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theater-hero__stage img, .theater-hero__curtains img, .theater-hero__title, .theater-hero__opening, .theater-hero__header, .theater-hero__scroll { transition: none; }
+  .theater-hero.title-ready .theater-hero__title-inner { animation: none; }
+}

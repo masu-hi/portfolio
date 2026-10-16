@@ -6,19 +6,28 @@ let projectsData = {};
 async function loadProjectData() {
     try {
         const response = await fetch('./data/projects.json');
+        if (!response.ok) throw new Error('Project data unavailable');
         projectsData = await response.json();
         displayProjectData();
     } catch (error) {
         console.error('プロジェクトデータの読み込みに失敗しました:', error);
-        document.querySelector('.project-detail__inner').innerHTML = `
-      <div style="text-align: center; padding: 4rem 0;">
-        <h2>データの読み込みに失敗しました</h2>
-        <p style="margin-top: 1rem;">
-          <a href="page_works.html" style="color: #f97316;">作品一覧に戻る</a>
-        </p>
-      </div>
-    `;
+        showProjectError('作品を読み込めませんでした。時間をおいて、もう一度お試しください。');
     }
+}
+
+function showProjectError(message) {
+    const main = document.querySelector('.project-detail');
+    const section = document.createElement('section');
+    section.className = 'case-error';
+    section.setAttribute('role', 'status');
+    const title = document.createElement('h1');
+    title.textContent = message;
+    const link = document.createElement('a');
+    link.href = 'page_works.html';
+    link.textContent = '作品一覧に戻る';
+    section.append(title, link);
+    main.replaceChildren(section);
+    main.setAttribute('aria-busy', 'false');
 }
 
 // URLパラメータからプロジェクトIDを取得
@@ -33,18 +42,12 @@ function displayProjectData() {
     const project = projectsData[projectId];
 
     if (!project) {
-        document.querySelector('.project-detail__inner').innerHTML = `
-      <div style="text-align: center; padding: 4rem 0;">
-        <h2>プロジェクトが見つかりません</h2>
-        <p style="margin-top: 1rem;">
-          <a href="page_works.html" style="color: #f97316;">作品一覧に戻る</a>
-        </p>
-      </div>
-    `;
+        showProjectError('作品が見つかりませんでした。');
         return;
     }
 
     // 基本情報
+    document.title = `${project.title.replace(/\n/g, ' ')} | Hikari's Portfolio`;
     document.getElementById('project-category').textContent = project.category || '';
     document.getElementById('project-title').textContent = project.title || '';
     document.getElementById('project-description').textContent = project.description || '';
@@ -82,8 +85,7 @@ function displayProjectData() {
     // 背景・課題
     if (project.challenge) {
         const challengeText = document.getElementById('project-challenge');
-        // 改行を<br>に変換
-        challengeText.innerHTML = project.challenge.replace(/\n/g, '<br><br>');
+        challengeText.textContent = project.challenge;
     } else {
         document.getElementById('challenge-section').style.display = 'none';
     }
@@ -203,6 +205,8 @@ function displayProjectData() {
             // iframe
             const iframe = document.createElement('iframe');
             iframe.src = item.url;
+            iframe.title = `${project.title.replace(/\n/g, ' ')}：${item.title}`;
+            iframe.loading = 'lazy';
             iframe.allowFullscreen = true;
             iframe.style.height = item.height;
 
@@ -281,6 +285,26 @@ function displayProjectData() {
     }
 
     renderProjectPagination(projectId);
+    numberProjectChapters();
+    prepareProjectImages();
+    document.getElementById('project-load-state').hidden = true;
+    document.querySelector('.project-detail').setAttribute('aria-busy', 'false');
+}
+
+function numberProjectChapters() {
+    let chapter = 0;
+    document.querySelectorAll('[data-chapter]').forEach(label => {
+        if (label.closest('.case-section').style.display === 'none') return;
+        chapter += 1;
+        label.textContent = `${String(chapter).padStart(2, '0')} / ${label.dataset.chapter}`;
+    });
+}
+
+function prepareProjectImages() {
+    document.querySelectorAll('.point-map__image, .point-map__note-images img, .design-details__thumb img, .result-images img').forEach(image => {
+        image.loading = 'lazy';
+        image.decoding = 'async';
+    });
 }
 
 function renderProjectPagination(currentProjectId) {
@@ -298,38 +322,26 @@ function renderProjectPagination(currentProjectId) {
     const nextId = projectIds[currentIndex + 1];
 
     pagination.innerHTML = '';
-    pagination.appendChild(createProjectPaginationItem(prevId, 'prev'));
-
-    const worksLink = document.createElement('a');
-    worksLink.href = 'page_works.html';
-    worksLink.className = 'project-pagination__list';
-    worksLink.textContent = '作品一覧';
-    pagination.appendChild(worksLink);
-
-    pagination.appendChild(createProjectPaginationItem(nextId, 'next'));
+    const previous = createProjectPaginationItem(prevId, 'prev');
+    const next = createProjectPaginationItem(nextId, 'next');
+    if (previous) pagination.appendChild(previous);
+    if (next) pagination.appendChild(next);
 }
 
 function createProjectPaginationItem(projectId, direction) {
-    const label = direction === 'prev' ? '前の作品' : '次の作品';
-    const item = projectId ? document.createElement('a') : document.createElement('span');
+    if (!projectId) return null;
+    const label = direction === 'prev' ? '前の作品へ' : '次の作品へ';
+    const item = document.createElement('a');
     item.className = `project-pagination__item project-pagination__item--${direction}`;
-
-    if (!projectId) {
-        item.classList.add('is-disabled');
-        item.setAttribute('aria-disabled', 'true');
-        item.innerHTML = `
-            <span class="project-pagination__label">${label}</span>
-            <span class="project-pagination__title">ありません</span>
-        `;
-        return item;
-    }
 
     const project = projectsData[projectId];
     item.href = `page_detail.html?id=${encodeURIComponent(projectId)}`;
-    item.innerHTML = `
-        <span class="project-pagination__label">${label}</span>
-        <span class="project-pagination__title">${project.title || ''}</span>
-    `;
+    const title = (project.title || '').replace(/\n/g, ' ');
+    item.setAttribute('aria-label', `${label}：${title}`);
+    item.title = `${label}：${title}`;
+    item.innerHTML = direction === 'prev'
+        ? `<span aria-hidden="true">←</span><span>${label}</span>`
+        : `<span>${label}</span><span aria-hidden="true">→</span>`;
 
     return item;
 }
@@ -614,20 +626,7 @@ function createPointMap(project, modal) {
             button.style.setProperty('--point-y', `${point.y}%`);
             button.setAttribute('aria-label', `POINT ${String(pointIndex + 1).padStart(2, '0')}：${detail.title}`);
             button.setAttribute('aria-haspopup', 'dialog');
-            const ringId = `point-ring-${sectionIndex}-${pointIndex}`;
-            button.innerHTML = `
-                <svg class="point-map__ring" viewBox="0 0 120 120" aria-hidden="true">
-                    <defs>
-                        <path id="${ringId}" d="M60,60 m-53,0 a53,53 0 1,1 106,0 a53,53 0 1,1 -106,0"></path>
-                    </defs>
-                    <text>
-                        <textPath href="#${ringId}" startOffset="0">
-                            CLICK CLICK CLICK CLICK CLICK CLICK CLICK CLICK CLICK CLICK
-                        </textPath>
-                    </text>
-                </svg>
-                <span>POINT</span>
-            `;
+            button.textContent = String(pointIndex + 1).padStart(2, '0');
 
             button.addEventListener('click', () => {
                 openDesignModal(modal, detail, pointIndex);
@@ -691,31 +690,28 @@ function activatePointSection(map, activeIndex) {
 }
 
 function createDesignModal() {
-    const modal = document.createElement('div');
+    const modal = document.createElement('dialog');
     modal.className = 'design-modal';
-    modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-hidden', 'true');
+    modal.setAttribute('aria-labelledby', 'design-modal-title');
 
     modal.innerHTML = `
-        <div class="design-modal__overlay" data-modal-close></div>
-        <div class="design-modal__panel" tabindex="-1">
-            <button class="design-modal__close" type="button" aria-label="閉じる" data-modal-close>×</button>
+        <form method="dialog" class="design-modal__bar"><span>DESIGN NOTES</span><button class="design-modal__close" type="submit" aria-label="詳細を閉じる" autofocus>×</button></form>
+        <div class="design-modal__panel">
             <p class="design-modal__label"></p>
-            <h3 class="design-modal__title"></h3>
-            <div class="design-modal__images"></div>
+            <h2 class="design-modal__title" id="design-modal-title"></h2>
             <p class="design-modal__text"></p>
+            <div class="design-modal__images"></div>
         </div>
     `;
 
-    modal.querySelectorAll('[data-modal-close]').forEach(element => {
-        element.addEventListener('click', () => closeDesignModal(modal));
+    modal.addEventListener('close', () => {
+        document.body.classList.remove('is-modal-open');
+        modal.opener?.focus({ preventScroll: true });
     });
-
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
-            closeDesignModal(modal);
-        }
+    modal.addEventListener('click', event => {
+        if (event.target !== modal) return;
+        const rect = modal.getBoundingClientRect();
+        if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) modal.close();
     });
 
     document.body.appendChild(modal);
@@ -727,7 +723,6 @@ function openDesignModal(modal, detail, index) {
     const title = modal.querySelector('.design-modal__title');
     const text = modal.querySelector('.design-modal__text');
     const images = modal.querySelector('.design-modal__images');
-    const panel = modal.querySelector('.design-modal__panel');
 
     label.textContent = `POINT ${String(index + 1).padStart(2, '0')}`;
     title.textContent = detail.title;
@@ -753,16 +748,14 @@ function openDesignModal(modal, detail, index) {
         images.style.display = 'none';
     }
 
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
+    modal.opener = document.activeElement;
+    modal.showModal();
+    modal.scrollTop = 0;
     document.body.classList.add('is-modal-open');
-    panel.focus();
 }
 
 function closeDesignModal(modal) {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('is-modal-open');
+    modal.close();
 }
 
 // ページ読み込み時に実行
@@ -902,5 +895,4 @@ document.addEventListener('DOMContentLoaded', () => {
     createFallingPuzzles();
     initScrollToTop();
     displayCurrentYear();
-    initSmoothScroll();
 });
